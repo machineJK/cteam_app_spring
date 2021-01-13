@@ -1,25 +1,23 @@
 package com.hanul.app.dto;
 
 public class MemberDTO {
-	String id, passwd, name, phonenumber, address;
+	String id, pw, nickname, name, gender, 
+			birth, email, addr1, addr2, picture ;
 
-	// 로그인할때 비밀번호 없이 멤버변수 보낼때
-	public MemberDTO(String id, String name, String phonenumber, String address) {
+	//로그인
+	public MemberDTO(String id, String pw, String nickname, String name, String gender, String birth, String email,
+			String addr1, String addr2, String picture) {
 		super();
 		this.id = id;
+		this.pw = pw;
+		this.nickname = nickname;
 		this.name = name;
-		this.phonenumber = phonenumber;
-		this.address = address;
-	}
-
-	// 데이터베이스에 멤버변수 추가할때
-	public MemberDTO(String id, String passwd, String name, String phonenumber, String address) {
-		super();
-		this.id = id;
-		this.passwd = passwd;
-		this.name = name;
-		this.phonenumber = phonenumber;
-		this.address = address;
+		this.gender = gender;
+		this.birth = birth;
+		this.email = email;
+		this.addr1 = addr1;
+		this.addr2 = addr2;
+		this.picture = picture;
 	}
 
 	public String getId() {
@@ -30,12 +28,20 @@ public class MemberDTO {
 		this.id = id;
 	}
 
-	public String getPasswd() {
-		return passwd;
+	public String getPw() {
+		return pw;
 	}
 
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getName() {
@@ -46,22 +52,51 @@ public class MemberDTO {
 		this.name = name;
 	}
 
-	public String getPhonenumber() {
-		return phonenumber;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getBirth() {
+		return birth;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
-	
-	
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddr1() {
+		return addr1;
+	}
+
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+
+	public String getAddr2() {
+		return addr2;
+	}
+
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 }

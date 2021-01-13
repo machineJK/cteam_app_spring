@@ -70,7 +70,7 @@ public class AnDao {
 	}
 	
 	
-    public MemberDTO anLogin(String idin, String passwdin) {
+    public MemberDTO anLogin(String idin, String pwin) {
 
     	MemberDTO adto = null;
 		Connection connection = null;
@@ -81,24 +81,32 @@ public class AnDao {
 			connection = dataSource.getConnection();
 			String query = "select * "					
 							+ " from member" 
-							+ " where id = '" + idin + "' and passwd = '" + passwdin + "' ";
+							+ " where id = '" + idin + "' and pw = '" + pwin + "' ";
 			prepareStatement = connection.prepareStatement(query);
 			resultSet = prepareStatement.executeQuery();
 			
 			while (resultSet.next()) {
 				String id = resultSet.getString("id");
+				String pw = resultSet.getString("pw");
+				String nickname = resultSet.getString("nickname");
 				String name = resultSet.getString("name");
-				String phonenumber = resultSet.getString("phonenumber");
-				String address = resultSet.getString("address"); 
+				String gender = resultSet.getString("gender");
+				String birth = resultSet.getString("birth");
+				String email = resultSet.getString("email");
+				String addr1 = resultSet.getString("addr1");
+				String addr2 = resultSet.getString("addr2");
+				String picture = resultSet.getString("picture");
+				
 
-				adto = new MemberDTO(id, name, phonenumber, address);							
+				adto = new MemberDTO(id, pw, nickname, name, gender, 
+						birth, email, addr1, addr2, picture);						
 			}	
 			
 			System.out.println("MemberDTO id : " + adto.getId());
 			
 		} catch (Exception e) {
-			
-			System.out.println(e.getMessage());
+			e.getMessage();
+			System.out.println("anLogin() Exception!!!");
 		} finally {
 			try {			
 				

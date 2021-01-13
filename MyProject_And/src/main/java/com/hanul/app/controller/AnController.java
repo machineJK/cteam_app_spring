@@ -89,25 +89,25 @@ public class AnController {
 		return "anJoin";
 	}
 	
-	//안드로이드에서 온 로그인 정보(id,passwd)
+	//안드로이드에서 온 로그인 정보(id,pw)
 	@RequestMapping(value="/anLogin", method = {RequestMethod.GET, RequestMethod.POST}  )
-	public String anLogin(HttpServletRequest req, Model model){
+	public String anLogin(HttpServletRequest request, Model model){
 		//System.out.println("anLogin()");
-		System.out.println("ddf");
+		System.out.println("anLogin()");
 		try {
-			req.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} 		
 		
-		String id = (String) req.getParameter("id");
-		String passwd = (String) req.getParameter("passwd");
+		String id = (String) request.getParameter("id");
+		String pw = (String) request.getParameter("pw");
 		
 		//System.out.println(id);
 		//System.out.println(passwd);
 		
 		model.addAttribute("id", id);
-		model.addAttribute("passwd", passwd);
+		model.addAttribute("pw", pw);
 		
 		command = new AnLoginCommand();
 		command.execute(model);

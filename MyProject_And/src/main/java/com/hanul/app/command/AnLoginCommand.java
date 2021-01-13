@@ -10,13 +10,13 @@ public class AnLoginCommand implements AnCommand{
 	@Override
 	public void execute(Model model) {
 		String id = (String)model.asMap().get("id");
-		String passwd = (String)model.asMap().get("passwd");	
+		String pw = (String)model.asMap().get("pw");	
 
 		//System.out.println(id);
 		//System.out.println(passwd);
 
 		AnDao adao = new AnDao();
-		MemberDTO dto = adao.anLogin(id, passwd);
+		MemberDTO dto = adao.anLogin(id, pw);
 		
 		model.addAttribute("anLogin", dto); 
 	}
