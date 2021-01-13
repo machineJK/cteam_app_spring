@@ -25,7 +25,7 @@ public class AnController {
 	public String anJoin(HttpServletRequest req, Model model){
 		
 		//안드로이드와 연결되어있는지 확인하기
-		//System.out.println("anJoin()");
+		System.out.println("anJoin()");
 		
 		//한글 설정
 		try {
