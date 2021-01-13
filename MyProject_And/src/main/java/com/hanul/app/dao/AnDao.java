@@ -18,7 +18,7 @@ public class AnDao {
 	public AnDao() {
 		try {
 			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:/comp/env/team01");
+			dataSource = (DataSource) context.lookup("java:/comp/env/cteam");
 			/*dataSource = (DataSource) context.lookup("java:/comp/env/CSS");*/
 		} catch (NamingException e) {
 			e.getMessage();
@@ -27,8 +27,9 @@ public class AnDao {
 	}
 	
 	//회원가입 메소드(Insert)
-	public int anJoin(String id, String passwd, String name, 
-			String phonenumber, String address) {
+	public int anJoin(String id, String pw, String nickname, String name,
+			String gender, String birth, String email, String addr1,
+			String addr2, String picture) {
 		
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -36,9 +37,11 @@ public class AnDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "insert into member(id, passwd, name, phonenumber, address) " + 
-			               "values('" + id + "', '" + passwd + "', '" + name + "', '" + 
-					        			phonenumber + "', '" + address + "' )";
+			String query = "insert into member(id,pw,nickname,name,gender,birth,email,addr1,addr2,picture) " + 
+			               "values('" + id + "', '" + pw + "', '" + nickname + 
+			               "', '" + name + "', '" + gender + 
+			               "', '" + birth + "', '" + email + "', '" + addr1 + 
+			               "', '" + addr2 + "', '" + picture + "')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			
