@@ -29,7 +29,7 @@ public class AnDao {
 	//회원가입 메소드(Insert)
 	public int anJoin(String id, String pw, String nickname, String name,
 			String gender, String birth, String email, String addr1,
-			String addr2, String picture) {
+			String addr2, String dbImgPath) {
 		
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -37,11 +37,11 @@ public class AnDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "insert into member(id,pw,nickname,name,gender,birth,email,addr1,addr2,picture) " + 
+			String query = "insert into member(id,pw,nickname,name,gender,birth,email,addr1,addr2,dbImgPath) " + 
 			               "values('" + id + "', '" + pw + "', '" + nickname + 
 			               "', '" + name + "', '" + gender + 
 			               "', '" + birth + "', '" + email + "', '" + addr1 + 
-			               "', '" + addr2 + "', '" + picture + "')";
+			               "', '" + addr2 + "', '" + dbImgPath + "')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			
@@ -95,11 +95,11 @@ public class AnDao {
 				String email = resultSet.getString("email");
 				String addr1 = resultSet.getString("addr1");
 				String addr2 = resultSet.getString("addr2");
-				String picture = resultSet.getString("picture");
+				String dbImgPath = resultSet.getString("dbImgPath");
 				
 
 				adto = new MemberDTO(id, pw, nickname, name, gender, 
-						birth, email, addr1, addr2, picture);						
+						birth, email, addr1, addr2, dbImgPath);						
 			}	
 			
 			System.out.println("MemberDTO id : " + adto.getId());
