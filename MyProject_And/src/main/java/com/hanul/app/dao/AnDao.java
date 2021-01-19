@@ -130,6 +130,51 @@ public class AnDao {
 		return adto;
 
 	}
+    
+    public int anTeacher(String teacher_id,String teacher_univ,
+    		String teacher_major,String teacher_univNum,String teacher_subject,
+    		String teacher_worktime,String teacher_pay,String teacher_intro,
+    		String teacher_image_path) {
+
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = -100;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into teacher(teacher_id,teacher_univ,teacher_major,"
+					+ "teacher_univNum,teacher_subject,teacher_worktime,teacher_pay,"
+					+ "teacher_intro) " + 
+			               "values('" + teacher_id + "', '" + teacher_univ + "', '" + 
+			               teacher_major + "', '" + teacher_univNum + "', '" +
+			               teacher_subject + "', '" + teacher_worktime + "', '" + 
+			               teacher_pay + "', '" + teacher_intro + "','" + teacher_image_path + "')";
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+			System.out.println(teacher_intro);
+			if (state > 0) {
+				System.out.println(state + ":삽입성공");				
+			} else {
+				System.out.println(state + ":삽입실패");
+			}
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return state;
+	}
 	
 	/*
 	 * //로그인 메소드 public String anLogin(String id, String passwd) {

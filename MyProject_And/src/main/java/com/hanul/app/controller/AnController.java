@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.hanul.app.command.AnCommand;
 import com.hanul.app.command.AnJoinCommand;
 import com.hanul.app.command.AnLoginCommand;
+import com.hanul.app.command.AnTeacherCommand;
 
 
 
@@ -160,4 +161,39 @@ public class AnController {
 		
 		return "anLogin";
 	}
+	
+	@RequestMapping(value="/anTeacher", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anTeacher(HttpServletRequest request, Model model){
+		System.out.println("anTeacher()");
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 		
+		
+		String teacher_id = (String) request.getParameter("teacher_id");
+		String teacher_univ = (String) request.getParameter("teacher_univ");
+		String teacher_major = (String) request.getParameter("teacher_major");
+		String teacher_univNum = (String) request.getParameter("teacher_univNum");
+		String teacher_subject = (String) request.getParameter("teacher_subject");
+		String teacher_worktime = (String) request.getParameter("teacher_worktime");
+		String teacher_pay = (String) request.getParameter("teacher_pay");
+		String teacher_intro = (String) request.getParameter("teacher_intro");
+		
+		model.addAttribute("teacher_id", teacher_id);
+		model.addAttribute("teacher_univ", teacher_univ);
+		model.addAttribute("teacher_major", teacher_major);
+		model.addAttribute("teacher_univNum", teacher_univNum);
+		model.addAttribute("teacher_subject", teacher_subject);
+		model.addAttribute("teacher_worktime", teacher_worktime);
+		model.addAttribute("teacher_pay", teacher_pay);
+		model.addAttribute("teacher_intro", teacher_intro);
+		
+		command = new AnTeacherCommand();
+		command.execute(model);
+		
+		return "anTeacher";
+	}
+	
 }
