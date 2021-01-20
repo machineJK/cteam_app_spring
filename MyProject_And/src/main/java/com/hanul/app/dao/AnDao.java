@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.hanul.app.dto.MemberDTO;
+import com.hanul.app.dto.StudentDTO;
 import com.hanul.app.dto.TeacherDTO;
 
 public class AnDao {
@@ -134,6 +135,7 @@ public class AnDao {
 
 	}
     
+    //선생 등록
     public int anTeacher(String teacher_id,String teacher_univ,
     		String teacher_major,String teacher_univnum,String teacher_subject,
     		String teacher_worktime,String teacher_pay,String teacher_intro,
@@ -179,6 +181,48 @@ public class AnDao {
 		return state;
 	}
     
+    public int anStudent(String student_id,String student_subject,
+    		String student_grade,String student_intro,String student_image_path) {
+
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = -100;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into student(student_id,student_subject,student_grade,"
+						+ "student_intro,student_image_path) "
+			            + "values('" + student_id + "', '" + student_subject + "', '" + 
+			            student_grade + "', '" + student_intro + "', '"
+			            + student_image_path +"')";
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+			
+			if (state > 0) {
+				System.out.println(state + ":삽입성공");				
+			} else {
+				System.out.println(state + ":삽입실패");
+			}
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return state;
+	}
+    
+    //선생 리스트
 	public ArrayList<TeacherDTO> anSelectMulti() {		
 		
 		ArrayList<TeacherDTO> adtos = new ArrayList<TeacherDTO>();
@@ -243,6 +287,66 @@ public class AnDao {
 
 	}
     
+	//학생 리스트
+	public ArrayList<StudentDTO> anSelectMulti2() {		
+		
+		ArrayList<StudentDTO> adtos = new ArrayList<StudentDTO>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select *"					
+							+ " from student" 
+							+ " order by student_date desc";
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String student_id = resultSet.getString("student_id");
+				String student_subject = resultSet.getString("student_subject");
+				String student_grade = resultSet.getString("student_grade");
+				String student_intro = resultSet.getString("student_intro");
+				String student_image_path = resultSet.getString("student_image_path");
+				int student_matching = resultSet.getInt("student_matching");
+				Date student_date = resultSet.getDate("student_date");
+				
+
+				StudentDTO adto = new StudentDTO(student_id, student_subject, student_grade, 
+						student_intro, student_image_path, student_matching, student_date);
+				adtos.add(adto);			
+			}	
+			
+			System.out.println("adtos크기" + adtos.size());
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return adtos;
+
+	}
+	
 	
 	/*
 	 * //로그인 메소드 public String anLogin(String id, String passwd) {

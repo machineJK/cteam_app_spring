@@ -16,9 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.hanul.app.command.ASelectMultiCommand;
+import com.hanul.app.command.ASelectMultiCommand2;
 import com.hanul.app.command.AnCommand;
 import com.hanul.app.command.AnJoinCommand;
 import com.hanul.app.command.AnLoginCommand;
+import com.hanul.app.command.AnStudentCommand;
 import com.hanul.app.command.AnTeacherCommand;
 
 
@@ -200,7 +202,36 @@ public class AnController {
 		return "anTeacher";
 	}
 	
-	//과외문의 리스트뷰
+	//선생 등록
+	@RequestMapping(value="/anStudent", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anStudent(HttpServletRequest request, Model model){
+		System.out.println("anStudent()");
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 		
+		
+		String student_id = (String) request.getParameter("student_id");
+		String student_subject = (String) request.getParameter("student_subject");
+		String student_grade = (String) request.getParameter("student_grade");
+		String student_intro = (String) request.getParameter("student_intro");
+		String student_image_path = (String) request.getParameter("student_image_path");
+		
+		model.addAttribute("student_id", student_id);
+		model.addAttribute("student_subject", student_subject);
+		model.addAttribute("student_grade", student_grade);
+		model.addAttribute("student_intro", student_intro);
+		model.addAttribute("student_image_path", student_image_path);
+		
+		command = new AnStudentCommand();
+		command.execute(model);
+		
+		return "anStudent";
+	}
+	
+	//선생 리스트뷰
 	@RequestMapping(value="/anSelectMulti", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anSelectMulti(HttpServletRequest req, Model model){
 		System.out.println("anSelectMulti()");
@@ -209,6 +240,17 @@ public class AnController {
 		command.execute(model);
 		
 		return "anSelectMulti";
+	}
+	
+	//학생 리스트뷰
+	@RequestMapping(value="/anSelectMulti2", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anSelectMulti2(HttpServletRequest req, Model model){
+		System.out.println("anSelectMulti2()");
+		
+		command = new ASelectMultiCommand2();
+		command.execute(model);
+		
+		return "anSelectMulti2";
 	}
 	
 	
