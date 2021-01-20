@@ -1,8 +1,10 @@
 package com.hanul.app.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.hanul.app.dto.MemberDTO;
+import com.hanul.app.dto.TeacherDTO;
 
 public class AnDao {
 	DataSource dataSource;
@@ -132,7 +135,7 @@ public class AnDao {
 	}
     
     public int anTeacher(String teacher_id,String teacher_univ,
-    		String teacher_major,String teacher_univNum,String teacher_subject,
+    		String teacher_major,String teacher_univnum,String teacher_subject,
     		String teacher_worktime,String teacher_pay,String teacher_intro,
     		String teacher_image_path) {
 
@@ -143,10 +146,10 @@ public class AnDao {
 		try {
 			connection = dataSource.getConnection();
 			String query = "insert into teacher(teacher_id,teacher_univ,teacher_major,"
-					+ "teacher_univNum,teacher_subject,teacher_worktime,teacher_pay,"
-					+ "teacher_intro) " + 
+					+ "teacher_univnum,teacher_subject,teacher_worktime,teacher_pay,"
+					+ "teacher_intro,teacher_image_path) " + 
 			               "values('" + teacher_id + "', '" + teacher_univ + "', '" + 
-			               teacher_major + "', '" + teacher_univNum + "', '" +
+			               teacher_major + "', '" + teacher_univnum + "', '" +
 			               teacher_subject + "', '" + teacher_worktime + "', '" + 
 			               teacher_pay + "', '" + teacher_intro + "','" + teacher_image_path + "')";
 			prepareStatement = connection.prepareStatement(query);
@@ -175,6 +178,71 @@ public class AnDao {
 		}
 		return state;
 	}
+    
+	public ArrayList<TeacherDTO> anSelectMulti() {		
+		
+		ArrayList<TeacherDTO> adtos = new ArrayList<TeacherDTO>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select *"					
+							+ " from teacher" 
+							+ " order by teacher_date desc";
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String teacher_id = resultSet.getString("teacher_id");
+				String teacher_univ = resultSet.getString("teacher_univ");
+				String teacher_major = resultSet.getString("teacher_major");
+				String teacher_univnum = resultSet.getString("teacher_univnum");
+				String teacher_subject = resultSet.getString("teacher_subject");
+				String teacher_worktime = resultSet.getString("teacher_worktime");
+				String teacher_pay = resultSet.getString("teacher_pay");
+				String teacher_intro = resultSet.getString("teacher_intro");
+				String teacher_image_path = resultSet.getString("teacher_image_path");
+				int teacher_matching = resultSet.getInt("teacher_matching");
+				Date teacher_date = resultSet.getDate("teacher_date");
+				
+
+				TeacherDTO adto = new TeacherDTO(teacher_id,teacher_univ,teacher_major,teacher_univnum,
+						teacher_subject,teacher_worktime,teacher_pay,teacher_intro,
+						teacher_image_path,teacher_matching,teacher_date);
+				adtos.add(adto);			
+			}	
+			
+			System.out.println("adtos크기" + adtos.size());
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return adtos;
+
+	}
+    
 	
 	/*
 	 * //로그인 메소드 public String anLogin(String id, String passwd) {

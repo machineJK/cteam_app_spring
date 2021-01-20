@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.hanul.app.command.ASelectMultiCommand;
 import com.hanul.app.command.AnCommand;
 import com.hanul.app.command.AnJoinCommand;
 import com.hanul.app.command.AnLoginCommand;
@@ -162,6 +163,7 @@ public class AnController {
 		return "anLogin";
 	}
 	
+	//선생 등록
 	@RequestMapping(value="/anTeacher", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anTeacher(HttpServletRequest request, Model model){
 		System.out.println("anTeacher()");
@@ -175,25 +177,39 @@ public class AnController {
 		String teacher_id = (String) request.getParameter("teacher_id");
 		String teacher_univ = (String) request.getParameter("teacher_univ");
 		String teacher_major = (String) request.getParameter("teacher_major");
-		String teacher_univNum = (String) request.getParameter("teacher_univNum");
+		String teacher_univnum = (String) request.getParameter("teacher_univnum");
 		String teacher_subject = (String) request.getParameter("teacher_subject");
 		String teacher_worktime = (String) request.getParameter("teacher_worktime");
 		String teacher_pay = (String) request.getParameter("teacher_pay");
 		String teacher_intro = (String) request.getParameter("teacher_intro");
+		String teacher_image_path = (String) request.getParameter("teacher_image_path");
 		
 		model.addAttribute("teacher_id", teacher_id);
 		model.addAttribute("teacher_univ", teacher_univ);
 		model.addAttribute("teacher_major", teacher_major);
-		model.addAttribute("teacher_univNum", teacher_univNum);
+		model.addAttribute("teacher_univnum", teacher_univnum);
 		model.addAttribute("teacher_subject", teacher_subject);
 		model.addAttribute("teacher_worktime", teacher_worktime);
 		model.addAttribute("teacher_pay", teacher_pay);
 		model.addAttribute("teacher_intro", teacher_intro);
+		model.addAttribute("teacher_image_path", teacher_image_path);
 		
 		command = new AnTeacherCommand();
 		command.execute(model);
 		
 		return "anTeacher";
 	}
+	
+	//과외문의 리스트뷰
+	@RequestMapping(value="/anSelectMulti", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anSelectMulti(HttpServletRequest req, Model model){
+		System.out.println("anSelectMulti()");
+		
+		command = new ASelectMultiCommand();
+		command.execute(model);
+		
+		return "anSelectMulti";
+	}
+	
 	
 }
