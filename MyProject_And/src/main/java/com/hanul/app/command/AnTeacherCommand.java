@@ -16,11 +16,14 @@ public class AnTeacherCommand implements AnCommand{
 		String teacher_worktime = (String)model.asMap().get("teacher_worktime");	
 		String teacher_pay = (String)model.asMap().get("teacher_pay");	
 		String teacher_intro = (String)model.asMap().get("teacher_intro");	
-		String teacher_image_path = (String)model.asMap().get("teacher_image_path");	
+		String teacher_image_path = (String)model.asMap().get("teacher_image_path");
+		String teacher_nickname = (String)model.asMap().get("teacher_nickname");
+		String teacher_addr = (String)model.asMap().get("teacher_addr");
 
 		AnDao adao = new AnDao();
 		int state = adao.anTeacher(teacher_id,teacher_univ,teacher_major,teacher_univnum,
-				teacher_subject,teacher_worktime,teacher_pay,teacher_intro,teacher_image_path);
+				teacher_subject,teacher_worktime,teacher_pay,teacher_intro,teacher_image_path,
+				teacher_nickname,teacher_addr);
 		
 		model.addAttribute("anTeacher", String.valueOf(state)); 	
 	}

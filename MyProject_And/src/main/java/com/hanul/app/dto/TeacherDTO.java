@@ -5,12 +5,14 @@ import java.sql.Date;
 public class TeacherDTO {
 	String teacher_id,teacher_univ,teacher_major,teacher_univNum,
 		teacher_subject,teacher_worktime,teacher_pay,teacher_intro,
-		teacher_image_path;
+		teacher_image_path,teacher_nickname,teacher_addr;
 	int teacher_matching;
 	Date teacher_date;
+	
 	public TeacherDTO(String teacher_id, String teacher_univ, String teacher_major, String teacher_univNum,
 			String teacher_subject, String teacher_worktime, String teacher_pay, String teacher_intro,
-			String teacher_image_path, int teacher_matching, Date teacher_date) {
+			String teacher_image_path, int teacher_matching, Date teacher_date, String teacher_nickname,
+			String teacher_addr) {
 		super();
 		this.teacher_id = teacher_id;
 		this.teacher_univ = teacher_univ;
@@ -23,7 +25,31 @@ public class TeacherDTO {
 		this.teacher_image_path = teacher_image_path;
 		this.teacher_matching = teacher_matching;
 		this.teacher_date = teacher_date;
+		this.teacher_nickname = teacher_nickname;
+		this.teacher_addr = teacher_addr;
 	}
+	
+	
+	
+	public String getTeacher_nickname() {
+		return teacher_nickname;
+	}
+	public void setTeacher_nickname(String teacher_nickname) {
+		this.teacher_nickname = teacher_nickname;
+	}
+
+	public String getTeacher_addr() {
+		return teacher_addr;
+	}
+
+
+
+	public void setTeacher_addr(String teacher_addr) {
+		this.teacher_addr = teacher_addr;
+	}
+
+
+
 	public String getTeacher_id() {
 		return teacher_id;
 	}

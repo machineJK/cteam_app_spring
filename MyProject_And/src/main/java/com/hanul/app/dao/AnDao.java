@@ -139,7 +139,7 @@ public class AnDao {
     public int anTeacher(String teacher_id,String teacher_univ,
     		String teacher_major,String teacher_univnum,String teacher_subject,
     		String teacher_worktime,String teacher_pay,String teacher_intro,
-    		String teacher_image_path) {
+    		String teacher_image_path,String teacher_nickname,String teacher_addr) {
 
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -149,11 +149,12 @@ public class AnDao {
 			connection = dataSource.getConnection();
 			String query = "insert into teacher(teacher_id,teacher_univ,teacher_major,"
 					+ "teacher_univnum,teacher_subject,teacher_worktime,teacher_pay,"
-					+ "teacher_intro,teacher_image_path) " + 
+					+ "teacher_intro,teacher_image_path,teacher_nickname,teacher_addr) " + 
 			               "values('" + teacher_id + "', '" + teacher_univ + "', '" + 
 			               teacher_major + "', '" + teacher_univnum + "', '" +
 			               teacher_subject + "', '" + teacher_worktime + "', '" + 
-			               teacher_pay + "', '" + teacher_intro + "','" + teacher_image_path + "')";
+			               teacher_pay + "', '" + teacher_intro + "','" + teacher_image_path + 
+			               teacher_nickname  + "','" + teacher_addr + "')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			System.out.println(teacher_intro);
@@ -250,11 +251,12 @@ public class AnDao {
 				String teacher_image_path = resultSet.getString("teacher_image_path");
 				int teacher_matching = resultSet.getInt("teacher_matching");
 				Date teacher_date = resultSet.getDate("teacher_date");
-				
+				String teacher_nickname = resultSet.getString("teacher_nickname");
+				String teacher_addr = resultSet.getString("teacher_addr");
 
 				TeacherDTO adto = new TeacherDTO(teacher_id,teacher_univ,teacher_major,teacher_univnum,
 						teacher_subject,teacher_worktime,teacher_pay,teacher_intro,
-						teacher_image_path,teacher_matching,teacher_date);
+						teacher_image_path,teacher_matching,teacher_date,teacher_nickname,teacher_addr);
 				adtos.add(adto);			
 			}	
 			

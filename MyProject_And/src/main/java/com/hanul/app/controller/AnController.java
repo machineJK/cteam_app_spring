@@ -185,6 +185,8 @@ public class AnController {
 		String teacher_pay = (String) request.getParameter("teacher_pay");
 		String teacher_intro = (String) request.getParameter("teacher_intro");
 		String teacher_image_path = (String) request.getParameter("teacher_image_path");
+		String teacher_nickname = (String) request.getParameter("teacher_nickname");
+		String teacher_addr = (String) request.getParameter("teacher_addr");
 		
 		model.addAttribute("teacher_id", teacher_id);
 		model.addAttribute("teacher_univ", teacher_univ);
@@ -195,6 +197,8 @@ public class AnController {
 		model.addAttribute("teacher_pay", teacher_pay);
 		model.addAttribute("teacher_intro", teacher_intro);
 		model.addAttribute("teacher_image_path", teacher_image_path);
+		model.addAttribute("teacher_nickname", teacher_nickname);
+		model.addAttribute("teacher_addr", teacher_addr);
 		
 		command = new AnTeacherCommand();
 		command.execute(model);
