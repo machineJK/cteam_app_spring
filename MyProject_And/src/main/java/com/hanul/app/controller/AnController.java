@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.hanul.app.command.AModifyCommand;
+import com.hanul.app.command.AModifyNoCommand;
 import com.hanul.app.command.ASelectMultiCommand;
 import com.hanul.app.command.ASelectMultiCommand2;
 import com.hanul.app.command.AnCommand;
@@ -27,7 +29,7 @@ import com.hanul.app.command.AnTeacherCommand;
 
 @Controller
 public class AnController {
-	
+
 	AnCommand command;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -43,21 +45,21 @@ public class AnController {
 		
 		return "home";
 	}
-	//æ»µÂ∑Œ¿ÃµÂø°º≠ ø¬ ¡§∫∏∞° ø©±‚∑Œ ≥—∞‹¡¸
+	//ÏïàÎìúÎ°úÏù¥ÎìúÏóêÏÑú Ïò® Ï†ïÎ≥¥Í∞Ä Ïó¨Í∏∞Î°ú ÎÑòÍ≤®Ïßê
 	@RequestMapping(value="/anJoin", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anJoin(HttpServletRequest req, Model model){
 		
-		//æ»µÂ∑Œ¿ÃµÂøÕ ø¨∞·µ«æÓ¿÷¥¬¡ˆ »Æ¿Œ«œ±‚
+		//ÏïàÎìúÎ°úÏù¥ÎìúÏôÄ Ïó∞Í≤∞ÎêòÏñ¥ÏûàÎäîÏßÄ ÌôïÏù∏ÌïòÍ∏∞
 		System.out.println("anJoin()");
 		
-		//«—±€ º≥¡§
+		//ÌïúÍ∏Ä ÏÑ§Ï†ï
 		try {
 			req.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} 		
 		
-		//πﬁ¿∫ ¡§∫∏∏¶ requestπÊΩƒ¿∏∑Œ πﬁ±‚
+		//Î∞õÏùÄ Ï†ïÎ≥¥Î•º requestÎ∞©ÏãùÏúºÎ°ú Î∞õÍ∏∞
 		String id = (String) req.getParameter("id");
 		String pw = (String) req.getParameter("pw");
 		String nickname = (String) req.getParameter("nickname");
@@ -70,14 +72,14 @@ public class AnController {
 		String dbImgPath = (String) req.getParameter("dbImgPath");
 
 		
-//		//µ•¿Ã≈Õ∞° ¡¶¥Î∑Œ ø¨∞·µ«æÓ ¿÷¥¬¡ˆ »Æ¿Œ
+//		//Îç∞Ïù¥ÌÑ∞Í∞Ä Ï†úÎåÄÎ°ú Ïó∞Í≤∞ÎêòÏñ¥ ÏûàÎäîÏßÄ ÌôïÏù∏
 //		System.out.println(id);
 //		System.out.println(passwd);
 //		System.out.println(name);
 //		System.out.println(phonenumber);
 //		System.out.println(address);
 		
-		//∏µ®ø° ¥„±‚(±◊≥… «œ¥¬∞Õ)
+		//Î™®Îç∏Ïóê Îã¥Í∏∞(Í∑∏ÎÉ• ÌïòÎäîÍ≤É)
 		model.addAttribute("id", id);
 		model.addAttribute("pw", pw);
 		model.addAttribute("nickname", nickname);
@@ -96,7 +98,7 @@ public class AnController {
 			String fileName = file.getOriginalFilename();
 			System.out.println(fileName);
 			
-			// µ∑∫≈‰∏Æ ¡∏¿Á«œ¡ˆ æ ¿∏∏È ª˝º∫
+			// ÎîîÎ†âÌÜ†Î¶¨ Ï°¥Ïû¨ÌïòÏßÄ ÏïäÏúºÎ©¥ ÏÉùÏÑ±
 			makeDir(req);	
 				
 			if(file.getSize() > 0){			
@@ -107,14 +109,14 @@ public class AnController {
 				System.out.println( "fileSize : " + file.getSize());					
 												
 			 	try {
-			 		// ¿ÃπÃ¡ˆ∆ƒ¿œ ¿˙¿Â
+			 		// Ïù¥ÎØ∏ÏßÄÌååÏùº Ï†ÄÏû•
 					file.transferTo(new File(realImgPath, fileName));										
 				} catch (Exception e) {
 					e.printStackTrace();
 				} 
 									
 			}else{
-				// ¿ÃπÃ¡ˆ∆ƒ¿œ Ω«∆–Ω√
+				// Ïù¥ÎØ∏ÏßÄÌååÏùº Ïã§Ìå®Ïãú
 				fileName = "FileFail.jpg";
 				String realImgPath = req.getSession().getServletContext()
 						.getRealPath("/resources/" + fileName);
@@ -139,7 +141,7 @@ public class AnController {
 		}	
 	}
 	
-	//æ»µÂ∑Œ¿ÃµÂø°º≠ ø¬ ∑Œ±◊¿Œ ¡§∫∏(id,pw)
+	//ÏïàÎìúÎ°úÏù¥ÎìúÏóêÏÑú Ïò® Î°úÍ∑∏Ïù∏ Ï†ïÎ≥¥(id,pw)
 	@RequestMapping(value="/anLogin", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anLogin(HttpServletRequest request, Model model){
 		//System.out.println("anLogin()");
@@ -165,7 +167,7 @@ public class AnController {
 		return "anLogin";
 	}
 	
-	//º±ª˝ µÓ∑œ
+	//ÏÑ†ÏÉù Îì±Î°ù
 	@RequestMapping(value="/anTeacher", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anTeacher(HttpServletRequest request, Model model){
 		System.out.println("anTeacher()");
@@ -206,7 +208,7 @@ public class AnController {
 		return "anTeacher";
 	}
 	
-	//º±ª˝ µÓ∑œ
+	//ÏÑ†ÏÉù Îì±Î°ù
 	@RequestMapping(value="/anStudent", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anStudent(HttpServletRequest request, Model model){
 		System.out.println("anStudent()");
@@ -235,7 +237,7 @@ public class AnController {
 		return "anStudent";
 	}
 	
-	//º±ª˝ ∏ÆΩ∫∆Æ∫‰
+	//ÏÑ†ÏÉù Î¶¨Ïä§Ìä∏Î∑∞
 	@RequestMapping(value="/anSelectMulti", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anSelectMulti(HttpServletRequest req, Model model){
 		System.out.println("anSelectMulti()");
@@ -246,7 +248,7 @@ public class AnController {
 		return "anSelectMulti";
 	}
 	
-	//«–ª˝ ∏ÆΩ∫∆Æ∫‰
+	//ÌïôÏÉù Î¶¨Ïä§Ìä∏Î∑∞
 	@RequestMapping(value="/anSelectMulti2", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anSelectMulti2(HttpServletRequest req, Model model){
 		System.out.println("anSelectMulti2()");
@@ -258,4 +260,119 @@ public class AnController {
 	}
 	
 	
+
+	//Modify ÏàòÏ†ïÌôîÎ©¥(ÏÑ±Í≥µ)
+	@RequestMapping(value="/anUpdateMulti", method = {RequestMethod.GET, RequestMethod.POST})
+	public void anUpdateMulti(HttpServletRequest req, Model model) {
+		System.out.println("anUpdateMulti()");
+		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String id = (String) req.getParameter("id");
+		String pw = (String) req.getParameter("pw");
+		String nickname = (String) req.getParameter("nickname");
+		String email = (String) req.getParameter("email");
+		String dbImgPath = (String) req.getParameter("dbImgPath");
+		String pDbImgPath = (String) req.getParameter("pDbImgPath");
+		
+		System.out.println(id);
+		System.out.println(pw);
+		System.out.println(nickname);
+		System.out.println(email);
+		System.out.println("Sub1Update:dbImgPath " + dbImgPath);
+		System.out.println("Sub1Update:pDbImgPath " + pDbImgPath);
+		
+		model.addAttribute("id", id);
+		model.addAttribute("pw", pw);
+		model.addAttribute("nickname", nickname);
+		model.addAttribute("email", email);
+		model.addAttribute("dbImgPath", dbImgPath);
+		
+		// Ïù¥ÎØ∏ÏßÄÍ∞Ä ÏÑúÎ°ú Í∞ôÏúºÎ©¥ ÏÇ≠Ï†úÌïòÏßÄ ÏïäÍ≥† Îã§Î•¥Î©¥ Í∏∞Ï°¥Ïù¥ÎØ∏ÏßÄ ÏÇ≠Ï†ú
+				if(!dbImgPath.equals(pDbImgPath)){			
+					
+					String pFileName = req.getParameter("pDbImgPath").split("/")[req.getParameter("pDbImgPath").split("/").length -1];
+					String delDbImgPath = req.getSession().getServletContext().getRealPath("/resources/" + pFileName);
+					
+					File delfile = new File(delDbImgPath);
+					System.out.println(delfile.getAbsolutePath());
+					
+			        if(delfile.exists()) {
+			        	boolean deleteFile = false;
+			            while(deleteFile != true){
+			            	deleteFile = delfile.delete();
+			            }	            
+			            
+			        }//if(delfile.exists())
+				
+				}//if(!dbImgPath.equals(pDbImgPath))  
+				
+				MultipartRequest multi = (MultipartRequest)req;
+				MultipartFile file = null;
+				
+				file = multi.getFile("image");
+					
+				if(file != null) {
+					String fileName = file.getOriginalFilename();
+					System.out.println(fileName);
+					
+					// ÎîîÎ†âÌÜ†Î¶¨ Ï°¥Ïû¨ÌïòÏßÄ ÏïäÏúºÎ©¥ ÏÉùÏÑ±
+					makeDir(req);	
+						
+					if(file.getSize() > 0){			
+						String realImgPath = req.getSession().getServletContext()
+								.getRealPath("/resources/");
+						
+						System.out.println( fileName + " : " + realImgPath);
+						System.out.println( "fileSize : " + file.getSize());					
+														
+					 	try {
+					 		// Ïù¥ÎØ∏ÏßÄÌååÏùº Ï†ÄÏû•
+							file.transferTo(new File(realImgPath, fileName));						
+						} catch (Exception e) {
+							e.printStackTrace();
+						} 
+											
+					}else{
+						fileName = "FileFail.jpg";
+						String realImgPath = req.getSession().getServletContext()
+								.getRealPath("/resources/" + fileName);
+						System.out.println(fileName + " : " + realImgPath);
+								
+					}			
+					
+				}
+				
+				command = new AModifyCommand();
+				command.execute(model);		
+				
+	}
+	@RequestMapping(value="/anUpdateMultiNo", method = {RequestMethod.GET, RequestMethod.POST})
+	public void anUpdateMultiNo(HttpServletRequest req, Model model) {
+		System.out.println("anUpdateMultiNo()");
+		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		
+		String id = (String) req.getParameter("id");
+		String pw = (String) req.getParameter("pw");
+		String nickname = (String) req.getParameter("nickname");
+		String email = (String) req.getParameter("email");
+		
+		command = new AModifyNoCommand();
+		command.execute(model);	
+		
+	}
+	
+	
+	
 }
+
