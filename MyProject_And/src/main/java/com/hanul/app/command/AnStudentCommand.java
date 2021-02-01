@@ -12,11 +12,12 @@ public class AnStudentCommand implements AnCommand{
 		String student_subject = (String)model.asMap().get("student_subject");	
 		String student_grade = (String)model.asMap().get("student_grade");	
 		String student_intro = (String)model.asMap().get("student_intro");		
-		String student_image_path = (String)model.asMap().get("student_image_path");	
+		String student_image_path = (String)model.asMap().get("student_image_path");
+		String student_addr = (String)model.asMap().get("student_addr");
 
 		AnDao adao = new AnDao();
 		int state = adao.anStudent(student_id,student_subject,student_grade,
-				student_intro,student_image_path);
+				student_intro,student_image_path,student_addr);
 		
 		model.addAttribute("anStudent", String.valueOf(state)); 	
 		

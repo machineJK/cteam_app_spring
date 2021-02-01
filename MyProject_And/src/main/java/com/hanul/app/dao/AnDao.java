@@ -183,7 +183,8 @@ public class AnDao {
 	}
     
     public int anStudent(String student_id,String student_subject,
-    		String student_grade,String student_intro,String student_image_path) {
+    		String student_grade,String student_intro,String student_image_path,
+    		String student_addr) {
 
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -192,10 +193,10 @@ public class AnDao {
 		try {
 			connection = dataSource.getConnection();
 			String query = "insert into student(student_id,student_subject,student_grade,"
-						+ "student_intro,student_image_path) "
+						+ "student_intro,student_image_path,student_addr) "
 			            + "values('" + student_id + "', '" + student_subject + "', '" + 
 			            student_grade + "', '" + student_intro + "', '"
-			            + student_image_path +"')";
+			            + student_image_path + "', '" + student_addr +"')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			
@@ -313,10 +314,12 @@ public class AnDao {
 				String student_image_path = resultSet.getString("student_image_path");
 				int student_matching = resultSet.getInt("student_matching");
 				Date student_date = resultSet.getDate("student_date");
+				String student_addr = resultSet.getString("student_addr");
 				
+				//System.out.println(student_addr);
 
 				StudentDTO adto = new StudentDTO(student_id, student_subject, student_grade, 
-						student_intro, student_image_path, student_matching, student_date);
+						student_intro, student_image_path, student_matching, student_date,student_addr);
 				adtos.add(adto);			
 			}	
 			

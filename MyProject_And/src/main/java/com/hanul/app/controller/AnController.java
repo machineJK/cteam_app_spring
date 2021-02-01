@@ -222,12 +222,14 @@ public class AnController {
 		String student_grade = (String) request.getParameter("student_grade");
 		String student_intro = (String) request.getParameter("student_intro");
 		String student_image_path = (String) request.getParameter("student_image_path");
+		String student_addr = (String) request.getParameter("student_addr");
 		
 		model.addAttribute("student_id", student_id);
 		model.addAttribute("student_subject", student_subject);
 		model.addAttribute("student_grade", student_grade);
 		model.addAttribute("student_intro", student_intro);
 		model.addAttribute("student_image_path", student_image_path);
+		model.addAttribute("student_addr",student_addr);
 		
 		command = new AnStudentCommand();
 		command.execute(model);
