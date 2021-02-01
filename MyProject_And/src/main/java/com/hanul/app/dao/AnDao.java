@@ -18,7 +18,8 @@ import com.hanul.app.dto.TeacherDTO;
 public class AnDao {
 	DataSource dataSource;
 
-	//DB¿¬°á ¸Ş¼Òµå
+
+	//DBì—°ê²° ë©”ì†Œë“œ
 	public AnDao() {
 		try {
 			Context context = new InitialContext();
@@ -30,7 +31,7 @@ public class AnDao {
 
 	}
 	
-	//È¸¿ø°¡ÀÔ ¸Ş¼Òµå(Insert)
+	//íšŒì›ê°€ì… ë©”ì†Œë“œ(Insert)
 	public int anJoin(String id, String pw, String nickname, String name,
 			String gender, String birth, String email, String addr1,
 			String addr2, String dbImgPath) {
@@ -50,9 +51,9 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 			
 			if (state > 0) {
-				System.out.println(state + ":»ğÀÔ¼º°ø");				
+				System.out.println(state + ":ì‚½ì…ì„±ê³µ");				
 			} else {
-				System.out.println(state + ":»ğÀÔ½ÇÆĞ");
+				System.out.println(state + ":ì‚½ì…ì‹¤íŒ¨");
 			}
 			
 		} catch (Exception e) {			
@@ -135,7 +136,7 @@ public class AnDao {
 
 	}
     
-    //¼±»ı µî·Ï
+    //ì„ ìƒ ë“±ë¡
     public int anTeacher(String teacher_id,String teacher_univ,
     		String teacher_major,String teacher_univnum,String teacher_subject,
     		String teacher_worktime,String teacher_pay,String teacher_intro,
@@ -159,9 +160,9 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 			System.out.println(teacher_intro);
 			if (state > 0) {
-				System.out.println(state + ":»ğÀÔ¼º°ø");				
+				System.out.println(state + ":ì‚½ì…ì„±ê³µ");				
 			} else {
-				System.out.println(state + ":»ğÀÔ½ÇÆĞ");
+				System.out.println(state + ":ì‚½ì…ì‹¤íŒ¨");
 			}
 			
 		} catch (Exception e) {			
@@ -201,9 +202,9 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 			
 			if (state > 0) {
-				System.out.println(state + ":»ğÀÔ¼º°ø");				
+				System.out.println(state + ":ì‚½ì…ì„±ê³µ");				
 			} else {
-				System.out.println(state + ":»ğÀÔ½ÇÆĞ");
+				System.out.println(state + ":ì‚½ì…ì‹¤íŒ¨");
 			}
 			
 		} catch (Exception e) {			
@@ -224,7 +225,7 @@ public class AnDao {
 		return state;
 	}
     
-    //¼±»ı ¸®½ºÆ®
+    //ì„ ìƒ ë¦¬ìŠ¤íŠ¸
 	public ArrayList<TeacherDTO> anSelectMulti() {		
 		
 		ArrayList<TeacherDTO> adtos = new ArrayList<TeacherDTO>();
@@ -261,7 +262,7 @@ public class AnDao {
 				adtos.add(adto);			
 			}	
 			
-			System.out.println("adtosÅ©±â" + adtos.size());
+			System.out.println("adtosí¬ê¸°" + adtos.size());
 			
 		} catch (Exception e) {
 			
@@ -290,7 +291,7 @@ public class AnDao {
 
 	}
     
-	//ÇĞ»ı ¸®½ºÆ®
+	//í•™ìƒ ë¦¬ìŠ¤íŠ¸
 	public ArrayList<StudentDTO> anSelectMulti2() {		
 		
 		ArrayList<StudentDTO> adtos = new ArrayList<StudentDTO>();
@@ -323,7 +324,7 @@ public class AnDao {
 				adtos.add(adto);			
 			}	
 			
-			System.out.println("adtosÅ©±â" + adtos.size());
+			System.out.println("adtosí¬ê¸°" + adtos.size());
 			
 		} catch (Exception e) {
 			
@@ -351,21 +352,125 @@ public class AnDao {
 		return adtos;
 
 	}
+	//Modifyíšì •ë³´ ìˆ˜ì •í™”ë©´(Modify)
+	public int anModify(int id, String pw, String nickname, String email, String dbImgPath) {
+		
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		int state = -1;
+	
+		try {			
+			//ì•„ì´ë””ëŠ” ìˆ˜ì •í• ìˆ˜ ì—†ìŒ		
+			connection = dataSource.getConnection();
+			String query = "update cteam set " 			             
+		             + " pw = '" + pw + "' "
+		             + ", nickname = '" + nickname + "' "
+		             + ", email = '" + email + "' "
+		             + ", image_path = '" + dbImgPath + "' "
+					 + " where id = " + id ;
+			
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+	
+			if (state > 0) {
+				System.out.println("ìˆ˜ì •1ì„±ê³µ");
+				
+			} else {
+				System.out.println("ìˆ˜ì •1ì‹¤íŒ¨");
+			}
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+	
+			}
+		}
+	
+		return state;
+	
+	}
+	//ìˆ˜ì •ì‹¤íŒ¨
+	public int anUpdateMultiNo(int id, String pw, String nickname, String email) {
+		
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		int state = -1;
+	
+		try {			
+			// ì•„ì´ë””ëŠ” ìˆ˜ì •í• ìˆ˜ ì—†ìŒ			
+			connection = dataSource.getConnection();
+			String query = "update cteam set " 			             
+		             + " pw = '" + pw + "' "
+		             + ", nickname = '" + nickname + "' "
+		             + ", email = '" + email + "' "
+					 + " where id = " + id ;
+			
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+	
+			if (state > 0) {
+				System.out.println("ìˆ˜ì •2ì„±ê³µ");
+				
+			} else {
+				System.out.println("ìˆ˜ì •2ì‹¤íŒ¨");
+			}
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+	
+			}
+		}
+	
+		return state;
+	}
 	
 	
 	/*
-	 * //·Î±×ÀÎ ¸Ş¼Òµå public String anLogin(String id, String passwd) {
+	 * //ë¡œê·¸ì¸ ë©”ì†Œë“œ public String anLogin(String id, String passwd) {
 	 * 
 	 * Connection connection = null; PreparedStatement prepareStatement = null;
-	 * ResultSet rs = null; String msg = "¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê;;½À´Ï´Ù!";
+	 * ResultSet rs = null; String msg = "ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•Š;;ìŠµë‹ˆë‹¤!";
 	 * 
 	 * try { connection = dataSource.getConnection(); String query =
 	 * "select id,passwd from member"; prepareStatement =
 	 * connection.prepareStatement(query); rs = prepareStatement.executeQuery();
 	 * 
 	 * while(rs.next()) { if(rs.getString("id").equals(id) &&
-	 * rs.getString("passwd").equals(passwd)) { System.out.println("·Î±×ÀÎ ¼º°ø!"); msg =
-	 * "·Î±×ÀÎ ¼º°ø!"; break; } }
+	 * rs.getString("passwd").equals(passwd)) { System.out.println("ë¡œê·¸ì¸ ì„±ê³µ!"); msg =
+	 * "ë¡œê·¸ì¸ ì„±ê³µ!"; break; } }
 	 * 
 	 * } catch (Exception e) { System.out.println(e.getMessage()); } finally { try {
 	 * if (prepareStatement != null) { prepareStatement.close(); } if (connection !=
