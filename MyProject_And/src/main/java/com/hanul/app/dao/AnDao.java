@@ -372,10 +372,10 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 	
 			if (state > 0) {
-				System.out.println("����1�깃났");
+				System.out.println("수정1성공");
 				
 			} else {
-				System.out.println("����1�ㅽ��");
+				System.out.println("수정1실패");
 			}
 	
 		} catch (Exception e) {
@@ -414,7 +414,7 @@ public class AnDao {
 		try {			
 			// 아이디는 수정할수 없음			
 			connection = dataSource.getConnection();
-			String query = "update android set " 			             
+			String query = "update cteam set " 			             
 		             + " pw = '" + pw + "' "
 		             + ", nickname = '" + nickname + "' "
 		             + ", email = '" + email + "' "
@@ -424,10 +424,10 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 	
 			if (state > 0) {
-				System.out.println("����2�깃났");
+				System.out.println("수정2성공");
 				
 			} else {
-				System.out.println("����2�ㅽ��");
+				System.out.println("수정2실패");
 			}
 	
 		} catch (Exception e) {
