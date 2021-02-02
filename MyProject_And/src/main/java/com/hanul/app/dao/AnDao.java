@@ -353,7 +353,7 @@ public class AnDao {
 
 	}
 	//Modify횐정보 수정화면(Modify)
-	public int anModify(int id, String pw, String nickname, String email, String dbImgPath) {
+	public int anModify(String id, String pw, String nickname, String email, String dbImgPath) {
 		
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -364,12 +364,12 @@ public class AnDao {
 		try {			
 			//아이디는 수정할수 없음		
 			connection = dataSource.getConnection();
-			String query = "update cteam set " 			             
+			String query = "update member set " 			             
 		             + " pw = '" + pw + "' "
 		             + ", nickname = '" + nickname + "' "
 		             + ", email = '" + email + "' "
-		             + ", image_path = '" + dbImgPath + "' "
-					 + " where id = " + id ;
+		             + ", dbimgpath = '" + dbImgPath + "' "
+					 + " where id = '" + id + "'";
 			
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
@@ -406,22 +406,23 @@ public class AnDao {
 	
 	}
 	//수정실패
-	public int anUpdateMultiNo(int id, String pw, String nickname, String email) {
+	public int anUpdateMultiNo(String id, String pw, String nickname, String email) {
 		
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
 		
 		int state = -1;
+
 	
 		try {			
 			// 아이디는 수정할수 없음			
 			connection = dataSource.getConnection();
-			String query = "update cteam set " 			             
+			String query = "update member set " 			             
 		             + " pw = '" + pw + "' "
 		             + ", nickname = '" + nickname + "' "
 		             + ", email = '" + email + "' "
-					 + " where id = " + id ;
+					 + " where id = '" + id + "'";
 			
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();

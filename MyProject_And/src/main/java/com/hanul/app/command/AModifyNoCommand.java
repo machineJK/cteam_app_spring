@@ -9,7 +9,7 @@ public class AModifyNoCommand implements AnCommand{
 
 	@Override
 	public void execute(Model model) {
-		int id = Integer.parseInt((String)model.asMap().get("id"));
+		String id = (String)model.asMap().get("id");
 		String pw = (String) model.asMap().get("pw");
 		String nickname = (String) model.asMap().get("nickname");
 		String email = (String) model.asMap().get("email");
