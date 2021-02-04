@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.hanul.app.dto.CheckDTO;
 import com.hanul.app.dto.MemberDTO;
 import com.hanul.app.dto.StudentDTO;
 import com.hanul.app.dto.TeacherDTO;
@@ -19,7 +20,7 @@ public class AnDao {
 	DataSource dataSource;
 
 
-	//DB연결 메소드
+	//DB�뿰寃� 硫붿냼�뱶
 	public AnDao() {
 		try {
 			Context context = new InitialContext();
@@ -31,7 +32,57 @@ public class AnDao {
 
 	}
 	
-	//회원가입 메소드(Insert)
+    public CheckDTO anIdCheck(String idin) {
+
+    	CheckDTO adto = null;
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select count(*) "					
+							+ " from member" 
+							+ " where id = '" + idin + "' ";
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				int idchk = resultSet.getInt(1);
+				adto = new CheckDTO(idchk);					
+			}	
+			
+			System.out.println("CheckDTO idchk : " + adto.getIdchk());
+			
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("anIdCheck() Exception!!!");
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return adto;
+
+	}
+	
+	
+	//�쉶�썝媛��엯 硫붿냼�뱶(Insert)
 	public int anJoin(String id, String pw, String nickname, String name,
 			String gender, String birth, String email, String addr1,
 			String addr2, String dbImgPath) {
@@ -51,9 +102,9 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 			
 			if (state > 0) {
-				System.out.println(state + ":삽입성공");				
+				System.out.println(state + ":�궫�엯�꽦怨�");				
 			} else {
-				System.out.println(state + ":삽입실패");
+				System.out.println(state + ":�궫�엯�떎�뙣");
 			}
 			
 		} catch (Exception e) {			
@@ -136,7 +187,7 @@ public class AnDao {
 
 	}
     
-    //선생 등록
+    //�꽑�깮 �벑濡�
     public int anTeacher(String teacher_id,String teacher_univ,
     		String teacher_major,String teacher_univnum,String teacher_subject,
     		String teacher_worktime,String teacher_pay,String teacher_intro,
@@ -160,9 +211,9 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 			System.out.println(teacher_intro);
 			if (state > 0) {
-				System.out.println(state + ":삽입성공");				
+				System.out.println(state + ":�궫�엯�꽦怨�");				
 			} else {
-				System.out.println(state + ":삽입실패");
+				System.out.println(state + ":�궫�엯�떎�뙣");
 			}
 			
 		} catch (Exception e) {			
@@ -202,9 +253,9 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 			
 			if (state > 0) {
-				System.out.println(state + ":삽입성공");				
+				System.out.println(state + ":�궫�엯�꽦怨�");				
 			} else {
-				System.out.println(state + ":삽입실패");
+				System.out.println(state + ":�궫�엯�떎�뙣");
 			}
 			
 		} catch (Exception e) {			
@@ -225,7 +276,7 @@ public class AnDao {
 		return state;
 	}
     
-    //선생 리스트
+    //�꽑�깮 由ъ뒪�듃
 	public ArrayList<TeacherDTO> anSelectMulti() {		
 		
 		ArrayList<TeacherDTO> adtos = new ArrayList<TeacherDTO>();
@@ -262,7 +313,7 @@ public class AnDao {
 				adtos.add(adto);			
 			}	
 			
-			System.out.println("adtos크기" + adtos.size());
+			System.out.println("adtos�겕湲�" + adtos.size());
 			
 		} catch (Exception e) {
 			
@@ -291,7 +342,7 @@ public class AnDao {
 
 	}
     
-	//학생 리스트
+	//�븰�깮 由ъ뒪�듃
 	public ArrayList<StudentDTO> anSelectMulti2() {		
 		
 		ArrayList<StudentDTO> adtos = new ArrayList<StudentDTO>();
@@ -324,7 +375,7 @@ public class AnDao {
 				adtos.add(adto);			
 			}	
 			
-			System.out.println("adtos크기" + adtos.size());
+			System.out.println("adtos�겕湲�" + adtos.size());
 			
 		} catch (Exception e) {
 			
@@ -352,7 +403,7 @@ public class AnDao {
 		return adtos;
 
 	}
-	//Modify횐정보 수정화면(Modify)
+	//Modify�쉺�젙蹂� �닔�젙�솕硫�(Modify)
 	public int anModify(String id, String pw, String nickname, String email, String dbImgPath) {
 		
 		Connection connection = null;
@@ -362,7 +413,7 @@ public class AnDao {
 		int state = -1;
 	
 		try {			
-			//아이디는 수정할수 없음		
+			//�븘�씠�뵒�뒗 �닔�젙�븷�닔 �뾾�쓬		
 			connection = dataSource.getConnection();
 			String query = "update member set " 			             
 		             + " pw = '" + pw + "' "
@@ -375,10 +426,10 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 	
 			if (state > 0) {
-				System.out.println("수정1성공");
+				System.out.println("�닔�젙1�꽦怨�");
 				
 			} else {
-				System.out.println("수정1실패");
+				System.out.println("�닔�젙1�떎�뙣");
 			}
 	
 		} catch (Exception e) {
@@ -405,7 +456,7 @@ public class AnDao {
 		return state;
 	
 	}
-	//수정실패
+	//�닔�젙�떎�뙣
 	public int anUpdateMultiNo(String id, String pw, String nickname, String email) {
 		
 		Connection connection = null;
@@ -416,7 +467,7 @@ public class AnDao {
 
 	
 		try {			
-			// 아이디는 수정할수 없음			
+			// �븘�씠�뵒�뒗 �닔�젙�븷�닔 �뾾�쓬			
 			connection = dataSource.getConnection();
 			String query = "update member set " 			             
 		             + " pw = '" + pw + "' "
@@ -428,10 +479,10 @@ public class AnDao {
 			state = prepareStatement.executeUpdate();
 	
 			if (state > 0) {
-				System.out.println("수정2성공");
+				System.out.println("�닔�젙2�꽦怨�");
 				
 			} else {
-				System.out.println("수정2실패");
+				System.out.println("�닔�젙2�떎�뙣");
 			}
 	
 		} catch (Exception e) {
@@ -460,18 +511,18 @@ public class AnDao {
 	
 	
 	/*
-	 * //로그인 메소드 public String anLogin(String id, String passwd) {
+	 * //濡쒓렇�씤 硫붿냼�뱶 public String anLogin(String id, String passwd) {
 	 * 
 	 * Connection connection = null; PreparedStatement prepareStatement = null;
-	 * ResultSet rs = null; String msg = "아이디 또는 비밀번호가 일치하지 않;;습니다!";
+	 * ResultSet rs = null; String msg = "�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡;;�뒿�땲�떎!";
 	 * 
 	 * try { connection = dataSource.getConnection(); String query =
 	 * "select id,passwd from member"; prepareStatement =
 	 * connection.prepareStatement(query); rs = prepareStatement.executeQuery();
 	 * 
 	 * while(rs.next()) { if(rs.getString("id").equals(id) &&
-	 * rs.getString("passwd").equals(passwd)) { System.out.println("로그인 성공!"); msg =
-	 * "로그인 성공!"; break; } }
+	 * rs.getString("passwd").equals(passwd)) { System.out.println("濡쒓렇�씤 �꽦怨�!"); msg =
+	 * "濡쒓렇�씤 �꽦怨�!"; break; } }
 	 * 
 	 * } catch (Exception e) { System.out.println(e.getMessage()); } finally { try {
 	 * if (prepareStatement != null) { prepareStatement.close(); } if (connection !=

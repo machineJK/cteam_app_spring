@@ -20,6 +20,7 @@ import com.hanul.app.command.AModifyNoCommand;
 import com.hanul.app.command.ASelectMultiCommand;
 import com.hanul.app.command.ASelectMultiCommand2;
 import com.hanul.app.command.AnCommand;
+import com.hanul.app.command.AnIdCheckCommand;
 import com.hanul.app.command.AnJoinCommand;
 import com.hanul.app.command.AnLoginCommand;
 import com.hanul.app.command.AnStudentCommand;
@@ -144,7 +145,6 @@ public class AnController {
 	//안드로이드에서 온 로그인 정보(id,pw)
 	@RequestMapping(value="/anLogin", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anLogin(HttpServletRequest request, Model model){
-		//System.out.println("anLogin()");
 		System.out.println("anLogin()");
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -165,6 +165,28 @@ public class AnController {
 		command.execute(model);
 		
 		return "anLogin";
+	}
+	
+	//아이디 체크
+	@RequestMapping(value="/anIdCheck", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anIdCheck(HttpServletRequest request, Model model){
+		System.out.println("anIdCheck()");
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 		
+		
+		String id = (String) request.getParameter("id");
+		
+		//System.out.println(id);
+		
+		model.addAttribute("id", id);
+		
+		command = new AnIdCheckCommand();
+		command.execute(model);
+		
+		return "anIdCheck";
 	}
 	
 	//선생 등록

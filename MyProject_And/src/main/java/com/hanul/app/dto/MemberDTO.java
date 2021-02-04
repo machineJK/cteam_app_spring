@@ -3,6 +3,9 @@ package com.hanul.app.dto;
 public class MemberDTO {
 	String id, pw, nickname, name, gender, 
 			birth, email, addr1, addr2, dbImgPath ;
+	
+	public MemberDTO() {}
+	
 
 	//·Î±×ÀÎ
 	public MemberDTO(String id, String pw, String nickname, String name, String gender, String birth, String email,
