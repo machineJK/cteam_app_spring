@@ -17,8 +17,11 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.hanul.app.command.AModifyCommand;
 import com.hanul.app.command.AModifyNoCommand;
+import com.hanul.app.command.ASelectBoardCommand;
 import com.hanul.app.command.ASelectMultiCommand;
 import com.hanul.app.command.ASelectMultiCommand2;
+import com.hanul.app.command.AnBoard2Command;
+import com.hanul.app.command.AnBoardCommand;
 import com.hanul.app.command.AnCommand;
 import com.hanul.app.command.AnIdCheckCommand;
 import com.hanul.app.command.AnJoinCommand;
@@ -396,7 +399,125 @@ public class AnController {
 		
 	}
 	
+	@RequestMapping(value="/anBoard", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anBoard(HttpServletRequest req, Model model){
+		
+		//�ȵ���̵�� ����Ǿ��ִ��� Ȯ���ϱ�
+		System.out.println("anBoard()");
+		
+		//�ѱ� ����
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 		
+		
+		//���� ������ request������� �ޱ�
+		String board_id = (String) req.getParameter("board_id");
+		String board_title = (String) req.getParameter("board_title");
+		String board_content = (String) req.getParameter("board_content");
+		String board_notice = (String) req.getParameter("board_notice");
+		String qna_ref_num = (String) req.getParameter("qna_ref_num");
+		String brdDbImgPath = (String) req.getParameter("brdDbImgPath");
+		String id_image_path = (String) req.getParameter("id_image_path");
+		
+		//�𵨿� ���(�׳� �ϴ°�)
+		model.addAttribute("board_id", board_id);
+		model.addAttribute("board_title", board_title);
+		model.addAttribute("board_content", board_content);
+		model.addAttribute("board_notice", board_notice);
+		model.addAttribute("qna_ref_num", qna_ref_num);
+		model.addAttribute("board_image_path", brdDbImgPath);
+		model.addAttribute("id_image_path", id_image_path);
+		
+		MultipartRequest multi = (MultipartRequest)req;
+		MultipartFile file = multi.getFile("brdImage");
+		
+		if(file != null) {			
+			
+			String fileName = file.getOriginalFilename();
+			System.out.println(fileName);
+			
+			// ���丮 �������� ������ ����
+			makeDir(req);	
+				
+			if(file.getSize() > 0){			
+				String realImgPath = req.getSession().getServletContext()
+						.getRealPath("/resources/");
+				
+				System.out.println( fileName + " : " + realImgPath);
+				System.out.println( "fileSize : " + file.getSize());					
+												
+			 	try {
+			 		// �̹������� ����
+					file.transferTo(new File(realImgPath, fileName));										
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+									
+			}else{
+				// �̹������� ���н�
+				fileName = "FileFail.jpg";
+				String realImgPath = req.getSession().getServletContext()
+						.getRealPath("/resources/" + fileName);
+				System.out.println(fileName + " : " + realImgPath);
+						
+			}			
+			
+		} 
+		command = new AnBoardCommand();
+		command.execute(model);
+		
+		return "anBoard";		
+		
+	}
 	
+	@RequestMapping(value="/anBoard2", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anBoard2(HttpServletRequest req, Model model){
+		
+		//�ȵ���̵�� ����Ǿ��ִ��� Ȯ���ϱ�
+		System.out.println("anBoard2()");
+		
+		//�ѱ� ����
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 		
+		
+		//���� ������ request������� �ޱ�
+		String board_id = (String) req.getParameter("board_id");
+		String board_title = (String) req.getParameter("board_title");
+		String board_content = (String) req.getParameter("board_content");
+		String board_notice = (String) req.getParameter("board_notice");
+		String qna_ref_num = (String) req.getParameter("qna_ref_num");
+		String brdDbImgPath = null;
+		String id_image_path = (String) req.getParameter("id_image_path");
+		
+		//�𵨿� ���(�׳� �ϴ°�)
+		model.addAttribute("board_id", board_id);
+		model.addAttribute("board_title", board_title);
+		model.addAttribute("board_content", board_content);
+		model.addAttribute("board_notice", board_notice);
+		model.addAttribute("qna_ref_num", qna_ref_num);
+		model.addAttribute("board_image_path", brdDbImgPath);
+		model.addAttribute("id_image_path", id_image_path);
+		
+		command = new AnBoard2Command();
+		command.execute(model);
+		
+		return "anBoard2";			
+	}
+	
+	@RequestMapping(value="/anSelectBoard", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anSelectBoard(HttpServletRequest req, Model model){
+		System.out.println("anSelectBoard()");
+		
+		command = new ASelectBoardCommand();
+		command.execute(model);
+		
+		return "anSelectBoard";
+	}
 	
 }
 

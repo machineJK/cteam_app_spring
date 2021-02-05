@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.hanul.app.dto.BoardDTO;
 import com.hanul.app.dto.CheckDTO;
 import com.hanul.app.dto.MemberDTO;
 import com.hanul.app.dto.StudentDTO;
@@ -509,6 +510,104 @@ public class AnDao {
 		return state;
 	}
 	
+	//Board DB에 등록
+	public int anBoard(String board_id, String board_title, String board_content, String board_notice,
+			String qna_ref_num, String board_image_path, String id_image_path) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = -100;
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into board(board_id, board_title, board_content, board_notice, qna_ref_num,board_image_path,id_image_path ) " + 
+			               "values('" + board_id + "', '" + board_title + "', '" + board_content + 
+			               "', '" + board_notice + "', '" + qna_ref_num + 
+			               "', '" + board_image_path + "', '" + id_image_path + "')";
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+			
+			if (state > 0) {
+				System.out.println(state + ":���Լ���");				
+			} else {
+				System.out.println(state + ":���Խ���");
+			}
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return state;
+	}
+	
+	//BoardList 작성
+	public ArrayList<BoardDTO> anSelectBoard() {		
+		
+		ArrayList<BoardDTO> adtos = new ArrayList<BoardDTO>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select * from board" 
+							+ " order by board_notice, board_write_date desc";
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String board_id = resultSet.getString("board_id");
+				String board_title = resultSet.getString("board_title");
+				String board_content = resultSet.getString("board_content");
+				Date board_write_date = resultSet.getDate("board_write_date");
+				int board_readcount = resultSet.getInt("board_readcount");
+				String board_image_path = resultSet.getString("board_image_path");				
+				int board_notice = resultSet.getInt("board_notice");
+				int qna_ref_num = resultSet.getInt("qna_ref_num");
+				String id_image_path = resultSet.getString("id_image_path");		
+
+				BoardDTO adto = new BoardDTO(board_id,board_title,board_content,board_write_date,
+						board_readcount,board_image_path,board_notice,qna_ref_num, id_image_path);
+				adtos.add(adto);			
+			}	
+			
+			System.out.println("adtos개수" + adtos.size());
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return adtos;
+
+	}
 	
 	/*
 	 * //濡쒓렇�씤 硫붿냼�뱶 public String anLogin(String id, String passwd) {
