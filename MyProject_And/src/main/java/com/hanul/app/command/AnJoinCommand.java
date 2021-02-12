@@ -19,6 +19,8 @@ public class AnJoinCommand implements AnCommand{
 		String addr1 = (String)model.asMap().get("addr1");	
 		String addr2 = (String)model.asMap().get("addr2");	
 		String dbImgPath = (String)model.asMap().get("dbImgPath");
+		String kakao_login = (String)model.asMap().get("kakao_login");
+		String naver_login = (String)model.asMap().get("naver_login");
 
 		
 		//System.out.println(id);
@@ -29,7 +31,7 @@ public class AnJoinCommand implements AnCommand{
 		
 		AnDao adao = new AnDao();
 		int state = adao.anJoin(id, pw, nickname, name, gender, birth, email,
-									addr1, addr2, dbImgPath);
+									addr1, addr2, dbImgPath, kakao_login, naver_login);
 		
 		model.addAttribute("anJoin", String.valueOf(state)); 
 	}

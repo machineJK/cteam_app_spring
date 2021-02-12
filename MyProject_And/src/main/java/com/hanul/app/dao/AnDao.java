@@ -86,7 +86,7 @@ public class AnDao {
 	//�쉶�썝媛��엯 硫붿냼�뱶(Insert)
 	public int anJoin(String id, String pw, String nickname, String name,
 			String gender, String birth, String email, String addr1,
-			String addr2, String dbImgPath) {
+			String addr2, String dbImgPath, String kakao_login, String naver_login) {
 		
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -94,11 +94,11 @@ public class AnDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "insert into member(id,pw,nickname,name,gender,birth,email,addr1,addr2,dbImgPath) " + 
+			String query = "insert into member(id,pw,nickname,name,gender,birth,email,addr1,addr2,dbImgPath,kakao_login,naver_login) " + 
 			               "values('" + id + "', '" + pw + "', '" + nickname + 
 			               "', '" + name + "', '" + gender + 
 			               "', '" + birth + "', '" + email + "', '" + addr1 + 
-			               "', '" + addr2 + "', '" + dbImgPath + "')";
+			               "', '" + addr2 + "', '" + dbImgPath + "', '" + kakao_login + "', '" + naver_login + "')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			
@@ -153,10 +153,11 @@ public class AnDao {
 				String addr1 = resultSet.getString("addr1");
 				String addr2 = resultSet.getString("addr2");
 				String dbImgPath = resultSet.getString("dbImgPath");
-				
+				String kakao_login = resultSet.getString("kakao_login");
+				String naver_login = resultSet.getString("naver_login");
 
 				adto = new MemberDTO(id, pw, nickname, name, gender, 
-						birth, email, addr1, addr2, dbImgPath);						
+						birth, email, addr1, addr2, dbImgPath, kakao_login, naver_login);						
 			}	
 			
 			System.out.println("MemberDTO id : " + adto.getId());

@@ -74,6 +74,9 @@ public class AnController {
 		String addr1 = (String) req.getParameter("addr1");
 		String addr2 = (String) req.getParameter("addr2");
 		String dbImgPath = (String) req.getParameter("dbImgPath");
+		String kakao_login = (String) req.getParameter("kakao_login");
+		String naver_login = (String) req.getParameter("naver_login");
+		
 
 		
 //		//데이터가 제대로 연결되어 있는지 확인
@@ -94,6 +97,8 @@ public class AnController {
 		model.addAttribute("addr1", addr1);
 		model.addAttribute("addr2", addr2);
 		model.addAttribute("dbImgPath", dbImgPath);	
+		model.addAttribute("kakao_login", kakao_login);	
+		model.addAttribute("naver_login", naver_login);	
 		
 		MultipartRequest multi = (MultipartRequest)req;
 		MultipartFile file = multi.getFile("image");

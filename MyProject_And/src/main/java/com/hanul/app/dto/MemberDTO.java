@@ -2,14 +2,13 @@ package com.hanul.app.dto;
 
 public class MemberDTO {
 	String id, pw, nickname, name, gender, 
-			birth, email, addr1, addr2, dbImgPath ;
+			birth, email, addr1, addr2, dbImgPath,kakao_login,naver_login;
 	
 	public MemberDTO() {}
-	
 
 	//·Î±×ÀÎ
 	public MemberDTO(String id, String pw, String nickname, String name, String gender, String birth, String email,
-			String addr1, String addr2, String dbImgPath) {
+			String addr1, String addr2, String dbImgPath, String kakao_login, String naver_login) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -21,11 +20,31 @@ public class MemberDTO {
 		this.addr1 = addr1;
 		this.addr2 = addr2;
 		this.dbImgPath = dbImgPath;
+		this.kakao_login = kakao_login;
+		this.naver_login = naver_login;
+	}
+	
+	
+	public String getKakao_login() {
+		return kakao_login;
+	}
+
+	public void setKakao_login(String kakao_login) {
+		this.kakao_login = kakao_login;
+	}
+
+	public String getNaver_login() {
+		return naver_login;
+	}
+
+	public void setNaver_login(String naver_login) {
+		this.naver_login = naver_login;
 	}
 
 	public String getId() {
 		return id;
 	}
+
 
 	public void setId(String id) {
 		this.id = id;
