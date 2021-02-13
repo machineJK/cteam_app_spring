@@ -14,10 +14,11 @@ public class AnStudentCommand implements AnCommand{
 		String student_intro = (String)model.asMap().get("student_intro");		
 		String student_image_path = (String)model.asMap().get("student_image_path");
 		String student_addr = (String)model.asMap().get("student_addr");
+		String student_nickname = (String)model.asMap().get("student_nickname");
 
 		AnDao adao = new AnDao();
 		int state = adao.anStudent(student_id,student_subject,student_grade,
-				student_intro,student_image_path,student_addr);
+				student_intro,student_image_path,student_addr,student_nickname);
 		
 		model.addAttribute("anStudent", String.valueOf(state)); 	
 		

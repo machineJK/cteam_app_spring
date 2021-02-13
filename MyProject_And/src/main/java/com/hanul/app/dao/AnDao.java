@@ -238,7 +238,7 @@ public class AnDao {
     
     public int anStudent(String student_id,String student_subject,
     		String student_grade,String student_intro,String student_image_path,
-    		String student_addr) {
+    		String student_addr,String student_nickname) {
 
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -247,10 +247,10 @@ public class AnDao {
 		try {
 			connection = dataSource.getConnection();
 			String query = "insert into student(student_id,student_subject,student_grade,"
-						+ "student_intro,student_image_path,student_addr) "
+						+ "student_intro,student_image_path,student_addr,student_nickname) "
 			            + "values('" + student_id + "', '" + student_subject + "', '" + 
 			            student_grade + "', '" + student_intro + "', '"
-			            + student_image_path + "', '" + student_addr +"')";
+			            + student_image_path + "', '" + student_addr + "', '" + student_nickname + "')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			
@@ -369,11 +369,12 @@ public class AnDao {
 				int student_matching = resultSet.getInt("student_matching");
 				Date student_date = resultSet.getDate("student_date");
 				String student_addr = resultSet.getString("student_addr");
+				String student_nickname = resultSet.getString("student_nickname");
 				
 				//System.out.println(student_addr);
 
 				StudentDTO adto = new StudentDTO(student_id, student_subject, student_grade, 
-						student_intro, student_image_path, student_matching, student_date,student_addr);
+						student_intro, student_image_path, student_matching, student_date,student_addr,student_nickname);
 				adtos.add(adto);			
 			}	
 			
@@ -512,24 +513,25 @@ public class AnDao {
 	}
 	
 	//Board DB에 등록
-	public int anBoard(String board_id, String board_title, String board_content, String board_notice,
+	public int anBoard(String board_id, String board_nickname,String board_content, String board_notice,
 			String qna_ref_num, String board_image_path, String id_image_path) {
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		int state = -100;
 		try {
 			connection = dataSource.getConnection();
-			String query = "insert into board(board_id, board_title, board_content, board_notice, qna_ref_num,board_image_path,id_image_path ) " + 
-			               "values('" + board_id + "', '" + board_title + "', '" + board_content + 
+			String query = "insert into board(board_id,board_nickname, board_content, "
+					+ "board_notice, qna_ref_num,board_image_path,id_image_path ) " + 
+			               "values('" + board_id + "', '" + board_nickname + "', '" +board_content + 
 			               "', '" + board_notice + "', '" + qna_ref_num + 
 			               "', '" + board_image_path + "', '" + id_image_path + "')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			
 			if (state > 0) {
-				System.out.println(state + ":���Լ���");				
+				System.out.println(state + ":삽입성공");				
 			} else {
-				System.out.println(state + ":���Խ���");
+				System.out.println(state + ":삽입실패");
 			}
 			
 		} catch (Exception e) {			
@@ -567,7 +569,7 @@ public class AnDao {
 			
 			while (resultSet.next()) {
 				String board_id = resultSet.getString("board_id");
-				String board_title = resultSet.getString("board_title");
+				String board_nickname = resultSet.getString("board_nickname");
 				String board_content = resultSet.getString("board_content");
 				Date board_write_date = resultSet.getDate("board_write_date");
 				int board_readcount = resultSet.getInt("board_readcount");
@@ -576,7 +578,7 @@ public class AnDao {
 				int qna_ref_num = resultSet.getInt("qna_ref_num");
 				String id_image_path = resultSet.getString("id_image_path");		
 
-				BoardDTO adto = new BoardDTO(board_id,board_title,board_content,board_write_date,
+				BoardDTO adto = new BoardDTO(board_id,board_nickname,board_content,board_write_date,
 						board_readcount,board_image_path,board_notice,qna_ref_num, id_image_path);
 				adtos.add(adto);			
 			}	

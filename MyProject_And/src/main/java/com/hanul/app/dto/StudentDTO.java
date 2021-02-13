@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class StudentDTO {
     String student_id,student_subject,student_grade,student_intro,
-    			student_image_path,student_addr;
+    			student_image_path,student_addr,student_nickname;
     int student_matching;
     Date student_date;
 	public StudentDTO(String student_id, String student_subject, String student_grade, String student_intro,
-			String student_image_path, int student_matching, Date student_date, String student_addr) {
+			String student_image_path, int student_matching, Date student_date, String student_addr,String student_nickname) {
 		super();
 		this.student_id = student_id;
 		this.student_subject = student_subject;
@@ -18,9 +18,20 @@ public class StudentDTO {
 		this.student_matching = student_matching;
 		this.student_date = student_date;
 		this.student_addr = student_addr;
+		this.student_nickname = student_nickname;
 	}
 	
 	
+	public String getStudent_nickname() {
+		return student_nickname;
+	}
+
+
+	public void setStudent_nickname(String student_nickname) {
+		this.student_nickname = student_nickname;
+	}
+
+
 	public String getStudent_addr() {
 		return student_addr;
 	}

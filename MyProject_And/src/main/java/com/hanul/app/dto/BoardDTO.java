@@ -3,17 +3,17 @@ package com.hanul.app.dto;
 import java.sql.Date;
 
 public class BoardDTO {
-    String board_id, board_title, board_content;
+    String board_id, board_nickname,board_content;
     Date board_write_date;
     int board_readcount;
     String board_image_path, id_image_path;
     int board_notice, qna_ref_num;
     
-	public BoardDTO(String board_id, String board_title, String board_content, Date board_write_date,
+	public BoardDTO(String board_id, String board_nickname,String board_content, Date board_write_date,
 			int board_readcount, String board_image_path, int board_notice, int qna_ref_num, String id_image_path) {
 		super();
 		this.board_id = board_id;
-		this.board_title = board_title;
+		this.board_nickname = board_nickname;
 		this.board_content = board_content;
 		this.board_write_date = board_write_date;
 		this.board_readcount = board_readcount;
@@ -23,6 +23,17 @@ public class BoardDTO {
 		this.id_image_path = id_image_path;
 	}
 	
+	
+	public String getBoard_nickname() {
+		return board_nickname;
+	}
+
+
+	public void setBoard_nickname(String board_nickname) {
+		this.board_nickname = board_nickname;
+	}
+
+
 	public String getId_image_path() {
 		return id_image_path;
 	}
@@ -37,14 +48,6 @@ public class BoardDTO {
 
 	public void setBoard_id(String board_id) {
 		this.board_id = board_id;
-	}
-
-	public String getBoard_title() {
-		return board_title;
-	}
-
-	public void setBoard_title(String board_title) {
-		this.board_title = board_title;
 	}
 
 	public String getBoard_content() {

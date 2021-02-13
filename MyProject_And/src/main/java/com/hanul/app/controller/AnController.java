@@ -255,6 +255,7 @@ public class AnController {
 		String student_intro = (String) request.getParameter("student_intro");
 		String student_image_path = (String) request.getParameter("student_image_path");
 		String student_addr = (String) request.getParameter("student_addr");
+		String student_nickname = (String) request.getParameter("student_nickname");
 		
 		model.addAttribute("student_id", student_id);
 		model.addAttribute("student_subject", student_subject);
@@ -262,6 +263,7 @@ public class AnController {
 		model.addAttribute("student_intro", student_intro);
 		model.addAttribute("student_image_path", student_image_path);
 		model.addAttribute("student_addr",student_addr);
+		model.addAttribute("student_nickname",student_nickname);
 		
 		command = new AnStudentCommand();
 		command.execute(model);
@@ -419,6 +421,7 @@ public class AnController {
 		
 		//���� ������ request������� �ޱ�
 		String board_id = (String) req.getParameter("board_id");
+		String board_nickname = (String) req.getParameter("board_nickname");
 		String board_title = (String) req.getParameter("board_title");
 		String board_content = (String) req.getParameter("board_content");
 		String board_notice = (String) req.getParameter("board_notice");
@@ -428,6 +431,7 @@ public class AnController {
 		
 		//�𵨿� ���(�׳� �ϴ°�)
 		model.addAttribute("board_id", board_id);
+		model.addAttribute("board_nickname", board_nickname);
 		model.addAttribute("board_title", board_title);
 		model.addAttribute("board_content", board_content);
 		model.addAttribute("board_notice", board_notice);
@@ -492,7 +496,7 @@ public class AnController {
 		
 		//���� ������ request������� �ޱ�
 		String board_id = (String) req.getParameter("board_id");
-		String board_title = (String) req.getParameter("board_title");
+		String board_nickname = (String) req.getParameter("board_nickname");
 		String board_content = (String) req.getParameter("board_content");
 		String board_notice = (String) req.getParameter("board_notice");
 		String qna_ref_num = (String) req.getParameter("qna_ref_num");
@@ -501,7 +505,7 @@ public class AnController {
 		
 		//�𵨿� ���(�׳� �ϴ°�)
 		model.addAttribute("board_id", board_id);
-		model.addAttribute("board_title", board_title);
+		model.addAttribute("board_nickname", board_nickname);
 		model.addAttribute("board_content", board_content);
 		model.addAttribute("board_notice", board_notice);
 		model.addAttribute("qna_ref_num", qna_ref_num);

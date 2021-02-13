@@ -9,7 +9,7 @@ public class AnBoardCommand implements AnCommand{
 	@Override
 	public void execute(Model model) {
 		String board_id = (String)model.asMap().get("board_id");
-		String board_title = (String)model.asMap().get("board_title");	
+		String board_nickname = (String)model.asMap().get("board_nickname");
 		String board_content = (String)model.asMap().get("board_content");	
 		String board_notice = (String)model.asMap().get("board_notice");	
 		String qna_ref_num = (String)model.asMap().get("qna_ref_num");	
@@ -17,7 +17,7 @@ public class AnBoardCommand implements AnCommand{
 		String id_image_path = (String)model.asMap().get("id_image_path");
 		
 		AnDao adao = new AnDao();
-		int state = adao.anBoard(board_id, board_title, board_content
+		int state = adao.anBoard(board_id, board_nickname, board_content
 						, board_notice, qna_ref_num, board_image_path, id_image_path);
 		
 		model.addAttribute("anBoard", String.valueOf(state)); 
