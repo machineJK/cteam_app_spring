@@ -231,7 +231,7 @@ public class AnController {
 		model.addAttribute("teacher_image_path", teacher_image_path);
 		model.addAttribute("teacher_nickname", teacher_nickname);
 		model.addAttribute("teacher_addr", teacher_addr);
-		
+		//System.out.println(teacher_addr);
 		command = new AnTeacherCommand();
 		command.execute(model);
 		
@@ -425,7 +425,6 @@ public class AnController {
 		String board_title = (String) req.getParameter("board_title");
 		String board_content = (String) req.getParameter("board_content");
 		String board_notice = (String) req.getParameter("board_notice");
-		String qna_ref_num = (String) req.getParameter("qna_ref_num");
 		String brdDbImgPath = (String) req.getParameter("brdDbImgPath");
 		String id_image_path = (String) req.getParameter("id_image_path");
 		
@@ -435,7 +434,6 @@ public class AnController {
 		model.addAttribute("board_title", board_title);
 		model.addAttribute("board_content", board_content);
 		model.addAttribute("board_notice", board_notice);
-		model.addAttribute("qna_ref_num", qna_ref_num);
 		model.addAttribute("board_image_path", brdDbImgPath);
 		model.addAttribute("id_image_path", id_image_path);
 		
@@ -499,7 +497,6 @@ public class AnController {
 		String board_nickname = (String) req.getParameter("board_nickname");
 		String board_content = (String) req.getParameter("board_content");
 		String board_notice = (String) req.getParameter("board_notice");
-		String qna_ref_num = (String) req.getParameter("qna_ref_num");
 		String brdDbImgPath = null;
 		String id_image_path = (String) req.getParameter("id_image_path");
 		
@@ -508,7 +505,6 @@ public class AnController {
 		model.addAttribute("board_nickname", board_nickname);
 		model.addAttribute("board_content", board_content);
 		model.addAttribute("board_notice", board_notice);
-		model.addAttribute("qna_ref_num", qna_ref_num);
 		model.addAttribute("board_image_path", brdDbImgPath);
 		model.addAttribute("id_image_path", id_image_path);
 		

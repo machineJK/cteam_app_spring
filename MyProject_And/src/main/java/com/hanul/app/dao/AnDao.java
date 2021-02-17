@@ -189,15 +189,28 @@ public class AnDao {
 
 	}
     
-    //�꽑�깮 �벑濡�
+    //선생님 등록
     public int anTeacher(String teacher_id,String teacher_univ,
     		String teacher_major,String teacher_univnum,String teacher_subject,
     		String teacher_worktime,String teacher_pay,String teacher_intro,
     		String teacher_image_path,String teacher_nickname,String teacher_addr) {
 
+    	//System.out.println("anTeacher DAO");
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		int state = -100;
+		
+		System.out.println(teacher_id);
+		System.out.println(teacher_univ);
+		System.out.println(teacher_major);
+		System.out.println(teacher_univnum);
+		System.out.println(teacher_subject);
+		System.out.println(teacher_worktime);
+		System.out.println(teacher_pay);
+		System.out.println(teacher_intro);
+		System.out.println(teacher_image_path);
+		System.out.println(teacher_nickname);
+		System.out.println(teacher_addr);
 		
 		try {
 			connection = dataSource.getConnection();
@@ -207,15 +220,15 @@ public class AnDao {
 			               "values('" + teacher_id + "', '" + teacher_univ + "', '" + 
 			               teacher_major + "', '" + teacher_univnum + "', '" +
 			               teacher_subject + "', '" + teacher_worktime + "', '" + 
-			               teacher_pay + "', '" + teacher_intro + "','" + teacher_image_path + 
+			               teacher_pay + "', '" + teacher_intro + "','" + teacher_image_path + "','" +
 			               teacher_nickname  + "','" + teacher_addr + "')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
-			System.out.println(teacher_intro);
+
 			if (state > 0) {
-				System.out.println(state + ":�궫�엯�꽦怨�");				
+				System.out.println(state + ":삽입성공");				
 			} else {
-				System.out.println(state + ":�궫�엯�떎�뙣");
+				System.out.println(state + ":삽입실패");
 			}
 			
 		} catch (Exception e) {			
@@ -514,17 +527,16 @@ public class AnDao {
 	
 	//Board DB에 등록
 	public int anBoard(String board_id, String board_nickname,String board_content, String board_notice,
-			String qna_ref_num, String board_image_path, String id_image_path) {
+						String board_image_path, String id_image_path) {
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		int state = -100;
 		try {
 			connection = dataSource.getConnection();
 			String query = "insert into board(board_id,board_nickname, board_content, "
-					+ "board_notice, qna_ref_num,board_image_path,id_image_path ) " + 
+					+ "board_notice,board_image_path,id_image_path ) " + 
 			               "values('" + board_id + "', '" + board_nickname + "', '" +board_content + 
-			               "', '" + board_notice + "', '" + qna_ref_num + 
-			               "', '" + board_image_path + "', '" + id_image_path + "')";
+			               "', '" + board_notice + "', '" + board_image_path + "', '" + id_image_path + "')";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			
