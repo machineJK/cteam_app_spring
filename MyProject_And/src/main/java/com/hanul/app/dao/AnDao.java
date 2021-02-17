@@ -16,6 +16,7 @@ import com.hanul.app.dto.CheckDTO;
 import com.hanul.app.dto.MemberDTO;
 import com.hanul.app.dto.StudentDTO;
 import com.hanul.app.dto.TeacherDTO;
+import com.hanul.app.dto.TokenDTO;
 
 public class AnDao {
 	DataSource dataSource;
@@ -622,6 +623,43 @@ public class AnDao {
 
 		return adtos;
 
+	}
+
+	public int setToken(String id, String token) {
+		
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = -100;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into userToken(id,token) " + 
+			               "values('" + id + "', '" + token + "')";
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+			
+			if (state > 0) {
+				System.out.println(state + ": 성공");				
+			} else {
+				System.out.println(state + ": 실패");
+			}
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return state;
 	}
 	
 	/*

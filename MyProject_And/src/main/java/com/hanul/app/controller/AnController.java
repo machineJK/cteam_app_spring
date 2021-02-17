@@ -28,6 +28,7 @@ import com.hanul.app.command.AnJoinCommand;
 import com.hanul.app.command.AnLoginCommand;
 import com.hanul.app.command.AnStudentCommand;
 import com.hanul.app.command.AnTeacherCommand;
+import com.hanul.app.command.SetTokenCommand;
 
 
 
@@ -49,6 +50,27 @@ public class AnController {
 		
 		return "home";
 	}
+	
+	//token 세팅
+	@RequestMapping(value="/setToken", method = {RequestMethod.GET, RequestMethod.POST} )
+	public String setToken(HttpServletRequest req, Model model) {
+		
+		System.out.println("setToken()");
+		
+		String id = (String) req.getParameter("id");
+		String token = (String) req.getParameter("token");
+		
+		model.addAttribute("id", id);
+		model.addAttribute("token", token);
+		
+
+		command = new SetTokenCommand();
+		command.execute(model);
+		
+		return "setToken";
+	}
+	
+	
 	//안드로이드에서 온 정보가 여기로 넘겨짐
 	@RequestMapping(value="/anJoin", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anJoin(HttpServletRequest req, Model model){
