@@ -633,15 +633,21 @@ public class AnDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "insert into userToken(id,token) " + 
-			               "values('" + id + "', '" + token + "')";
+			String query = "select * from userToken where id = '" + id + "'";
 			prepareStatement = connection.prepareStatement(query);
 			state = prepareStatement.executeUpdate();
 			
 			if (state > 0) {
-				System.out.println(state + ": 성공");				
+				System.out.println(state + ": 있음");
+				query = "update userToken set token = '" + token + "' where id = '" + id + "'";
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();				
 			} else {
-				System.out.println(state + ": 실패");
+				System.out.println(state + ": 없음");
+				query = "insert into userToken(id,token) " + 
+			               "values('" + id + "', '" + token + "')";
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();
 			}
 			
 		} catch (Exception e) {			
