@@ -147,6 +147,13 @@
     		<artifactId>jcodec-javase</artifactId>
     		<version>0.2.2</version>
 		</dependency>
+		
+		<!-- 파이어베이스 -->
+      	<dependency>
+          <groupId>com.google.firebase</groupId>
+          <artifactId>firebase-admin</artifactId>
+          <version>7.0.0</version>
+      </dependency>
 	</dependencies>
     <build>
         <plugins>

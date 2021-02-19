@@ -667,6 +667,53 @@ public class AnDao {
 		}
 		return state;
 	}
+
+	public String getToken(String id) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		String token = "";
+		
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select *"					
+							+ " from userToken" 
+							+ " where id = '" + id + "' ";
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				token = resultSet.getString("token");										
+			}	
+			
+			System.out.println(id + "의 token : " + token);
+			
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("getToken() Exception!!!");
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return token;
+	}
 	
 	/*
 	 * //濡쒓렇�씤 硫붿냼�뱶 public String anLogin(String id, String passwd) {

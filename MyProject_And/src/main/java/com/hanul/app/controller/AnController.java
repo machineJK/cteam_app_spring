@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
@@ -28,7 +29,10 @@ import com.hanul.app.command.AnJoinCommand;
 import com.hanul.app.command.AnLoginCommand;
 import com.hanul.app.command.AnStudentCommand;
 import com.hanul.app.command.AnTeacherCommand;
+import com.hanul.app.command.GetTokenCommand;
 import com.hanul.app.command.SetTokenCommand;
+
+import fcm.FcmUtil;
 
 
 
@@ -36,21 +40,21 @@ import com.hanul.app.command.SetTokenCommand;
 public class AnController {
 
 	AnCommand command;
+		
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-	
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+	//알림 보내기
+	@ResponseBody @RequestMapping("/sendNoti")
+	public void sendNotification(String id, String name, String content, HttpServletRequest request) {
+		String title = "Tutors";
+	    //long user_id, String user_type,
+	    
+		GetTokenCommand getToken = new GetTokenCommand();
+		String token = getToken.execute(id);
+
+	    FcmUtil fcmUtill = new FcmUtil();
+	    fcmUtill.send_FCM(token, title, name,  content, request);
 	}
-	
+
 	//token 세팅
 	@RequestMapping(value="/setToken", method = {RequestMethod.GET, RequestMethod.POST} )
 	public String setToken(HttpServletRequest req, Model model) {
@@ -69,7 +73,22 @@ public class AnController {
 		
 		return "setToken";
 	}
+		
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
 	
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "home";
+	}
+	
+
 	
 	//안드로이드에서 온 정보가 여기로 넘겨짐
 	@RequestMapping(value="/anJoin", method = {RequestMethod.GET, RequestMethod.POST}  )
