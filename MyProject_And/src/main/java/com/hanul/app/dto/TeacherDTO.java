@@ -9,6 +9,7 @@ public class TeacherDTO {
 	int teacher_matching;
 	Date teacher_date;
 	
+	public TeacherDTO() {}
 	public TeacherDTO(String teacher_id, String teacher_univ, String teacher_major, String teacher_univNum,
 			String teacher_subject, String teacher_worktime, String teacher_pay, String teacher_intro,
 			String teacher_image_path, int teacher_matching, Date teacher_date, String teacher_nickname,

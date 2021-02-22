@@ -30,6 +30,7 @@ import com.hanul.app.command.AnLoginCommand;
 import com.hanul.app.command.AnStudentCommand;
 import com.hanul.app.command.AnTeacherCommand;
 import com.hanul.app.command.GetTokenCommand;
+import com.hanul.app.command.MyTeacherDetail;
 import com.hanul.app.command.SetTokenCommand;
 
 import fcm.FcmUtil;
@@ -41,6 +42,21 @@ public class AnController {
 
 	AnCommand command;
 		
+	//내가 등록한 선생님 정보 가져오기
+	@RequestMapping(value="/myTeacherDetail", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String myDetail(HttpServletRequest req, Model model){
+		System.out.println("myTeacherDetail()");
+		
+		String id = (String) req.getParameter("id");
+		
+		model.addAttribute("id", id);
+		
+		command = new MyTeacherDetail();
+		command.execute(model);
+		
+		return "myTeacherDetail";
+	}
+	
 	
 	//알림 보내기
 	@ResponseBody @RequestMapping("/sendNoti")

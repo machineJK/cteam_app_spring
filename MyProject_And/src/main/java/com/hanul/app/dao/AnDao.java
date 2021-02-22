@@ -714,6 +714,54 @@ public class AnDao {
 
 		return token;
 	}
+
+	public TeacherDTO myTeacherDetail(String id) {
+		TeacherDTO adto =  new TeacherDTO();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		System.out.println("teacherDTO");
+		try {
+			connection = dataSource.getConnection();
+			String query = "select *"					
+							+ " from teacher" 
+							+ " where teacher_id = '" + id + "'";
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				adto.setTeacher_id(resultSet.getString("teacher_id"));
+				adto.setTeacher_pay(resultSet.getString("teacher_pay"));
+				adto.setTeacher_intro(resultSet.getString("teacher_intro"));
+					
+			}	
+		
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		return adto;
+
+	}
 	
 	/*
 	 * //濡쒓렇�씤 硫붿냼�뱶 public String anLogin(String id, String passwd) {
