@@ -6,7 +6,7 @@
 		<ul>
 			<li><a href='<c:url value="/" />'><img src='images/kim-logo.png' width="100px" height="100px"/><span style="font-size: 30px; font-weight: bold;">튜더스</span></a></li>
 			<li><a class="${category eq 'cu' ? 'active' : ''}" href='list.cu'>과외매칭</a></li>
-			<li><a class="${category eq 'hr' ? 'active' : ''}" href='list.hr'>채팅하기</a></li>
+			<li><a class="${category eq 'chat' ? 'active' : ''}" href='list.chat'>채팅하기</a></li>
 			<li><a class="${category eq 'no' ? 'active' : ''}" href='list.no'>게시판</a></li>
 			<li><a class="${category eq 'bo' ? 'active' : ''}" href='list.bo'>마이페이지</a></li>
 			<%-- <li><a class="${category eq 'da' ? 'active' : ''}" href='list.da'>공공데이터</a></li> --%>
