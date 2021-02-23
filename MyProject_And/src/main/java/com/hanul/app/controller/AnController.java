@@ -31,6 +31,7 @@ import com.hanul.app.command.AnStudentCommand;
 import com.hanul.app.command.AnTeacherCommand;
 import com.hanul.app.command.GetTokenCommand;
 import com.hanul.app.command.MyTeacherDetail;
+import com.hanul.app.command.SetMatchCommand;
 import com.hanul.app.command.SetTokenCommand;
 
 import fcm.FcmUtil;
@@ -42,6 +43,26 @@ public class AnController {
 
 	AnCommand command;
 		
+	//매칭 세팅
+	@RequestMapping(value="/setMatch", method = {RequestMethod.GET, RequestMethod.POST} )
+	public String setMatch(HttpServletRequest req, Model model) {
+		
+		System.out.println("setMatch()");
+		
+		String teacher_id = (String) req.getParameter("teacher_id");
+		String student_id = (String) req.getParameter("student_id");
+		
+		model.addAttribute("teacher_id", teacher_id);
+		model.addAttribute("student_id", student_id);
+		
+
+		command = new SetMatchCommand();
+		command.execute(model);
+		
+		return "setMatch";
+	}
+	
+	
 	//내가 등록한 선생님 정보 가져오기
 	@RequestMapping(value="/myTeacherDetail", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String myDetail(HttpServletRequest req, Model model){
