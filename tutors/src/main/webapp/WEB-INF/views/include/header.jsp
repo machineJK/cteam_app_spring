@@ -8,7 +8,7 @@
 			<li><a class="${category eq 'cu' ? 'active' : ''}" href='list.cu'>과외매칭</a></li>
 			<li><a class="${category eq 'hr' ? 'active' : ''}" href='list.hr'>채팅하기</a></li>
 			<li><a class="${category eq 'no' ? 'active' : ''}" href='list.no'>게시판</a></li>
-			<li><a class="${category eq 'bo' ? 'active' : ''}" href='list.bo'>마이페이지</a></li>
+			<%-- <li><a class="${category eq 'bo' ? 'active' : ''}" href='list.bo'>마이페이지</a></li> --%>
 			<%-- <li><a class="${category eq 'da' ? 'active' : ''}" href='list.da'>공공데이터</a></li> --%>
 		</ul>
 	</div>
@@ -22,14 +22,17 @@
 			</c:if>
 			<!-- 로그인한 경우 -->
 			<c:if test='${!empty loginInfo and !empty loginInfo.name}'>
-			<li style='padding-right:10px'><strong>${loginInfo.name}</strong>님</li>
+			<li style='padding-right:30px'>
+			<a class="${category eq 'pro' ? 'active' : ''}" href='profile.pro?id=${loginInfo.id}'>내 프로필</a></li>
+			<li style='padding-right:100px'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginInfo.name}&nbsp;</strong>님</li>
 			<li><a class='btn-fill' href='logout'>로그아웃</a></li>
 			</c:if>
 			<c:if test='${!empty loginInfo and empty loginInfo.name}'>
 			<li style='padding-right:10px'><strong>${loginInfo.nickname}</strong>님</li>
 			<li><a class='btn-fill' href='logout'>로그아웃</a></li>
 			</c:if>
-		</ul>
+
+			</ul>
 	</div>
 </header>
 <style>

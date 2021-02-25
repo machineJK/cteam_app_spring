@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository
 public class MemberDAO implements MemberService{
 	@Autowired private SqlSession sql;
@@ -16,10 +18,15 @@ public class MemberDAO implements MemberService{
 		return false;
 	}
 
+	
 	@Override
 	public MemberVO member_select(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sql.selectOne("member.mapper.select", id);
+	}
+	
+	@Override
+	public void member_update(MemberVO vo) {
+		sql.update("member.mapper.update", vo) ;
 	}
 
 	@Override
@@ -27,11 +34,6 @@ public class MemberDAO implements MemberService{
 		return sql.selectOne("member.mapper.login", map);
 	}
 
-	@Override
-	public boolean member_update(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean member_delete(String id) {
@@ -60,5 +62,8 @@ public class MemberDAO implements MemberService{
 	public boolean member_social_update(MemberVO vo) {
 		return sql.update("member.mapper.social_update", vo) > 0 ? true : false;
 	}
+
+
+	
 
 }

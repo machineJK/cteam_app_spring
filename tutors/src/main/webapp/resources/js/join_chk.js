@@ -1,31 +1,31 @@
 var join = {
 	
 	common : {
-		space : {code : "invalid", desc : "ê³µë°±ì—†ì´ ì…ë ¥í•˜ì„¸ìš”"},
-		empty : {code : "invalid", desc : "ì…ë ¥í•˜ì„¸ìš”"},
-		max : {code : "invalid", desc : "ìµœëŒ€ 10ìì´í•˜ ì…ë ¥í•˜ì„¸ìš”"},
-		min : {code : "invalid", desc : "ìµœì†Œ 5ìì´ìƒ ì…ë ¥í•˜ì„¸ìš”"}
+		space : {code : "invalid", desc : "°ø¹é¾øÀÌ ÀÔ·ÂÇÏ¼¼¿ä"},
+		empty : {code : "invalid", desc : "ÀÔ·ÂÇÏ¼¼¿ä"},
+		max : {code : "invalid", desc : "ÃÖ´ë 10ÀÚÀÌÇÏ ÀÔ·ÂÇÏ¼¼¿ä"},
+		min : {code : "invalid", desc : "ÃÖ¼Ò 5ÀÚÀÌ»ó ÀÔ·ÂÇÏ¼¼¿ä"}
 		
 	},
 
 	id : {
-		valid : {code : "valid", desc : "ì‚¬ìš©ê°€ëŠ¥í•œ ì•„ì´ë””"},
-		invalid : {code : "invalid", desc : "ì˜ë¬¸ì†Œë¬¸ì,ìˆ«ìë§Œ ì…ë ¥í•˜ì„¸ìš”"},
-		usable : {code : "valid", desc:"ì‚¬ìš©ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤"},
-		unusable : {code :"invalid", desc : "ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë””ì…ë‹ˆë‹¤"}
+		valid : {code : "valid", desc : "»ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğ"},
+		invalid : {code : "invalid", desc : "¿µ¹®¼Ò¹®ÀÚ,¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä"},
+		usable : {code : "valid", desc:"»ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù"},
+		unusable : {code :"invalid", desc : "ÀÌ¹Ì »ç¿ëÁßÀÎ ¾ÆÀÌµğÀÔ´Ï´Ù"}
 	},
 	
 	pw : {
-		valid : {code : "valid", desc : "ì‚¬ìš©ê°€ëŠ¥í•œ ë¹„ë°€ë²ˆí˜¸"},
-		invalid : {code : "invalid", desc:"ë¹„ë°€ë²ˆí˜¸ëŠ” ì˜ë¬¸ ëŒ€/ì†Œë¬¸ì, ìˆ«ìë§Œ ì…ë ¥ ê°€ëŠ¥"},
-		lack : {code : "invalid", desc:"ë¹„ë°€ë²ˆí˜¸ëŠ” ì˜ë¬¸ ëŒ€/ì†Œë¬¸ì, ìˆ«ìë¥¼ ëª¨ë‘ í¬í•¨í•´ì•¼ í•©ë‹ˆë‹¤"},
-		equal : {code : "valid", desc:"ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤"},
-		notEqual : {code:"invalid",desc:"ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤"}
+		valid : {code : "valid", desc : "»ç¿ë°¡´ÉÇÑ ºñ¹Ğ¹øÈ£"},
+		invalid : {code : "invalid", desc:"ºñ¹Ğ¹øÈ£´Â ¿µ¹® ´ë/¼Ò¹®ÀÚ, ¼ıÀÚ¸¸ ÀÔ·Â °¡´É"},
+		lack : {code : "invalid", desc:"ºñ¹Ğ¹øÈ£´Â ¿µ¹® ´ë/¼Ò¹®ÀÚ, ¼ıÀÚ¸¦ ¸ğµÎ Æ÷ÇÔÇØ¾ß ÇÕ´Ï´Ù"},
+		equal : {code : "valid", desc:"ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÕ´Ï´Ù"},
+		notEqual : {code:"invalid",desc:"ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù"}
 	},
 	
 	email : {
-		valid : {code : "valid", desc : "ì‚¬ìš©ê°€ëŠ¥í•œ ì´ë©”ì¼ì…ë‹ˆë‹¤"},
-		invalid : {code : "invalid", desc : "ì‚¬ìš© ë¶ˆê°€ëŠ¥í•œ ì´ë©”ì¼ì…ë‹ˆë‹¤"}
+		valid : {code : "valid", desc : "»ç¿ë°¡´ÉÇÑ ÀÌ¸ŞÀÏÀÔ´Ï´Ù"},
+		invalid : {code : "invalid", desc : "»ç¿ë ºÒ°¡´ÉÇÑ ÀÌ¸ŞÀÏÀÔ´Ï´Ù"}
 	},
 	
 	tag_status : function(tag){

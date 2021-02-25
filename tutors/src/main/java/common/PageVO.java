@@ -4,16 +4,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PageVO {
-	private int totalList;	//ì´ê¸€ê±´ìˆ˜
-	private int totalPage;	//ì´ íŽ˜ì´ì§€ìˆ˜
-	private int totalBlock;	//ì´ ë¸”ë¡ìˆ˜
-	private int pageList = 10;	//íŽ˜ì´ì§€ë‹¹ ë³´ì—¬ì§ˆ ëª©ë¡ ìˆ˜
-	private int blockPage = 10;	//ë¸”ëŸ­ë‹¹ ë³´ì—¬ì§ˆ íŽ˜ì´ì§€ì˜ ìˆ˜
-	private int curPage; 	//í˜„ìž¬ íŽ˜ì´ì§€
-	private int beginList,endList;	//ê° íŽ˜ì´ì§€ì— ë³´ì—¬ì§ˆ ëª©ë¡ë²ˆí˜¸
-	private int curBlock;	//í˜„ìž¬ ë¸”ëŸ­
-	private int beginPage,endPage;//ê° ë¸”ëŸ­ì— ë³´ì—¬ì§ˆ íŽ˜ì´ì§€ë²ˆí˜¸
-	private String search,keyword,viewType = "list";	//ê²€ìƒ‰ì¡°ê±´, ê²€ìƒ‰ì–´,ë³´ê¸°í˜•íƒœ
+	private int totalList;	//ÃÑ±Û°Ç¼ö
+	private int totalPage;	//ÃÑ ÆäÀÌÁö¼ö
+	private int totalBlock;	//ÃÑ ºí·Ï¼ö
+	private int pageList = 10;	//ÆäÀÌÁö´ç º¸¿©Áú ¸ñ·Ï ¼ö
+	private int blockPage = 10;	//ºí·°´ç º¸¿©Áú ÆäÀÌÁöÀÇ ¼ö
+	private int curPage; 	//ÇöÀç ÆäÀÌÁö
+	private int beginList,endList;	//°¢ ÆäÀÌÁö¿¡ º¸¿©Áú ¸ñ·Ï¹øÈ£
+	private int curBlock;	//ÇöÀç ºí·°
+	private int beginPage,endPage;//°¢ ºí·°¿¡ º¸¿©Áú ÆäÀÌÁö¹øÈ£
+	private String search,keyword,viewType = "list";	//°Ë»öÁ¶°Ç, °Ë»ö¾î,º¸±âÇüÅÂ
 	
 	public String getViewType() {
 		return viewType;
@@ -37,32 +37,32 @@ public class PageVO {
 		return totalList;
 	}
 	public void setTotalList(int totalList) {
-		this.totalList = totalList;	//DBë¡œë¶€í„° ì¡°íšŒëœ ì´ ê¸€ê±´ìˆ˜
-		totalPage = totalList/pageList;	//ì´ íŽ˜ì´ì§€ìˆ˜ = ì´ê±´ìˆ˜ / íŽ˜ì´ì§€ë‹¹ ê¸€ê±´ìˆ˜
+		this.totalList = totalList;	//DB·ÎºÎÅÍ Á¶È¸µÈ ÃÑ ±Û°Ç¼ö
+		totalPage = totalList/pageList;	//ÃÑ ÆäÀÌÁö¼ö = ÃÑ°Ç¼ö / ÆäÀÌÁö´ç ±Û°Ç¼ö
 		if(totalList % pageList > 0) ++totalPage;
 		
-		totalBlock = totalPage / blockPage;	//ì´ ë¸”ë¡ìˆ˜ = ì´íŽ˜ì´ì§€ìˆ˜ / ë¸”ëŸ­ë‹¹ íŽ˜ì´ì§€ìˆ˜
+		totalBlock = totalPage / blockPage;	//ÃÑ ºí·Ï¼ö = ÃÑÆäÀÌÁö¼ö / ºí·°´ç ÆäÀÌÁö¼ö
 		if(totalPage % blockPage > 0) ++totalBlock;
 		
 		//1809 1808 1807 ... 1800
-		//í˜„ìž¬íŽ˜ì´ì§€ì— ë”°ë¼ ë³´ì—¬ì§ˆ ê¸€ì˜ ì‹œìž‘/ëëª©ë¡ë²ˆí˜¸ê°€ ê²°ì •ëœë‹¤.
-		//ê° íŽ˜ì´ì§€ì˜ ë ëª©ë¡ë²ˆí˜¸ : ì´ ëª©ë¡ìˆ˜ - (íŽ˜ì´ì§€ë²ˆí˜¸-1) * íŽ˜ì´ì§€ë‹¹ ë³´ì—¬ì§ˆ ëª©ë¡ìˆ˜
+		//ÇöÀçÆäÀÌÁö¿¡ µû¶ó º¸¿©Áú ±ÛÀÇ ½ÃÀÛ/³¡¸ñ·Ï¹øÈ£°¡ °áÁ¤µÈ´Ù.
+		//°¢ ÆäÀÌÁöÀÇ ³¡ ¸ñ·Ï¹øÈ£ : ÃÑ ¸ñ·Ï¼ö - (ÆäÀÌÁö¹øÈ£-1) * ÆäÀÌÁö´ç º¸¿©Áú ¸ñ·Ï¼ö
 		endList = totalList - (curPage - 1) * pageList;
-		//ê° íŽ˜ì´ì§€ì˜ ì‹œìž‘ ëª©ë¡ë²ˆí˜¸ : ë ëª©ë¡ë²ˆí˜¸ - (íŽ˜ì´ì§€ë‹¹ ë³´ì—¬ì§ˆ ëª©ë¡ìˆ˜ - 1)
+		//°¢ ÆäÀÌÁöÀÇ ½ÃÀÛ ¸ñ·Ï¹øÈ£ : ³¡ ¸ñ·Ï¹øÈ£ - (ÆäÀÌÁö´ç º¸¿©Áú ¸ñ·Ï¼ö - 1)
 		beginList = endList - (pageList - 1);
 		
-		//ê° ë¸”ëŸ­ì— ë³´ì—¬ì§ˆ íŽ˜ì´ì§€ë²ˆí˜¸ëŠ” í˜„ìž¬ ë¸”ëŸ­ì— ë”°ë¼ ê²°ì •ëœë‹¤
+		//°¢ ºí·°¿¡ º¸¿©Áú ÆäÀÌÁö¹øÈ£´Â ÇöÀç ºí·°¿¡ µû¶ó °áÁ¤µÈ´Ù
 		curBlock = curPage / blockPage;
 		if(curPage % blockPage > 0) ++curBlock;
 		
-		//ì´ì „ 1 2 3 4 ... 9 10 ë‹¤ìŒ
-		//ê° ë¸”ëŸ­ì˜ ë íŽ˜ì´ì§€ë²ˆí˜¸ : ë¸”ëŸ­ë²ˆí˜¸ * ë¸”ëŸ­ë‹¹ ë³´ì—¬ì§ˆ íŽ˜ì´ì§€ìˆ˜
+		//ÀÌÀü 1 2 3 4 ... 9 10 ´ÙÀ½
+		//°¢ ºí·°ÀÇ ³¡ ÆäÀÌÁö¹øÈ£ : ºí·°¹øÈ£ * ºí·°´ç º¸¿©Áú ÆäÀÌÁö¼ö
 		endPage = curBlock * blockPage;
-		//ê° ë¸”ëŸ­ì˜ ì‹œìž‘ íŽ˜ì´ì§€ë²ˆí˜¸ : ë íŽ˜ì´ì§€ë²ˆí˜¸ - (ë¸”ëŸ­ë‹¹ ë³´ì—¬ì§ˆ íŽ˜ì´ì§€ ìˆ˜-1)
+		//°¢ ºí·°ÀÇ ½ÃÀÛ ÆäÀÌÁö¹øÈ£ : ³¡ ÆäÀÌÁö¹øÈ£ - (ºí·°´ç º¸¿©Áú ÆäÀÌÁö ¼ö-1)
 		beginPage = endPage - (blockPage - 1);
 		
-		//ë§ˆì§€ë§‰ ë¸”ëŸ­ì—ì„œ ë íŽ˜ì´ì§€ë²ˆí˜¸ê°€ ì´ íŽ˜ì´ì§€ìˆ˜ë³´ë‹¤ í´ ìˆ˜ ì—†ìœ¼ë¯€ë¡œ
-		//ì´ íŽ˜ì´ì§€ìˆ˜ë¥¼ ë íŽ˜ì´ì§€ë²ˆí˜¸ë¡œ í•œë‹¤.
+		//¸¶Áö¸· ºí·°¿¡¼­ ³¡ ÆäÀÌÁö¹øÈ£°¡ ÃÑ ÆäÀÌÁö¼öº¸´Ù Å¬ ¼ö ¾øÀ¸¹Ç·Î
+		//ÃÑ ÆäÀÌÁö¼ö¸¦ ³¡ ÆäÀÌÁö¹øÈ£·Î ÇÑ´Ù.
 		if(endPage > totalPage) endPage = totalPage;
 		
 		

@@ -29,6 +29,8 @@
 		name="sqlSessionFactory" ref="factory" />
 </bean>
 
+
+
 <!-- 파일첨부객체(반드시 id 설정하기) -->
 <bean id="multipartResolver" 
 	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

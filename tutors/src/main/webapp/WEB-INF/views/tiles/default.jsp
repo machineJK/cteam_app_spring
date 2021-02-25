@@ -11,7 +11,7 @@
 	</c:when>
 </c:choose>
 
-<title>${title}IoT</title>
+<title>${title}Tutors</title>
 <link rel='stylesheet' type='text/css' 
 		href='css/common.css?v=<%=new java.util.Date().getTime() %>'>
 <link rel="icon" type="image/x-icon" href="images/hanul.ico">

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,7 +20,7 @@ import member.MemberVO;
 public class MemberController {
 	@Autowired private MemberServiceImpl service;
 	
-	//ë¡œê·¸ì¸ ëˆŒë €ì„ ë•Œ í™”ë©´ì´ë™
+	//·Î±×ÀÎ ´­·¶À» ¶§ È­¸éÀÌµ¿
 	@RequestMapping("/login")
 	public String login(HttpSession session) {
 		session.setAttribute("category", "login");
@@ -28,12 +29,12 @@ public class MemberController {
 	
 	@ResponseBody @RequestMapping("/tutorlogin")
 	public boolean login(String id, String pw, HttpSession session) {
-		//í™”ë©´ì—ì„œ ì…ë ¥í•œ ì•„ì´ë””/ë¹„ë²ˆì´ ì¼ì¹˜í•˜ëŠ” íšŒì›ì •ë³´ë¥¼ ì¡°íšŒí•´ì˜¨ë‹¤
+		//È­¸é¿¡¼­ ÀÔ·ÂÇÑ ¾ÆÀÌµğ/ºñ¹øÀÌ ÀÏÄ¡ÇÏ´Â È¸¿øÁ¤º¸¸¦ Á¶È¸ÇØ¿Â´Ù
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("pw", pw);
 		MemberVO vo = service.member_login(map);
-		//ë¡œê·¸ì¸í•œ íšŒì›ì •ë³´ë¥¼ ì„¸ì…˜ì— ë‹´ì•„ë‘”ë‹¤
+		//·Î±×ÀÎÇÑ È¸¿øÁ¤º¸¸¦ ¼¼¼Ç¿¡ ´ã¾ÆµĞ´Ù
 		session.setAttribute("loginInfo", vo);
 		return vo==null ? false : true;
 	}	
@@ -41,7 +42,7 @@ public class MemberController {
 	private String naver_client_id = "qu_lR9gmMvoSzs_ljPzw";
 	private String kakao_client_id = "77c939760d65450e90e8ae736d73979b";
 	
-	//ì¹´ì¹´ì˜¤ë¡œê·¸ì¸ìš”ì²­
+	//Ä«Ä«¿À·Î±×ÀÎ¿äÃ»
 	@RequestMapping("/kakaologin")
 	public String kakaologin(HttpSession session) {
 		// https://kauth.kakao.com/oauth/authorize?client_id={REST_API_KEY}
@@ -66,7 +67,7 @@ public class MemberController {
 				|| error!=null )
 			return "redirect:/";
 		
-		//í† í° ë°œê¸‰ë°›ê¸°
+		//ÅäÅ« ¹ß±Ş¹Ş±â
 		StringBuffer url = new StringBuffer(
 			"https://kauth.kakao.com/oauth/token?grant_type=authorization_code");
 		url.append("&client_id=").append(kakao_client_id);
@@ -87,7 +88,7 @@ public class MemberController {
 //		curl -v -X GET "https://kapi.kakao.com/v2/user/me" \
 //		  -H "Authorization: Bearer {ACCESS_TOKEN}"
 		
-		//ì‚¬ìš©ìì •ë³´ ê°€ì ¸ì˜¤ê¸°
+		//»ç¿ëÀÚÁ¤º¸ °¡Á®¿À±â
 		url = new StringBuffer("https://kapi.kakao.com/v2/user/me");
 		json = new JSONObject(
 				common.requestAPI(url, token_type+" "+access_token) );
@@ -101,16 +102,16 @@ public class MemberController {
 			vo.setEmail(json.getString("email"));
 			String gender 
 			= json.has("gender") ? json.getString("gender") : "male";
-			vo.setGender( gender.equals("female") ? "ì—¬ì" : "ë‚¨ì" );
+			vo.setGender( gender.equals("female") ? "¿©ÀÚ" : "³²ÀÚ" );
 		
 			json = json.getJSONObject("profile");
 			vo.setNickname( json.getString("nickname") );
 			vo.setName( json.getString("nickname") );
-			//ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸ ì •ë³´ê°€ DBì— ìˆìœ¼ë©´ update, ì—†ìœ¼ë©´ insert
+			//Ä«Ä«¿À ·Î±×ÀÎ Á¤º¸°¡ DB¿¡ ÀÖÀ¸¸é update, ¾øÀ¸¸é insert
 			
-			if( service.member_social_id(vo) ) { //idê°€ ìˆìœ¼ë©´ update
+			if( service.member_social_id(vo) ) { //id°¡ ÀÖÀ¸¸é update
 				service.member_social_update(vo);
-			}else { //idê°€ ì—†ìœ¼ë©´ insert
+			}else { //id°¡ ¾øÀ¸¸é insert
 				service.member_social_insert(vo);
 			}
 			session.setAttribute("loginInfo", vo);
@@ -118,14 +119,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	//ë„¤ì´ë²„ë¡œê·¸ì¸ìš”ì²­
+	//³×ÀÌ¹ö·Î±×ÀÎ¿äÃ»
 	@RequestMapping("/naverlogin")
 	public String naverlogin(HttpSession session) {
 		//https://nid.naver.com/oauth2.0/authorize?
 		//response_type=code&client_id=CLIENT_ID
 		//&state=STATE_STRING&redirect_uri=CALLBACK_URL
 		
-		//UUID ë¡œ ëœë¤ë¬¸ìë¥¼ ìƒì„±
+		//UUID ·Î ·£´ı¹®ÀÚ¸¦ »ı¼º
 		String state = UUID.randomUUID().toString();
 		session.setAttribute("state", state);
 		
@@ -144,11 +145,11 @@ public class MemberController {
 	@RequestMapping("/navercallback")
 	public String navercallback(HttpSession session, String state
 								, String code, String error) {
-		//ìƒíƒœ í† í°ì´ ì¼ì¹˜í•˜ì§€ ì•Šê±°ë‚˜ ì½œë°±ì‹¤íŒ¨ë¡œ ì—ëŸ¬ ë°œìƒì‹œ í† í°ì„ ë°œê¸‰ë°›ì„ ìˆ˜ ì—†ë‹¤ --> í™ˆìœ¼ë¡œ
+		//»óÅÂ ÅäÅ«ÀÌ ÀÏÄ¡ÇÏÁö ¾Ê°Å³ª Äİ¹é½ÇÆĞ·Î ¿¡·¯ ¹ß»ı½Ã ÅäÅ«À» ¹ß±Ş¹ŞÀ» ¼ö ¾ø´Ù --> È¨À¸·Î
 		if( !state.equals((String)session.getAttribute("state"))
 				|| error!=null ) return "redirect:/";
-		//ì •ìƒì²˜ë¦¬: code ê°’ì´ ìˆìŒ
-		//ì ‘ê·¼í† í°ì„ ë°œê¸‰ë°›ê¸° ìœ„í•œ ìš”ì²­
+		//Á¤»óÃ³¸®: code °ªÀÌ ÀÖÀ½
+		//Á¢±ÙÅäÅ«À» ¹ß±Ş¹Ş±â À§ÇÑ ¿äÃ»
 		//https://nid.naver.com/oauth2.0/token?grant_type=authorization_code
 		//&client_id=?&client_secret=?&code=?&state=? 
 		StringBuffer url = new StringBuffer(
@@ -161,9 +162,9 @@ public class MemberController {
 		String access_token = json.getString("access_token");
 		String token_type = json.getString("token_type");
 		
-		//ì‚¬ìš©ì í”„ë¡œí•„ì •ë³´ ì¡°íšŒ
-		//ìš”ì²­URL: https://openapi.naver.com/v1/nid/me
-		//ìš”ì²­í—¤ë”: Authorization: {í† í° íƒ€ì…] {ì ‘ê·¼ í† í°]
+		//»ç¿ëÀÚ ÇÁ·ÎÇÊÁ¤º¸ Á¶È¸
+		//¿äÃ»URL: https://openapi.naver.com/v1/nid/me
+		//¿äÃ»Çì´õ: Authorization: {ÅäÅ« Å¸ÀÔ] {Á¢±Ù ÅäÅ«]
 		
 		url = new StringBuffer("https://openapi.naver.com/v1/nid/me");
 		json = new JSONObject( common.requestAPI(url, token_type+" "+access_token) );
@@ -178,15 +179,15 @@ public class MemberController {
 			vo.setNaver_login("1");
 			vo.setId(json.getString("id"));
 			vo.setGender( json.has("gender") 
-					    ? ( json.getString("gender").equals("F") ? "ì—¬ì" :"ë‚¨ì" ) 
-					    : "ë‚¨ì");
+					    ? ( json.getString("gender").equals("F") ? "¿©ÀÚ" :"³²ÀÚ" ) 
+					    : "³²ÀÚ");
 			vo.setName(json.has("name") ? json.getString("name") : json.getString("nickname"));
 			vo.setNickname(json.has("nickname") ? json.getString("nickname") : json.getString("name"));
 			vo.setEmail( json.getString("email") );
 			
-			//ë„¤ì´ë²„ë¡œê·¸ì¸ì¸ ì²˜ìŒì´ë¼ë©´ insertí•˜ê³ , ì•„ë‹ˆë©´ update
-			//í•´ë‹¹ ë„¤ì´ë²„ì•„ì´ë””ê°€ ì¡´ì¬í•˜ëŠ”ì§€ë¥¼ ë¨¼ì € íŒŒì•…
-			if( service.member_social_id(vo) ) { //ì•„ì´ë”” ì¡´ì¬ì‹œ
+			//³×ÀÌ¹ö·Î±×ÀÎÀÎ Ã³À½ÀÌ¶ó¸é insertÇÏ°í, ¾Æ´Ï¸é update
+			//ÇØ´ç ³×ÀÌ¹ö¾ÆÀÌµğ°¡ Á¸ÀçÇÏ´ÂÁö¸¦ ¸ÕÀú ÆÄ¾Ç
+			if( service.member_social_id(vo) ) { //¾ÆÀÌµğ Á¸Àç½Ã
 				service.member_social_update(vo);
 			}else {
 				service.member_social_insert(vo);	
@@ -196,7 +197,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	//ë¡œê·¸ì•„ì›ƒì²˜ë¦¬ ìš”ì²­
+	//·Î±×¾Æ¿ôÃ³¸® ¿äÃ»
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		
@@ -209,7 +210,7 @@ public class MemberController {
 		//&logout_redirect_uri=?
 		//&state=? HTTP/1.1
 //				Host: kauth.kakao.com
-		//ì¹´ì¹´ì˜¤ë¡œê·¸ì¸ì¸ ê²½ìš° ì¹´ì¹´ì˜¤ê³„ì •ë„ í•¨ê»˜ ë¡œê·¸ì•„ì›ƒë˜ê²Œ í•˜ì
+		//Ä«Ä«¿À·Î±×ÀÎÀÎ °æ¿ì Ä«Ä«¿À°èÁ¤µµ ÇÔ²² ·Î±×¾Æ¿ôµÇ°Ô ÇÏÀÚ
 		if( kakao_login!=null && kakao_login.equals("1") ) {
 			StringBuffer url = new StringBuffer(
 					"https://kauth.kakao.com/oauth/logout"); 
@@ -221,12 +222,33 @@ public class MemberController {
 			return "redirect:/";
 	}
 	
-	//íšŒì›ê°€ì…í™”ë©´ ìš”ì²­
+	//È¸¿ø°¡ÀÔÈ­¸é ¿äÃ»
 	@RequestMapping("/member")
 	public String member(HttpSession session) {
 		session.setAttribute("category", "join");
 		return "member/join";
 	}
 	
+	//³»ÇÁ·ÎÇÊ È­¸é ¿äÃ»
+	@RequestMapping("/profile.pro")
+	public String select(Model model, String id, HttpSession session) {
+		session.setAttribute("category", "pro");
+		model.addAttribute("vo", service.member_select(id) );
+		return "member/profile";
+	}
+	
+	//³»ÇÁ·ÎÇÊ ¼öÁ¤È­¸é ¿äÃ»
+	@RequestMapping("/modify.pro")
+	public String modify(String id, Model model) {
+		model.addAttribute("vo", service.member_select(id));
+		return "member/modify";
+	}
+	
+	//³»Á¤º¸ ÀúÀå¿äÃ»
+	@RequestMapping("/update.pro")
+	public String update(MemberVO vo) {
+		service.member_update(vo);
+		return "redirect:profile.pro?id=" + vo.getId();
+	}
 	
 }
