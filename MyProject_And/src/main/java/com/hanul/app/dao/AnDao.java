@@ -762,6 +762,50 @@ public class AnDao {
 		return adto;
 
 	}
+
+	public int setMatch(String teacher_id, String student_id) {
+		
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = -100;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select * from match where teacher_id = '" + teacher_id + "' and student_id='" + student_id + "'";
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+			
+			if (state > 0) {
+				System.out.println(state + ": 있음");
+				query = "update match set teacher_value = '0'";
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();				
+			} else {
+				System.out.println(state + ": 없음");
+				query = "insert into match(teacher_id, student_id, teacher_value) " + 
+			               "values('" + teacher_id + "', '" + student_id + "', '1')";
+				
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();
+			}
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return state;
+	}
 	
 	/*
 	 * //濡쒓렇�씤 硫붿냼�뱶 public String anLogin(String id, String passwd) {
