@@ -27,12 +27,17 @@ import com.hanul.app.command.AnCommand;
 import com.hanul.app.command.AnIdCheckCommand;
 import com.hanul.app.command.AnJoinCommand;
 import com.hanul.app.command.AnLoginCommand;
+import com.hanul.app.command.AnStudentAcceptCommand;
 import com.hanul.app.command.AnStudentCommand;
 import com.hanul.app.command.AnTeacherCommand;
 import com.hanul.app.command.GetTokenCommand;
 import com.hanul.app.command.MyTeacherDetail;
+import com.hanul.app.command.SelectCommentCommand;
 import com.hanul.app.command.SetMatchCommand;
 import com.hanul.app.command.SetTokenCommand;
+import com.hanul.app.command.anAdminMatchingCommand;
+import com.hanul.app.command.anMatchedCommand;
+import com.hanul.app.command.anWantMatchingCommand;
 
 import fcm.FcmUtil;
 
@@ -43,23 +48,47 @@ public class AnController {
 
 	AnCommand command;
 		
-	//매칭 세팅
+	//학생 -> 선생
 	@RequestMapping(value="/setMatch", method = {RequestMethod.GET, RequestMethod.POST} )
 	public String setMatch(HttpServletRequest req, Model model) {
 		
 		System.out.println("setMatch()");
 		
 		String teacher_id = (String) req.getParameter("teacher_id");
+		String teacher_nickname = (String) req.getParameter("teacher_nickname");
 		String student_id = (String) req.getParameter("student_id");
+		String student_nickname = (String) req.getParameter("student_nickname");
 		
 		model.addAttribute("teacher_id", teacher_id);
+		model.addAttribute("teacher_nickname", teacher_nickname);
 		model.addAttribute("student_id", student_id);
+		model.addAttribute("student_nickname", student_nickname);
 		
 
 		command = new SetMatchCommand();
 		command.execute(model);
 		
 		return "setMatch";
+	}
+	
+	//선생이 학생 승인
+	@RequestMapping(value="/anStudentAccept", method = {RequestMethod.GET, RequestMethod.POST} )
+	public String anStudentAccept(HttpServletRequest req, Model model) {
+		
+		System.out.println("setMatch()");
+		
+		String teacher_id = (String) req.getParameter("teacher_id");
+		String student_id = (String) req.getParameter("student_id");
+		String check = (String) req.getParameter("check");
+		
+		model.addAttribute("teacher_id", teacher_id);
+		model.addAttribute("student_id", student_id);
+		model.addAttribute("check", check);
+		
+		command = new AnStudentAcceptCommand();
+		command.execute(model);
+		
+		return "anStudentAccept";
 	}
 	
 	
@@ -371,6 +400,56 @@ public class AnController {
 		return "anSelectMulti2";
 	}
 	
+	//매칭희망 리스트뷰
+	@RequestMapping(value="/anWantMatchingList", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anWantMatchingList(HttpServletRequest request, Model model){
+		System.out.println("anSelectMulti2()");
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 	
+		
+		String id = (String) request.getParameter("id");
+		model.addAttribute("id", id);
+		
+		command = new anWantMatchingCommand();
+		command.execute(model);
+		
+		return "anWantMatching";
+	}
+	
+	//매칭완료 리스트
+	@RequestMapping(value="/MatchedList", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String MatchedList(HttpServletRequest request, Model model){
+		System.out.println("anSelectMulti2()");
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 	
+		
+		String id = (String) request.getParameter("id");
+		model.addAttribute("id", id);
+		
+		command = new anMatchedCommand();
+		command.execute(model);
+		
+		return "anMatched";
+	}
+	
+	//관리자한테 매칭승인요청 리스트
+	@RequestMapping(value="/anAdminMatchingList", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String AdminMatchingList(HttpServletRequest request, Model model){
+		System.out.println("anAdminMatchingList()");
+		
+		command = new anAdminMatchingCommand();
+		command.execute(model);
+		
+		return "anAdminMatching";
+	}
 	
 
 	//Modify 수정화면(성공)
@@ -560,31 +639,31 @@ public class AnController {
 	@RequestMapping(value="/anBoard2", method = {RequestMethod.GET, RequestMethod.POST}  )
 	public String anBoard2(HttpServletRequest req, Model model){
 		
-		//�ȵ���̵�� ����Ǿ��ִ��� Ȯ���ϱ�
 		System.out.println("anBoard2()");
 		
-		//�ѱ� ����
 		try {
 			req.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} 		
 		
-		//���� ������ request������� �ޱ�
 		String board_id = (String) req.getParameter("board_id");
 		String board_nickname = (String) req.getParameter("board_nickname");
 		String board_content = (String) req.getParameter("board_content");
 		String board_notice = (String) req.getParameter("board_notice");
 		String brdDbImgPath = null;
 		String id_image_path = (String) req.getParameter("id_image_path");
+		String isComment = (String) req.getParameter("isComment");
+		String postOriginal = (String) req.getParameter("postOriginal");
 		
-		//�𵨿� ���(�׳� �ϴ°�)
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("board_nickname", board_nickname);
 		model.addAttribute("board_content", board_content);
 		model.addAttribute("board_notice", board_notice);
 		model.addAttribute("board_image_path", brdDbImgPath);
 		model.addAttribute("id_image_path", id_image_path);
+		model.addAttribute("isComment", isComment);
+		model.addAttribute("postOriginal", postOriginal);
 		
 		command = new AnBoard2Command();
 		command.execute(model);
@@ -600,6 +679,26 @@ public class AnController {
 		command.execute(model);
 		
 		return "anSelectBoard";
+	}
+	
+	//댓글 불러오기
+	@RequestMapping(value="/anSelectComment", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anSelectComment(HttpServletRequest req, Model model){
+		System.out.println("anSelectComment()");
+		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		String postOriginal = (String) req.getParameter("postOriginal");
+		model.addAttribute("postOriginal", postOriginal);
+		
+		command = new SelectCommentCommand();
+		command.execute(model);
+		
+		return "anSelectComment";
 	}
 	
 }

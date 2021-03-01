@@ -14,10 +14,12 @@ public class AnBoardCommand implements AnCommand{
 		String board_notice = (String)model.asMap().get("board_notice");	
 		String board_image_path = (String)model.asMap().get("board_image_path");	
 		String id_image_path = (String)model.asMap().get("id_image_path");
+		String isComment ="";
+		String postOriginal ="";
 		
 		AnDao adao = new AnDao();
 		int state = adao.anBoard(board_id, board_nickname, board_content
-						, board_notice, board_image_path, id_image_path);
+						, board_notice, board_image_path, id_image_path,isComment, postOriginal);
 		
 		model.addAttribute("anBoard", String.valueOf(state)); 
 		

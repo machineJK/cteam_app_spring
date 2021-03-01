@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import com.hanul.app.dto.BoardDTO;
 import com.hanul.app.dto.CheckDTO;
+import com.hanul.app.dto.MatchingDTO;
 import com.hanul.app.dto.MemberDTO;
 import com.hanul.app.dto.StudentDTO;
 import com.hanul.app.dto.TeacherDTO;
@@ -420,6 +421,191 @@ public class AnDao {
 		return adtos;
 
 	}
+	
+	//매칭 희망 리스트
+	public ArrayList<MatchingDTO> anWantMatching(String id) {		
+		
+		ArrayList<MatchingDTO> adtos = new ArrayList<MatchingDTO>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select * from match where teacher_id = '" + id + "' "
+					+ "and teacher_value='0' and student_value='1' and admin_value='0'";				
+			
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String teacher_id = resultSet.getString("teacher_id");
+				String student_id = resultSet.getString("student_id");
+				String teacher_value = resultSet.getString("teacher_value");
+				String student_value = resultSet.getString("student_value");
+				String admin_value = resultSet.getString("admin_value");
+				String teacher_nickname = resultSet.getString("teacher_nickname");
+				String student_nickname = resultSet.getString("student_nickname");
+				
+				//System.out.println(student_addr);
+
+				MatchingDTO adto = new MatchingDTO(teacher_id, student_id, teacher_value, 
+									student_value, admin_value,teacher_nickname,student_nickname);
+				adtos.add(adto);			
+			}	
+			
+			System.out.println("매칭희망 리스트 사이즈 : " + adtos.size());
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return adtos;
+
+	}
+	
+	//매칭 완료 리스트
+	public ArrayList<MatchingDTO> anMatched(String id) {		
+		
+		ArrayList<MatchingDTO> adtos = new ArrayList<MatchingDTO>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select * from match where (teacher_id = '" + id + "' "
+					+ "and teacher_value='1' and student_value='1' and admin_value='1') or "
+					+ "(student_id = '" + id + "' and teacher_value='1' and student_value='1' and admin_value='1')";				
+			
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String teacher_id = resultSet.getString("teacher_id");
+				String student_id = resultSet.getString("student_id");
+				String teacher_value = resultSet.getString("teacher_value");
+				String student_value = resultSet.getString("student_value");
+				String admin_value = resultSet.getString("admin_value");
+				String teacher_nickname = resultSet.getString("teacher_nickname");
+				String student_nickname = resultSet.getString("student_nickname");
+				
+				//System.out.println(student_addr);
+
+				MatchingDTO adto = new MatchingDTO(teacher_id, student_id, teacher_value, 
+									student_value, admin_value,teacher_nickname,student_nickname);
+				adtos.add(adto);			
+			}	
+			
+			System.out.println("매칭완료 리스트 사이즈 : " + adtos.size());
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return adtos;
+
+	}
+
+	
+	//매칭 완료 리스트
+	public ArrayList<MatchingDTO> anAdminMatching() {		
+		
+		ArrayList<MatchingDTO> adtos = new ArrayList<MatchingDTO>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select * from match where teacher_value='1' and student_value='1' and admin_value='0'";	
+			
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String teacher_id = resultSet.getString("teacher_id");
+				String student_id = resultSet.getString("student_id");
+				String teacher_value = resultSet.getString("teacher_value");
+				String student_value = resultSet.getString("student_value");
+				String admin_value = resultSet.getString("admin_value");
+				String teacher_nickname = resultSet.getString("teacher_nickname");
+				String student_nickname = resultSet.getString("student_nickname");
+				
+				//System.out.println(student_addr);
+
+				MatchingDTO adto = new MatchingDTO(teacher_id, student_id, teacher_value, 
+									student_value, admin_value,teacher_nickname,student_nickname);
+				adtos.add(adto);			
+			}	
+			
+			System.out.println("관리자한테 매칭승인요청 리스트 사이즈 : " + adtos.size());
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return adtos;
+
+	}
+	
 	//Modify�쉺�젙蹂� �닔�젙�솕硫�(Modify)
 	public int anModify(String id, String pw, String nickname, String email, String dbImgPath) {
 		
@@ -528,18 +714,29 @@ public class AnDao {
 	
 	//Board DB에 등록
 	public int anBoard(String board_id, String board_nickname,String board_content, String board_notice,
-						String board_image_path, String id_image_path) {
+						String board_image_path, String id_image_path,String isComment,String postOriginal) {
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		int state = -100;
 		try {
 			connection = dataSource.getConnection();
-			String query = "insert into board(board_id,board_nickname, board_content, "
-					+ "board_notice,board_image_path,id_image_path ) " + 
-			               "values('" + board_id + "', '" + board_nickname + "', '" +board_content + 
-			               "', '" + board_notice + "', '" + board_image_path + "', '" + id_image_path + "')";
-			prepareStatement = connection.prepareStatement(query);
-			state = prepareStatement.executeUpdate();
+			if(isComment.equals("y")) {
+				String query = "insert into board(board_id,board_nickname, board_content, "
+						+ "board_notice,board_image_path,id_image_path,board_num,qna_ref_num ) " + 
+						"values('" + board_id + "', '" + board_nickname + "', '" +board_content + 
+						"', '" + board_notice + "', '" + board_image_path + "', '" + id_image_path + 
+						"',seq_board.nextval,"+ postOriginal +")";
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();
+			}else {
+				String query = "insert into board(board_id,board_nickname, board_content, "
+						+ "board_notice,board_image_path,id_image_path,board_num,qna_ref_num ) " + 
+						"values('" + board_id + "', '" + board_nickname + "', '" +board_content + 
+						"', '" + board_notice + "', '" + board_image_path + "', '" + id_image_path + 
+						"',seq_board.nextval,seq_board.currval)";
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();				
+			}
 			
 			if (state > 0) {
 				System.out.println(state + ":삽입성공");				
@@ -575,7 +772,7 @@ public class AnDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "select * from board" 
+			String query = "select * from board where qna_ref_num = board_num" 
 							+ " order by board_notice, board_write_date desc";
 			prepareStatement = connection.prepareStatement(query);
 			resultSet = prepareStatement.executeQuery();
@@ -623,6 +820,67 @@ public class AnDao {
 
 		return adtos;
 
+	}
+	
+	//댓글 불러오기
+	public ArrayList<BoardDTO> anSelectComment(String postOriginal) {		
+		
+		ArrayList<BoardDTO> adtos = new ArrayList<BoardDTO>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "select * from board where qna_ref_num =" + postOriginal + " and qna_ref_num != board_num"
+					+ " order by board_notice, board_write_date desc"; 
+			prepareStatement = connection.prepareStatement(query);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String board_id = resultSet.getString("board_id");
+				String board_nickname = resultSet.getString("board_nickname");
+				String board_content = resultSet.getString("board_content");
+				Date board_write_date = resultSet.getDate("board_write_date");
+				int board_readcount = resultSet.getInt("board_readcount");
+				String board_image_path = resultSet.getString("board_image_path");				
+				int board_notice = resultSet.getInt("board_notice");
+				int qna_ref_num = resultSet.getInt("qna_ref_num");
+				String id_image_path = resultSet.getString("id_image_path");		
+				
+				BoardDTO adto = new BoardDTO(board_id,board_nickname,board_content,board_write_date,
+						board_readcount,board_image_path,board_notice,qna_ref_num, id_image_path);
+				adtos.add(adto);			
+			}	
+			
+			System.out.println("adtos개수" + adtos.size());
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				
+			}
+		}
+		
+		return adtos;
+		
 	}
 
 	public int setToken(String id, String token) {
@@ -763,28 +1021,82 @@ public class AnDao {
 
 	}
 
-	public int setMatch(String teacher_id, String student_id) {
+	//학생 -> 선생
+	public int setMatch(String teacher_id,String teacher_nickname, String student_id, String student_nickname) {
 		
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
-		int state = -100;
+		ResultSet resultset = null;
+		int state = 0;
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "select * from match where teacher_id = '" + teacher_id + "' and student_id='" + student_id + "'";
+			String query = "select count(*) from match where teacher_id = '" + teacher_id + "' and student_id='" + student_id + "'";
 			prepareStatement = connection.prepareStatement(query);
-			state = prepareStatement.executeUpdate();
+			resultset = prepareStatement.executeQuery();
 			
-			if (state > 0) {
-				System.out.println(state + ": 있음");
-				query = "update match set teacher_value = '0'";
+			resultset.next();
+			
+			if(resultset.getInt(1) > 0) {
+				System.out.println("match값 존재, 업데이트 완료");
+				query = "update match set student_value = 1 where "
+						+ "teacher_id = '" + teacher_id + "' and student_id = '" + student_id + "'";
 				prepareStatement = connection.prepareStatement(query);
-				state = prepareStatement.executeUpdate();				
-			} else {
-				System.out.println(state + ": 없음");
-				query = "insert into match(teacher_id, student_id, teacher_value) " + 
-			               "values('" + teacher_id + "', '" + student_id + "', '1')";
-				
+				state = prepareStatement.executeUpdate();
+			}else {
+				System.out.println("match값 없음, 삽입 완료");
+				query = "insert into match(teacher_id,teacher_nickname,student_id,student_nickname,student_value) "
+						+ "values('" + teacher_id + "','" + teacher_nickname + "','" + student_id 
+						+ "','" + student_nickname + "','1')";
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();
+			}
+			
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return state;
+	}
+	
+
+	public int studentAccept(String teacher_id, String student_id, String check){
+		
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			if(check.equals("y")) {
+				String query = "update match set teacher_value='1' where teacher_id = '" + teacher_id + "' and student_id = '" + student_id + "'"
+						+ " and teacher_value='0' and student_value='1' and admin_value='0'";				
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();
+			}else if(check.equals("n")){
+				String query = "delete from match where teacher_id='" + teacher_id + "' and student_id='" + student_id + "'";
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();
+			}else if(check.equals("adminY")){
+				String query = "update match set admin_value='1' where teacher_id='" + teacher_id + "' and student_id='" + student_id + "'"
+						+ " and teacher_value='1' and student_value='1' and admin_value='0'";
+				prepareStatement = connection.prepareStatement(query);
+				state = prepareStatement.executeUpdate();
+			}else if(check.equals("adminN")){
+				String query = "delete from match where teacher_id='" + teacher_id + "' and student_id='" + student_id + "'"
+						+ " and teacher_value='1' and student_value='1' and admin_value='0'";
 				prepareStatement = connection.prepareStatement(query);
 				state = prepareStatement.executeUpdate();
 			}
@@ -799,7 +1111,7 @@ public class AnDao {
 				if (connection != null) {
 					connection.close();
 				}	
-
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
