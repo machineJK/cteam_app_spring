@@ -12,7 +12,7 @@
 	 <div id="list-top">
 	 	<div>
 	 		<ul>
- 				<c:if test="${loginInfo.admin eq 'Y' }">
+ 				<c:if test="${loginInfo.id eq 'admin' }">
 		 			<li>
 		 				<a class="btn-fill" href="new.bo">글쓰기</a>
 		 			</li>

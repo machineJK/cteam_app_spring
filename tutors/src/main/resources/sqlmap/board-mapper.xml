@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board.mapper">
 	
-	<select id="list">
+	<select id="list" resultType="board.BoardVO">
 		select rownum no, n.*, (select name from member m
-								where m.id=n.writer) name
+								where m.id=n.board_id) name
 		from (select * from board
-				order by id) n
-		order by no desc		
+				order by board_id) n
+		order by no desc
 	</select>
 
 </mapper>

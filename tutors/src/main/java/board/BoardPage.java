@@ -2,8 +2,11 @@ package board;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import common.PageVO;
 
+@Component
 public class BoardPage extends PageVO{
 	private List<BoardVO> list;
 
