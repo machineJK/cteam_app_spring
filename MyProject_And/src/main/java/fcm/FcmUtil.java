@@ -26,12 +26,12 @@ public class FcmUtil  {
 	                .setDatabaseUrl("https://myproject-4683c-default-rtdb.firebaseio.com")
 	                .build();
 	         
-	         //Firebase ì²˜ìŒ í˜¸ì¶œì‹œì—ë§Œ initializing ì²˜ë¦¬
+	         //Firebase Ã³À½ È£Ãâ½Ã¿¡¸¸ initializing Ã³¸®
 	         if(FirebaseApp.getApps().isEmpty()) {
 	            FirebaseApp.initializeApp(options);
 	         }
 	         
-	         //ë©”ì„¸ì§€ ì‘ì„±
+	         //¸Ş¼¼Áö ÀÛ¼º
 	         Message msg = Message.builder()
 	               .putData("title", title)
 	               .putData("name", name)
@@ -40,9 +40,9 @@ public class FcmUtil  {
 	               .setToken(token)
 	               .build();
 	         
-	         //ë©”ì„¸ì§€ë¥¼ FirebaseMessagingì— ë³´ë‚´ê¸°
+	         //¸Ş¼¼Áö¸¦ FirebaseMessaging¿¡ º¸³»±â
 	         String response = FirebaseMessaging.getInstance().send(msg);
-	         //ê²°ê³¼ì¶œë ¥
+	         //°á°úÃâ·Â
 	         System.out.println("Successfully sent message: " + response);
 	         
 	      } catch (Exception e) {

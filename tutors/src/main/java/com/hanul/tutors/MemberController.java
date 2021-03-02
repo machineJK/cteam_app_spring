@@ -1,17 +1,25 @@
 package com.hanul.tutors;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import board.BoardVO;
 import common.CommonService;
 import member.MemberServiceImpl;
 import member.MemberVO;
@@ -19,6 +27,8 @@ import member.MemberVO;
 @Controller
 public class MemberController {
 	@Autowired private MemberServiceImpl service;
+	
+
 	
 	//로그인 눌렀을 때 화면이동
 	@RequestMapping("/login")
@@ -245,10 +255,15 @@ public class MemberController {
 	}
 	
 	//내정보 저장요청
-	@RequestMapping("/update.pro")
+	@RequestMapping("/update.pro") 
 	public String update(MemberVO vo) {
-		service.member_update(vo);
-		return "redirect:profile.pro?id=" + vo.getId();
-	}
+		service.member_update(vo); 
+	    return "redirect:profile.pro?id=" + vo.getId(); }
+	
+	
+	
+	
+	
+	
 	
 }

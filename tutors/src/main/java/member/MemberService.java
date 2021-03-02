@@ -14,5 +14,9 @@ public interface MemberService {
 	boolean member_social_update(MemberVO vo);//소셜로그인시 회원 변경저장
 	MemberVO member_select(String id); //내 프로필 변경페이지
 	void member_update(MemberVO vo); //회원정보 변경 저장
+//	void updateUimage(String id, String dbimgpath);
+//	void modifyUimage(String uid, String uimage);
+
+	
 	
 }

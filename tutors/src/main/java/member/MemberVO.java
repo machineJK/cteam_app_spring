@@ -99,4 +99,12 @@ public class MemberVO {
 	public void setNaver_login(String naver_login) {
 		this.naver_login = naver_login;
 	}
+	
+	public void updateUimage(String id, String dbimgpath) throws Exception {
+	}
+
+	
+	
+
+
 }

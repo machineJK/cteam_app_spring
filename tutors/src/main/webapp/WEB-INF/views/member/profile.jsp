@@ -12,13 +12,25 @@
 <h3>내 프로필</h3>
 <div class=""><br/>
 
-		<a class="" href="modify.pro?id=${vo.id}">프로필 수정하기</a><br/>
+
 
 <br/>
 </div>
-<div>
-<img src="${vo.dbimgpath}">
+<div class="title_image">
+				<c:choose>
+					<c:when test="${vo.dbimgpath == null}">
+						<img src="/images/noimage.png" class="profile_image" style="width: 200px; height: 200px; border-radius: 100px">
+					</c:when>
+					<c:otherwise>
+						<img src="${vo.dbimgpath}" class="profile_image" style="width: 200px; height: 200px; border-radius: 100px">
+					</c:otherwise>
+				</c:choose>			
 </div>
+<br>
+	<a href="update/${vo.id}"><i class="far fa-image"></i></a><br>
+	
+	
+	<a class="" href="modify.pro?id=${vo.id}">프로필 수정하기</a><br><br>
 <form method="post" action="profile.pro">
 <table class="w-pct40">
 <tr>
@@ -43,35 +55,20 @@
 	<td class="" colspan="2">과외지역</td>
 	<td class="" colspan="2">${vo.addr1} ${vo.addr2}</td>
 </tr>
-
-<!-- <tr>
-	
-	<td class="" colspan="4">과외정보</td>
-</tr>
+</table>
+<h3>매칭된 사람</h3>
+<p>닉네임을 클릭하면 정보를 볼 수 있습니다.</p>
+<table class="w-pct30">
+<c:forEach items="${profile}" var="vo">
 <tr>
-	
-
-	<td class="" colspan="2">학교</td>
-	<td class=""></td>
+	<td class="w-pct30" colspan="2">닉네임</td>
+	<td class="" colspan="2"><a href='detail.pro?id='></a></td>
 </tr>
-	<tr>
-	
 
-	<td class="" colspan="2">과목</td>
-	<td class=""></td>
-</tr>
-<tr>
-	
-	
-	<td class="" colspan="2">과외지역</td>
-	<td class=""></td>
-</tr> -->
-<!-- <tr>
-	<td colspan="5">
-	<hr style="background-color: lightgray; height: 0.5px; border: thin"></td>
-</tr> -->
+</c:forEach>
 </table>
 </form>
+
 
 </body>
 </html>
