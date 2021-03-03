@@ -5,14 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 function clickTrEvent(trObj) {
 	location.href="view.bo";
 }
 
-$('[name=keyword]').change(function(){
-	$('#delete').css('display', 'inline');
+/* $('[name=keyword]').change(function(){
+	$('#delete').css("display", "inline");
 });
+$('#delete').click(function(){
+	$('[name=keyword]').val('');
+	$('#delete').css('display', 'none');
+}); */
+
 </script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
@@ -37,9 +43,9 @@ input[name=keyword]{width:90%;}
 .c_detail {
 	height: 500px;
 	cursor: pointer;
+	padding: 20px;
 }
 p { margin-bottom: 35px; }
-
 
 </style>
 </head>
@@ -56,8 +62,8 @@ p { margin-bottom: 35px; }
 						 	<div class="right po noti_right"><c:if test="${!empty loginInfo }"><a class="btn-fill" href="new.bo">글쓰기</a></c:if></div>
 				 		</div>
 					 	<div class="searchBar">
-				 			 <input name="keyword" value="${page.keyword}" placeholder="검색어입력" /> 
-				 			<span id="delete" style="display: none; color: gray; position: relative; right: 25px; cursor: pointer;"><i class="fas fa-times"></i></span>
+				 			<input type="text" name="keyword" value="${page.keyword}" placeholder="검색어입력" /> 
+				 			<!-- <span id="delete" style="display: none; color: gray; position: relative; right: 25px; cursor: pointer;"><i class="fas fa-times"></i></span> -->
 				 			<span id="btn_search" 
 				 				onclick="$('form').submit()" 
 				 				style="width: 50px; color:#3982f7; position: relative; right: 25px; cursor: pointer;"><i class="fas fa-search"></i></span>
@@ -70,17 +76,17 @@ p { margin-bottom: 35px; }
 			<div>
 				<c:forEach items="${page.list }" var="vo">
 					<table id="_content">
-						 	<tr class="left divi">
-						 		<th class="w-px60 lineNo" rowspan="2" >프로필 사진</th>
-						 		<td class="lineNo">${vo.board_id}</td>
-						 	</tr>
-						 	<tr class="left">
-						 		<td class="lineNo">${vo.board_write_date}</td>
-						 	</tr>
-						 	<tr>
-								<td class="lineNo2 left c_detail" colspan="2" 
-								onclick="javascript:clickTrEvent(this)">${vo.board_content }</a></td>
-						 	</tr>
+					 	<tr class="left divi">
+					 		<th class="w-px60 lineNo" rowspan="2" >프로필 사진</th>
+					 		<td class="lineNo">${vo.board_id}</td>
+					 	</tr>
+					 	<tr class="left divi">
+					 		<td class="lineNo">${vo.board_write_date}</td>
+					 	</tr>
+					 	<tr valign="top">
+							<td class="lineNo2 left c_detail" colspan="2" 
+							onclick="javascript:clickTrEvent(this)">${vo.board_content }</a></td>
+					 	</tr>
 					</table>
 					<p></p>
 				</c:forEach>

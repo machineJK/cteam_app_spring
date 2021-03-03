@@ -23,6 +23,13 @@ public class BoardController {
 	@Autowired private BoardServiceImpl service;
 	@Autowired private CommonService common;
 	
+	//글 신규화면 요청
+	@RequestMapping("/new.bo")
+	public String board() {
+		return "board/new";
+	}
+	
+	
 	
 	@Autowired MemberServiceImpl member;
 	@Autowired BoardPage page;
@@ -44,7 +51,6 @@ public class BoardController {
 		page.setCurPage(curPage);
 		page.setSearch(search);
 		page.setKeyword("");
-		keyword="";
 		model.addAttribute("page", service.board_list(page));
 		
 		return "board/list";
