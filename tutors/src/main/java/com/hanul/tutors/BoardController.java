@@ -67,8 +67,9 @@ public class BoardController {
 		//DB에서 글목록 조회해서 목록화면에 출력
 		page.setCurPage(curPage);
 		page.setSearch(search);
-		page.setKeyword("");
+		page.setKeyword(keyword);
 		model.addAttribute("page", service.board_list(page));
+		
 		
 		return "board/list";
 	}
