@@ -13,7 +13,7 @@
 		</ul>
 	</div>
 	
-	<div style='position:absolute; right:0; top:50px; margin-right:100px'>
+	<div style='position:absolute; right:0; top:40px; margin-right:100px'>
 		<ul>
 			<!-- 로그인하지 않은 경우 -->
 			<c:if test='${empty loginInfo}'>
@@ -24,7 +24,8 @@
 			<c:if test='${!empty loginInfo and !empty loginInfo.name}'>
 			<li style='padding-right:30px'>
 			<a class="${category eq 'pro' ? 'active' : ''}" href='profile.pro?id=${loginInfo.id}'>내 프로필</a></li>
-			<li style='padding-right:100px'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginInfo.name}&nbsp;</strong>님</li>
+			<li><div class="box"><img src="${loginInfo.dbimgpath }" class="profile"/></div></li>
+			<li style='padding-right:30px'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginInfo.name}&nbsp;</strong>님</li>
 			<li><a class='btn-fill' href='logout'>로그아웃</a></li>
 			</c:if>
 			<c:if test='${!empty loginInfo and empty loginInfo.name}'>
@@ -40,6 +41,18 @@ header ul, header ul li {
 	margin:0; padding:0; display:inline }
 .category { font-size:18px }
 .category li:not(:first-child) { padding-left:100px }
-.category ul li:first-child{margin-right:200px;}
+.category ul li:first-child{margin-right:100px;}
 .category li a:not(:first-child):hover, .category li a.active { font-weight:bold; color:#0000cd; }
+.box {
+    width: 50px;
+    height: 50px; 
+	display: inline-block;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+}
 </style>

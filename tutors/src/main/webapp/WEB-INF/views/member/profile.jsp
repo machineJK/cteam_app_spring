@@ -17,7 +17,7 @@
 <br/>
 </div>
 <div>
-<img src="${vo.dbimgpath}">
+<img src="${vo.dbimgpath}" width="100" height="100">
 </div>
 <form method="post" action="profile.pro">
 <table class="w-pct40">

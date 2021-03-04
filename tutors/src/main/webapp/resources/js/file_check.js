@@ -10,7 +10,7 @@
 		$("#attach-file").val("");
 		$("#delete-file").css("display","none");
 		//삭제시 이미지 미리보기태그가 있는 경우 미리보기 이미지 없애기
-		if($('#preview').length > 0) $('#preview').html(''); 
+		if($('#preview').length > 0) $('#preview').html('<img src="images/blank-profile-picture.png" width="100" height="100">'); 
 	});
 
 
