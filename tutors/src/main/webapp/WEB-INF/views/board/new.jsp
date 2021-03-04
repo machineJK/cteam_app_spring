@@ -44,10 +44,11 @@ a.btn {
 					<td class="lineNo"><textarea id="textarea" name="board_content" title="내용"></textarea></td>
 				</tr>
 			</table>
-			<div class="btnSet">
-				<a class="btn" onclick="if(emptyCheck()) $('form').submit()">완료</a>
-			</div>
 		</div>
 	</form>
+	<div class="btnSet">
+		<a class="btn" onclick="if(emptyCheck()) $('form').submit()">완료</a>
+	</div>
+<script type="text/javascript" src="js/file_check.js"></script>
 </body>
 </html>

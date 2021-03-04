@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board.mapper">
-
+	
+	<insert id="insert">
+		insert into board(board_id, board_content, board_nickname, board_image_path, board_image_name)
+		values (seq_board.nextval, #{board_content}, #{board_nickname}
+				, #{board_image_path}
+				)
+	</insert>
 	
 	<select id="totalList" resultType="integer">
 		select count(*) from board where board_content like '%'|| #{keyword} ||'%'

@@ -11,8 +11,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void board_insert(BoardVO vo) {
-		// TODO Auto-generated method stub
-
+		dao.board_insert(vo);
 	}
 
 	@Override

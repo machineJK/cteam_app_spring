@@ -12,8 +12,7 @@ public class BoardDAO implements BoardService {
 	
 	@Override
 	public void board_insert(BoardVO vo) {
-		// TODO Auto-generated method stub
-
+		sql.insert("board.mapper.insert", vo);
 	}
 
 	@Override
