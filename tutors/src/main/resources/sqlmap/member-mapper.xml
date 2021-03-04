@@ -10,7 +10,7 @@
 	<update id="update" parameterType="hashMap">
 		update member set pw = #{pw, jdbcType=VARCHAR}, nickname = #{nickname}, email =#{email}
 		where id = #{id}
-	</update>    
+	</update>
 	
 	<select id="login" resultType="member.MemberVO">
 		select * from member where id = #{id} and pw = #{pw}

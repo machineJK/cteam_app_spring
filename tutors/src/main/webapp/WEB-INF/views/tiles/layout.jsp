@@ -14,7 +14,7 @@
 		<c:set var="title" value="공지사항 : " />
 	</c:when>
 	<c:when test="${category eq 'bo' }">
-		<c:set var="title" value="방명록 : " />
+		<c:set var="title" value="게시판 : " />
 	</c:when>
 	<c:when test="${category eq 'da' }">
 		<c:set var="title" value="공공데이터 : " />

@@ -11,8 +11,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void board_insert(BoardVO vo) {
-		// TODO Auto-generated method stub
-
+		dao.board_insert(vo);
 	}
 
 	@Override
@@ -21,7 +20,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO board_view() {
+	public BoardVO board_view(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,6 +41,11 @@ public class BoardServiceImpl implements BoardService {
 	public void board_delete(int id) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public BoardPage board_list(BoardPage page) {
+		return dao.board_list(page);
 	}
 
 }

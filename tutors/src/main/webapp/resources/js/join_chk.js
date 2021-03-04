@@ -2,14 +2,14 @@ var join = {
 	
 	common : {
 		space : {code : "invalid", desc : "공백없이 입력하세요"},
-		empty : {code : "invalid", desc : ""},
+		empty : {code : "invalid", desc : "입력하세요"},
 		max : {code : "invalid", desc : "최대 10자이하 입력하세요"},
 		min : {code : "invalid", desc : "최소 5자이상 입력하세요"}
 		
 	},
 
 	id : {
-		valid : {code : "valid", desc : "중복확인을 해주세요!"},
+		valid : {code : "valid", desc : "사용가능한 아이디"},
 		invalid : {code : "invalid", desc : "영문소문자,숫자만 입력하세요"},
 		usable : {code : "valid", desc:"사용가능한 아이디입니다"},
 		unusable : {code :"invalid", desc : "이미 사용중인 아이디입니다"}
@@ -28,10 +28,9 @@ var join = {
 		invalid : {code : "invalid", desc : "사용 불가능한 이메일입니다"}
 	},
 	
-	//태그 종류가 무엇인지 판단(id냐 pw냐 등등)
 	tag_status : function(tag){
-		var data = tag.val();	//태그가 가지고 있는값(ex)id: ska907, pw: 0000)
-		tag = tag.attr("name");	//태그 종류
+		var data = tag.val();
+		tag = tag.attr("name");
 		if(tag=="id"){
 			return this.id_status(data);
 		}else if(tag=="pw"){

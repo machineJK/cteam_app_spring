@@ -1,10 +1,15 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@font-face {
+     font-family: 'S-CoreDream-4Regular';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
 
 body{
 	margin:0 auto;
 	text-align:center;
-	font-family: 'Noto Sans KR', sans-serif; 
+	font-family: 'S-CoreDream-4Regular';
 }
 a:link, a:visited { text-decoration:none; color:#000; }
 #content{ padding:20px 0; min-width:1280px; }
@@ -108,6 +113,7 @@ textarea[name=content]{width:calc(100% - 6px); resize: none; height:150px;}
 .w-pct60 { width:60% }
 .w-pct50 { width:50% }
 .w-pct40 { width:40% }
+.w-pct30 { width:30% }
 .w-px300 { width:300px; }
 .w-px200 { width:200px; }
 .w-px250 { width:200px; }
