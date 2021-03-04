@@ -77,7 +77,7 @@ p { margin-bottom: 35px; }
 				<c:forEach items="${page.list }" var="vo">
 					<table id="_content">
 					 	<tr class="left divi">
-					 		<th class="w-px60 lineNo" rowspan="2" >프로필 사진</th>
+					 		<th class="w-px60 lineNo" rowspan="2" >${MemberVO.dbimgpath }</th>
 					 		<td class="lineNo">${vo.board_id}</td>
 					 	</tr>
 					 	<tr class="left divi">
