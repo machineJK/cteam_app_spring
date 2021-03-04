@@ -11,7 +11,7 @@ h3 {font-size: 20px}
 #frame {margin: 0 auto; width: 55%; }
 .file {margin-top: 40px;}
 .file_img { width: 40px; cursor: pointer; text-align: right; margin-right: 5px}
-#textarea { width: 95%; height: 300px; padding: 20px; font-size: 20px;}
+#textarea { width: 95%; height: 300px; padding: 20px; font-size: 20px; resize: none;}
 table { width: 100%; margin-top: 1px;}
 .lineNo {
  	border: 0px;
