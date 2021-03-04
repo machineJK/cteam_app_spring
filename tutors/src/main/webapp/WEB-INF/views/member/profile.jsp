@@ -16,8 +16,6 @@
 
 <br/>
 </div>
-<img src="${vo.dbimgpath}" width="100" height="100">
-=======
 <div class="title_image">
 				<c:choose>
 					<c:when test="${vo.dbimgpath == null}">
@@ -27,7 +25,6 @@
 						<img src="${vo.dbimgpath}" class="profile_image" style="width: 200px; height: 200px; border-radius: 100px">
 					</c:otherwise>
 				</c:choose>			
->>>>>>> 2520a93f3dc1a8065aac1e8dee2be1d08924cec4
 </div>
 <br>
 	<a href="update/${vo.id}"><i class="far fa-image"></i></a><br>

@@ -5,7 +5,7 @@
 	<div class='category' style='margin-left:100px'>
 		<ul>
 			<li><a href='<c:url value="/" />'><img src='images/kim-logo.png' width="100px" height="100px"/><span style="font-size: 30px; font-weight: bold;">튜더스</span></a></li>
-			<li><a class="${category eq 'cu' ? 'active' : ''}" href='list.cu'>과외매칭</a></li>
+			<li><a class="${category eq 'match' ? 'active' : ''}" href='list.match'>과외매칭</a></li>
 			<li><a class="${category eq 'chat' ? 'active' : ''}" href='list.chat'>채팅하기</a></li>
 			<li><a class="${category eq 'no' ? 'active' : ''}" href='list.bo'>게시판</a></li>
 			<%-- <li><a class="${category eq 'bo' ? 'active' : ''}" href='list.bo'>마이페이지</a></li> --%>
@@ -25,17 +25,9 @@
 			<li style='padding-right:30px'>
 			<a class="${category eq 'pro' ? 'active' : ''}" href='profile.pro?id=${loginInfo.id}'>내 프로필</a></li>
 			<li><div class="box"><img src="${loginInfo.dbimgpath }" class="profile"/></div></li>
-			<li style='padding-right:30px'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginInfo.name}&nbsp;</strong>님</li>
-			<li><a class='btn-fill' href='logout'>로그아웃</a></li>
-			<a class="${category eq 'pro' ? 'active' : ''}" href='profile.pro?id=${loginInfo.id}' style="font-family: 'S-CoreDream-4Regular';">내 프로필</a></li>
-			<li style='padding-right:20px'><strong style="font-family: 'S-CoreDream-4Regular';">&nbsp;&nbsp;&nbsp;&nbsp;${loginInfo.name}&nbsp;</strong>님</li>
-			<li><a class='btn-fill' href='logout' style="font-family: 'S-CoreDream-4Regular';">로그아웃</a></li>
+			<li style="padding-right:30px; font-family: 'S-CoreDream-4Regular';"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginInfo.name}&nbsp;</strong>님</li>
+			<li style="font-family: 'S-CoreDream-4Regular';"><a class='btn-fill' href='logout'>로그아웃</a></li>
 			</c:if>
-			<c:if test='${!empty loginInfo and empty loginInfo.name}'>
-			<li style='padding-right:10px'><strong style="font-family: 'S-CoreDream-4Regular';">${loginInfo.nickname}</strong>님</li>
-			<li><a class='btn-fill' href='logout'>로그아웃</a></li>
-			</c:if>
-
 			</ul>
 	</div>
 </header>
