@@ -33,6 +33,7 @@ input[name=keyword]{width:90%;}
 .noti_right {float: right; line-height: 50px; margin-right: 5px}
 ._content { 
 	width: 100%;
+	font-size: 18px;
 }
 .lineNo {
  	border: 0px;
@@ -47,10 +48,20 @@ input[name=keyword]{width:90%;}
 	cursor: pointer;
 	padding: 22px 30px;;
 	width: 20%;
+	
 }
 p { margin-bottom: 35px; }
 
-
+.ellip{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7; 
+    -webkit-box-orient: vertical;
+    line-height: 2.2em;
+	height: 10.6em;	
+}
+.color{ color: #3982f7; margin-top: 10px;}
 </style>
 </head>
 <body>
@@ -89,9 +100,10 @@ p { margin-bottom: 35px; }
 					 	</tr>
 					</table>
 					<table class="_content">
-					 	<tr valign="top">
-							<td class="lineNo2 left c_detail"
-							onclick="javascript:clickTrEvent(this)">${fn:replace(vo.board_content, crlf, '</br>') }</td>
+					 	<tr valign="top" class="">
+							<td class="lineNo2 left c_detail "
+							onclick="javascript:clickTrEvent(this)">
+							<span class="ellip">${fn:replace(vo.board_content, crlf, '</br>') }</span><div class="color">···전체보기<div></td>
 					 	</tr>
 					</table>
 					<p></p>
