@@ -9,8 +9,10 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-function clickTrEvent(trObj) {
-	location.href="view.bo";
+function clickTrEvent(id) {
+	$("[name=id]").val(id);
+	$("form").attr("action", "view.bo");
+	$("form").submit();
 }
 
 /* $('[name=keyword]').change(function(){
@@ -45,7 +47,6 @@ input[name=keyword]{width:90%;}
 }
 .c_detail {
 	height: 100px;
-	cursor: pointer;
 	padding: 22px 30px;;
 	width: 20%;
 	
@@ -59,9 +60,10 @@ p { margin-bottom: 35px; }
     -webkit-line-clamp: 7; 
     -webkit-box-orient: vertical;
     line-height: 2.2em;
-	height: 10.6em;	
+	height: 10.6em;
+	
 }
-.color{ color: #3982f7; margin-top: 10px;}
+.color{ color: #3982f7; margin-top: 10px; cursor: pointer; width: 15%}
 </style>
 </head>
 <body>
@@ -101,15 +103,19 @@ p { margin-bottom: 35px; }
 					</table>
 					<table class="_content">
 					 	<tr valign="top" class="">
-							<td class="lineNo2 left c_detail "
-							onclick="javascript:clickTrEvent(this)">
-							<span class="ellip">${fn:replace(vo.board_content, crlf, '</br>') }</span><div class="color">···전체보기<div></td>
+							<td class="lineNo2 left c_detail ">
+							<span class="ellip">${fn:replace(vo.board_content, crlf, '</br>') }</span><div class="color" onclick="clickTrEvent(${vo.board_num})">···전체보기<div></td>
 					 	</tr>
 					</table>
 					<p></p>
+					</br>
 				</c:forEach>
 			</div>
 		</table>
+		<form action="list.bo" method="post">
+			<input type="hidden" name="id"/>
+			<input type="hidden" name="curPage" value="1"/>
+		</form>
 	</div>
 </body>
 </html>

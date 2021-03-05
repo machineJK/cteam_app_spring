@@ -24,6 +24,18 @@ public class BoardController {
 	@Autowired private BoardServiceImpl service;
 	@Autowired private CommonService common;
 	
+	//글 내용 상세보기 화면 요청
+	@RequestMapping("/view.bo")
+	public String view(int id, Model model) {
+		service.board_read(id);
+		//선택한 글의 정보를 DB에서 조회해와 보기화면에 출력
+		model.addAttribute("vo", service.board_view(id));
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
+		model.addAttribute("page", page);
+		return "board/view";
+	}
+	
 	//신규 글 저장처리 요청
 	@RequestMapping("/insert.bo")
 	public String insert(BoardVO vo, MultipartFile file, HttpSession session) {
