@@ -49,8 +49,10 @@
 		
 	</div>
 	<div class="loading"><img src="images/loading.gif" /></div>
+	<div><a onclick="teacher_list();" class="btn-empty">더보기</a></div>
 	
 <script type="text/javascript">
+var cnt = 0;
 teacher_list();
 
 
@@ -67,10 +69,11 @@ function teacher_list(){
 	$(".loading").attr("display","block");
 	$.ajax({
 		url:"data/teacher_list",
+		data:{count : cnt},
 		success:function(response){
-			console.log(response.length);
+			//$(".grid-container").html("");
+			console.log("teacher_list : " + cnt);
 			console.log(response);
-			$(".grid-container").html("");
 			for(let i=0; i< response.length; i++){
 				var tag = "";
 				tag += "<div class='grid-item' onclick='teacherDetail(\"" + response[i].teacher_id + "\")'>"
@@ -85,6 +88,7 @@ function teacher_list(){
 				$(".grid-container").append(tag);
 			}
 			$(".loading").attr("display","none");
+			cnt += 1;
 		},
 		error:function(req,text){
 			alert(text + " : " + req.status);
@@ -98,7 +102,7 @@ function student_list(){
 		url:"data/student_list",
 		success:function(response){
 			//console.log(response.length);
-			$(".grid-container").html("");
+			//$(".grid-container").html("");
 			for(let i=0; i< response.length; i++){
 				var tag = "";
 				tag += "<div class='grid-item' onclick='studentDetail(\"" + response[i].student_id + "\")'>"

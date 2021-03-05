@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 public class MatchServiceImpl implements MatchService{
 	@Autowired private MatchDAO dao;
 	
-	@Override
-	public List<TeacherVO> teacherList() {
-		return dao.teacherList();
-	}
+	/*
+	 * @Override public List<TeacherVO> teacherList() { return dao.teacherList(); }
+	 */
 
 	@Override
 	public List<StudentVO> studentList() {
@@ -26,8 +25,12 @@ public class MatchServiceImpl implements MatchService{
 
 	@Override
 	public StudentVO studentDetail(String student_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.studentDetail(student_id);
+	}
+
+	@Override
+	public List<TeacherVO> teacherList(int count) {
+		return dao.teacherList(count);
 	}
 
 }

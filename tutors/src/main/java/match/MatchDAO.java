@@ -10,11 +10,10 @@ import org.springframework.stereotype.Repository;
 public class MatchDAO implements MatchService{
 	@Autowired private SqlSession sql;
 	
-	@Override
-	public List<TeacherVO> teacherList() {
-		return sql.selectList("match.mapper.teacherList");
-	}
-
+	/*
+	 * @Override public List<TeacherVO> teacherList() { return
+	 * sql.selectList("match.mapper.teacherList"); }
+	 */
 	@Override
 	public List<StudentVO> studentList() {
 		return sql.selectList("match.mapper.studentList");
@@ -27,8 +26,12 @@ public class MatchDAO implements MatchService{
 
 	@Override
 	public StudentVO studentDetail(String student_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sql.selectOne("match.mapper.studentDetail", student_id);
+	}
+
+	@Override
+	public List<TeacherVO> teacherList(int count) {
+		return sql.selectList("match.mapper.teacherList", count);
 	}
 
 }

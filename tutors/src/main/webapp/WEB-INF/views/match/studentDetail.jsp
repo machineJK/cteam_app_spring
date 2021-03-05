@@ -49,19 +49,17 @@
 <body>
 
 <div class="grid-container">
-	<div><img src="${teacherDetail.teacher_image_path }" width="250" height="250"/></div>
+	<div><img src="${studentDetail.student_image_path }" width="250" height="250"/></div>
 	<div class="grid-content">
-		<div class="left" id="nickname"> ${teacherDetail.teacher_nickname }</div>
-		<div class="left"> <i class="fas fa-graduation-cap"></i> ${teacherDetail.teacher_univ } ${teacherDetail.teacher_major }</div>
-		<div class="left"> <i class="far fa-address-card"></i> ${teacherDetail.teacher_univnum }</div>
-		<div class="left"> <i class="fas fa-book"></i> ${teacherDetail.teacher_subject }</div>
-		<div class="left"> <i class="fas fa-comment-dollar"></i> ${teacherDetail.teacher_worktime }시간 ${teacherDetail.teacher_pay }만원</div>
-		<div class="left"> <i class="fas fa-map-marker-alt"></i> ${teacherDetail.teacher_addr }</div>
+		<div class="left" id="nickname"> ${studentDetail.student_nickname }</div>
+		<div class="left"> <i class="fas fa-graduation-cap"></i> ${studentDetail.student_grade }</div>
+		<div class="left"> <i class="fas fa-book"></i> ${studentDetail.student_subject }</div>
+		<div class="left"> <i class="fas fa-map-marker-alt"></i> ${studentDetail.student_addr }</div>
 	</div>
 	<a href="#" class="btn-fill" id="goMatch">상담하기</a><!-- 채팅방으로 이동하게 수정 -->
 </div>
 <div id="intro">
-	${teacherDetail.teacher_intro }
+	${studentDetail.student_intro }
 </div>
 	
 </body>
