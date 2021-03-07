@@ -22,26 +22,19 @@ public class MatchController {
 	@RequestMapping("/list.match")
 	public String match(HttpSession session, Model model) {
 		session.setAttribute("category","match");	
-		//model.addAttribute("teacherList", service.teacherList());
 		
-		return "match/listtest";
+		return "match/list";
 	}
 
 	@ResponseBody @RequestMapping("/data/teacher_list")
-	public List<TeacherVO> teacher_list(int count,Model model) {
-		System.out.println(count);
-		List<TeacherVO> vo = service.teacherList(count);
-		return vo;
+	public List<TeacherVO> teacher_list(int count) {
+		//System.out.println(count);
+		return service.teacherList(count);
 	}
 	
-	/*
-	 * @ResponseBody @RequestMapping("/data/teacher_list") public List<TeacherVO>
-	 * teacher_list(Model model) { return service.teacherList(); }
-	 */
-	
 	@ResponseBody @RequestMapping("/data/student_list")
-	public List<StudentVO> student_list(Model model) {
-		return service.studentList();
+	public List<StudentVO> student_list(int count) {
+		return service.studentList(count);
 	}
 	
 	@RequestMapping("/teacherDetail.match")

@@ -36,6 +36,11 @@
 	transform: translate(-50%,-50%);
 	display: none;
 }
+
+#more{
+	margin-top: 50px;
+    margin-bottom: 35px;
+}
 	
 </style>
 </head>
@@ -49,20 +54,34 @@
 		
 	</div>
 	<div class="loading"><img src="images/loading.gif" /></div>
-	<div><a onclick="teacher_list();" class="btn-empty">더보기</a></div>
+	<div id="more"><a onclick="more_list();" class="btn-empty">더보기</a></div>
 	
 <script type="text/javascript">
 var cnt = 0;
 teacher_list();
 
+function more_list(){
+	if($(".listOpion a").eq(0).has(".btn-fill")){
+		teacher_list();
+	}else if($(".listOpion a").eq(1).has(".btn-fill")){
+		student_list();
+	}
+}
 
 $(".listOption > a").click(function(){
 	$(".listOption > a").removeClass();
 	$(".listOption > a").addClass("btn-empty");
 	$(this).removeClass().addClass("btn-fill");
 	var idx = $(this).index();
-	if(idx == 0) teacher_list();
-	else student_list();
+	if(idx == 0){
+		$(".grid-container").html("");
+		cnt = 0;
+		teacher_list();
+	}else{
+		$(".grid-container").html("");
+		cnt = 0;
+		student_list();
+	} 
 });
 
 function teacher_list(){
@@ -72,8 +91,8 @@ function teacher_list(){
 		data:{count : cnt},
 		success:function(response){
 			//$(".grid-container").html("");
-			console.log("teacher_list : " + cnt);
-			console.log(response);
+			//console.log("teacher_list : " + cnt);
+			//console.log(response);
 			for(let i=0; i< response.length; i++){
 				var tag = "";
 				tag += "<div class='grid-item' onclick='teacherDetail(\"" + response[i].teacher_id + "\")'>"
@@ -100,6 +119,7 @@ function student_list(){
 	$(".loading").attr("display","block");
 	$.ajax({
 		url:"data/student_list",
+		data:{count : cnt},
 		success:function(response){
 			//console.log(response.length);
 			//$(".grid-container").html("");
@@ -115,6 +135,7 @@ function student_list(){
 				$(".grid-container").append(tag);
 			}
 			$(".loading").attr("display","none");
+			cnt += 1;
 			
 		},
 		error:function(req,text){

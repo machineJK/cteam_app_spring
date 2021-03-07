@@ -8,15 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MatchServiceImpl implements MatchService{
 	@Autowired private MatchDAO dao;
-	
-	/*
-	 * @Override public List<TeacherVO> teacherList() { return dao.teacherList(); }
-	 */
-
-	@Override
-	public List<StudentVO> studentList() {
-		return dao.studentList();
-	}
 
 	@Override
 	public TeacherVO teacherDetail(String teacher_id) {
@@ -31,6 +22,11 @@ public class MatchServiceImpl implements MatchService{
 	@Override
 	public List<TeacherVO> teacherList(int count) {
 		return dao.teacherList(count);
+	}
+
+	@Override
+	public List<StudentVO> studentList(int count) {
+		return dao.studentList(count);
 	}
 
 }

@@ -16,7 +16,12 @@
 	</select>
 
 	<select id="studentList" resultType="match.StudentVO">
-		select * from student
+		<![CDATA[ 
+			select * 
+			from (select rownum num,s.* from student s)
+			where num <= ((#{count}+1) * 16) 
+			and num > (16 * #{count} )
+		]]> 
 	</select>
 	
 	<select id="teacherDetail" resultType="match.TeacherVO">
