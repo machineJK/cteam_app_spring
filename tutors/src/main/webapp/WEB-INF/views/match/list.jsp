@@ -14,12 +14,12 @@
 	margin: 0 auto;
 	grid-template-columns: auto auto auto auto;
 	grid-gap: 20px;
-	background-color: #2196F3;
+	/* background-color: #2196F3; */
 	margin-top: 30px;
 }
 
 .grid-container > div {
-	background-color: rgba(255, 255, 255, 0.8);
+	/* background-color: rgba(255, 255, 255, 0.8); */
 	border: 1px solid black;
 	text-align: center;
 	font-size: 30px;
@@ -40,6 +40,10 @@
 #more{
 	margin-top: 50px;
     margin-bottom: 35px;
+}
+a{
+	display: inline;
+	text-decoration: none;
 }
 	
 </style>

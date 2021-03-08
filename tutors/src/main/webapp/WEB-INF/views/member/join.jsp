@@ -11,12 +11,38 @@
 	.valid{color:green;}
 	.invalid{color:red;}
 	table, table tr td, table tr th {border:none;}
-	input{border: none; border-bottom: 1px solid black; width: 400px;}
-	input[name=id]{border: none; border-bottom: 1px solid black; width: 326px;}
-	input[name=pw]{border: none; border-bottom: 1px solid black; width: 377px;}
+	input{border: none; width: 400px; font-size: 16px; height: 40px; border-radius: 15px;}
+	input:hover{background-color: #CCCCCC;}
+	input:focus{background-color: #FFFFFF; border: 1px solid gray; outline: none;}
+	input[name=pw]{width: 377px;}
 	/* input:focus {outline:none;} */ /* input태그를 눌렀을 때 나오는 테두리 없애기 */
 	#isblind:hover, .fa-images{cursor: pointer;}
 	/* #blind{display: none;} */
+	#content{
+		position: absolute;
+		top: 40%;
+		left: 45%;
+		transform: translate(-50%,-50%);
+	}
+	#checkList{
+		position: absolute;
+	    top: 33%;
+    	left: 73%;
+	}
+	ul{
+		list-style: none;
+		text-align: left;
+	}
+	li:not(:first-child){
+	    padding-top: 10px;
+	}
+	.fa-check{
+		color: green;
+	}
+	.fa-circle{font-size: 10px;}
+	#chk-id,#chk-pw,#chk-pwreg,#chk-email{
+		display: none;
+	}
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -27,23 +53,24 @@
 <form method="post" action="join" style="margin-bottom: 10px;" enctype="multipart/form-data">
 <table class='w-pct50'>
 <tr>
-	<td><input type='text' name='name' placeholder="이름을 입력하세요" maxlength="4"/></td>
+	<td><input type='text' name='name' placeholder="이름을 입력하세요"/></td>
 </tr>
 <tr>
-	<td><input type='text' name='id' class="chk" placeholder="아이디를 입력하세요" />
-		<a class="btn-fill-s" id="btn-id">중복확인</a>
-		<div class="valid"></div>
+	<td><input type='text' name='id' placeholder="아이디를 입력하세요" maxlength="13" />	</td>
+</tr>
+<tr>
+	<td><input type='text' name='nickname' placeholder="닉네임을 입력해주세요"/><br>
 	</td>
 </tr>
 <tr>
-	<td><input type='text' name='nickname' class="chk" placeholder="닉네임을 입력해주세요"/><br>
-		<div class="valid"></div>
-	</td>
-</tr>
-<tr>
-	<td><input type='password' name='pw' class="chk" placeholder="비밀번호를 입력하세요"/>
-		<span id="isblind"><i class="far fa-eye-slash"></i></span><!-- <span id="blind"><i class="far fa-eye"></i></span> --><br>
-		<div class="valid"></div>
+	<td><input type='password' name='pw' placeholder="비밀번호를 입력하세요" maxlength="13"/>
+		<span id="isblind"><i class="far fa-eye-slash"></i></span>
+		<ul id="checkList">
+			<li><span id="chk-id-circle" ><i class="fas fa-circle"></i></span><span id="chk-id"><i class="fas fa-check"></i></span> 아이디는 영문,숫자를 이용해 6~13자리로 써주세요</li>
+			<li><span id="chk-pw-circle"><i class="fas fa-circle"></i></span><span id="chk-pw"><i class="fas fa-check"></i></span> 비밀번호는 6~13자리 이하로 써주세요</li>
+			<li><span id="chk-pwreg-circle"><i class="fas fa-circle"></i></span><span id="chk-pwreg"><i class="fas fa-check"></i></span> 비밀번호는 영어 대문자, 소문자, 특수문자가 1개이상 포함되어야 합니다</li>
+			<li><span id="chk-email-circle"><i class="fas fa-circle"></i></span><span id="chk-email"><i class="fas fa-check"></i></span> 이메일을 바르게 적어주세요!</li>
+		</ul>
 	</td>
 </tr>
 <tr>
@@ -52,13 +79,12 @@
 	</td>
 </tr>
 <tr>
-	<td><input type='text' name='email' class="chk" placeholder="이메일을 입력해주세요"/><br>
-		<div class="valid"></div>
+	<td><input type='text' name='email' placeholder="이메일을 입력해주세요"/><br>
 	</td>
 </tr>
 <!-- 참고 -->
 <tr>
-	<td><input type='text' name='birth' placeholder="생일을 입력해주세요" />
+	<td><input type='text' name='birth' placeholder="생일을 입력해주세요" readonly="readonly"/>
 		<span id="delete" style="color:red; position:relative; right:25px; cursor: pointer; display:none;">
 		<i class="fas fa-times"></i></span></td>
 </tr>
@@ -94,37 +120,160 @@
 		
 	</td>
 </tr>
-
 </table>
 
 </form>
-
 <a class="btn-fill" onclick="go_join()">회원가입</a>
 <a class="btn-empty" href="<c:url value='/' />">취소</a>
 
 <!-- datepicker jQueryUI -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script src="js/join_chk.js"></script>
 <script type="text/javascript" src="js/file_check.js"></script>
 <script type="text/javascript">
+//회원가입
+function go_join(){
+	if($("[name=name]").val() == ""){
+		alert("이름을 작성해 주세요!");
+		$("[name=name]").focus();
+		return;
+	}
+	if($("[name=nickname]").val() == ""){
+		alert("닉네임을 작성해 주세요!");
+		$("[name=nickname]").focus();
+		return;
+	}
+	if($("[name=birth]").val() == ""){
+		alert("생일을 작성해 주세요!");
+		return;
+	}
+	if($("[name=file]").val() == ""){
+		alert("이미지를 올려 주세요!");
+		$(this).focus();
+		return;
+	}
+
+	if($("#chk-id").css("display") == "none" || 
+			   $("#chk-pw").css("display") == "none" ||
+			   $("#chk-pwreg").css("display") == "none" ||
+			   $("#chk-email").css("display") == "none"){
+				alert("양식에 맞게 정보를 입력해 주세요!");
+				return;
+	}
+	
+	$("form").submit();
+}
+
+//input text스페이스바 막기
+$("input").keydown(function(){
+	preventSpacebar();
+});
+ 
+//스페이스바 막기
+function preventSpacebar(){
+	var keycode = event.keyCode;
+	if(keycode == 32) event.returnValue = false;
+}
+
+//아이디 유효성 검사
+$("[name=id]").keyup(function(){
+	var reg = /^[a-z0-9]{6,13}/g;
+
+ 	if(reg.test($(this).val())){
+ 	 	$("#chk-id-circle").css("display","none");
+		$("#chk-id").css("display","inline");
+	}else{
+		$("#chk-id").css("display","none");
+		$("#chk-id-circle").css("display","inline");
+	}
+
+	/* if($(this).val() == ""){
+		$("#chk-id").css("display","none");
+		$("#chk-id-circle").css("display","inline");
+	} */
+}).focusout(function() {	//아이디 포커스 아웃 이후 자동 중복검사
+	if($("#chk-id").css("display") == "inline") id_check();
+});
+
+//아이디 중복확인
+function id_check(){
+	if($("[name=id]").val() != ""){
+		$.ajax({
+			type : "post",
+			url : "id_check",
+			data : {id : $("[name=id]").val() },
+			success : function(response){
+					if(response == false){	//중복된 아이디가 없음
+						alert("사용가능한 아이디입니다!");
+					}else{
+						alert("중복된 아이디 입니다!");
+						$("[name=id]").val("");
+						$("[name=id]").focus();
+					}
+				
+			},
+			error : function(req,text){
+				alert(text + " : " + req.status);
+			}
+			
+		});
+	}
+}
+
+//비밀번호 유효성 검사
+$("[name=pw]").keyup(function(){
+	//var reg = /^[a-z0-9~!@#$%^&*()]/g;
+	var symbol = /[~!@#$%^&*()]/g, lower = /[a-z]/g, digit = /[0-9]/g, nums = /^.{6,13}/g;
+	if(symbol.test($(this).val()) && lower.test($(this).val()) && digit.test($(this).val())){
+		$("#chk-pwreg-circle").css("display","none");
+		$("#chk-pwreg").css("display","inline");	
+	}else{
+		$("#chk-pwreg").css("display","none");
+		$("#chk-pwreg-circle").css("display","inline");
+	}
+
+	if(nums.test($(this).val())){
+		$("#chk-pw-circle").css("display","none");
+		$("#chk-pw").css("display","inline");	
+	}else{
+		$("#chk-pw").css("display","none");
+		$("#chk-pw-circle").css("display","inline");
+	}
+		
+});
+
+//이메일 유효성 검사
+$("[name=email]").keyup(function(){
+	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+	if(reg.test($(this).val())){
+ 	 	$("#chk-email-circle").css("display","none");
+		$("#chk-email").css("display","inline");		
+	}else{
+		$("#chk-email").css("display","none");
+		$("#chk-email-circle").css("display","inline");
+	}
+	
+});
+
+
+
 //눈 모양을 클릭했을 때 이미지가 바뀌고 비밀번호가 보이게 또는 보이지 않게 변경
-$("#isblind, #blind").click(function(){
-	/* if($(this).find('.fa-eye-slash').length > 0){
+$("#isblind").click(function(){
+	if($(this).find('.fa-eye-slash').length > 0){
 		$(this).find('.fa-eye-slash').attr('class',"far fa-eye");
 		$("[name=pw]").attr("type","text");
 	}else{
 		$(this).find('.fa-eye').attr('class',"far fa-eye-slash");
 		$("[name=pw]").attr("type","password");
-	} */
-	
-	$(this).find("[data-fa-i2svg]").toggleClass("fa-eye").toggleClass("fa-eye-slash");
+	}
+	/* $(this).find("[data-fa-i2svg]").toggleClass("fa-eye").toggleClass("fa-eye-slash");
 
 	if($(this).find('.fa-eye-slash').length > 0){
 		$("[name=pw]").attr("type","password");
 	}else{
 		$("[name=pw]").attr("type","text");
-	}
+	} */
 });
 
 //광역시가 어디냐에 따라 구군이 달라짐(#addr1,#addr2)
@@ -226,57 +375,6 @@ $("#addr1").change(function(){
 	}
 });
 
-//회원가입
-function go_join(){
-	//이름이 입력되지 않았을경우
-	if($("[name=name]").val() == ""){
-		alert("이름을 입력하세요!!!");
-		$("[name=name]").focus();
-		return;
-	}
-	
-	//아이디 중복확인 한 경우 : chked 클래스가 있음
-	if($("[name=id]").hasClass("chked")){
-		if($("[name=id]").siblings("div").hasClass("invalid")){	//아이디 중복체크는 했는데 아이디가 중복일 경우
-			alert("회원가입 불가!\n" + join.id.unusable.desc);
-			$("[name=id]").focus();
-			return;
-		}
-		
-	}else{	//아이디 중복체크를 하지 않았을경우
-		if(!item_check($("[name=id]"))) return;
-		else{
-			alert(join.id.valid.desc);
-			$("[name=id]").focus();
-			return;
-		}
-	}
-	
-	
-	//아이디 중복확인 하지 않은 경우
-	if(!item_check($("[name=pw]"))) return;
-	if(!item_check($("[name=email]"))) return;
-	if($("#attach-file").val() == ""){
-		alert("프로필 사진을 반드시 넣어주세요!");
-		return;
-	}
-	
-	$("form").submit();
-}
-
-//정규식을 이용해 전달한 값이 정규식과 맞는지 판단 후 true나 false return
-function item_check(tag){
-	var result = join.tag_status(tag);
-	if(result.code == "invalid"){
-		alert("회원가입 불가!\n" + result.desc);
-		tag.focus();
-		return false;
-	}else{
-		return true;
-	}
-}
-
-
 //datepicker
 $(function(){
 	var today = new Date();
@@ -296,70 +394,6 @@ $(function(){
 		maxDate: today.getFullYear()-7
 	});
 });
-
-//아이디 중복확인
-function id_check(){
-	//먼저 아이디가 규칙에 맞게 작성되어 있는지 확인
-	var $id = $('[name=id]');
-	var data = join.tag_status($id);
-	if(data.code == "invalid"){
-		alert("규칙에 맞게 아이디를 먼저 작성해 주세요!" + data.desc);
-		$id.focus();
-		return;
-	}
-	
-	$.ajax({
-		type : "post",
-		url : "id_check",
-		data : {id : $id.val() },
-		success : function(response){
-			response = join.id_usable(response);
-			
-			$id.siblings("div").text(response.desc);
-			$id.siblings("div").removeClass();
-			$id.siblings("div").addClass(response.code);	
-			$id.addClass("chked");
-		},
-		error : function(req,text){
-			alert(text + " : " + req.status);
-		}
-		
-	});
-	
-	
-}
-
-//중복확인 버튼 클릭시 중복확인 메소드 실행
-$("#btn-id").on("click",function(){
-	id_check();
-});
-
-
-//id,pw 등등 실시간으로 체크(규칙에 맞는지)
-$(".chk").on('keyup', function(){
-	validate($(this));
-});
-
-function validate(tag){
-	var data = join.tag_status(tag);
-	tag.siblings("div").text(data.desc);
-	tag.siblings("div").removeClass();
-	tag.siblings("div").addClass(data.code);
-}
-
-//name=id 일경우 엔터키를 눌렀을 때 submit이 아닌 중복확인버튼이 눌리게 바꾸기
-$(".chk").on("keyup",function(e){
-	if($(this).attr("name")=="id"){
-		if(e.keyCode==13){
-			id_check();
-			return;
-		}else{
-			$(this).removeClass("chked");
-		}
-	}
-	validate($(this));
-});
-
 
 //name=birth에 change가 일어날 경우 X자 버튼 나오게 하기
 $("[name=birth]").change(function(){

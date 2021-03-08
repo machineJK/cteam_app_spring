@@ -244,10 +244,7 @@ public class MemberController {
 		return service.member_id_check(id);
 	}
 	
-	
-	
-	
-	//신규공지글 저장처리 요청
+	//회원가입
 	@RequestMapping("/join")
 	public String join(MemberVO vo, MultipartFile file, HttpSession session) {
 		//첨부된 파일이 있다면 데이터객체에 파일정보를 담는다
