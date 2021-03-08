@@ -15,6 +15,7 @@
 <link rel='stylesheet' type='text/css' 
 		href='css/common.css?v=<%=new java.util.Date().getTime() %>'>
 <link rel="icon" type="image/x-icon" href="images/hanul.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
 
 </head>

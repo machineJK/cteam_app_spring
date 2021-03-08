@@ -2,7 +2,8 @@ package member;
 
 public class MemberVO {
 	private String id,pw,nickname,name,gender,birth,email,addr1,addr2,
-					dbimgpath,kakao_login,naver_login;
+				dbimgpath,kakao_login,naver_login;
+
 
 	public String getEmail() {
 		return email;

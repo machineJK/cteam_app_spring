@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="match.mapper">
+	
+<!-- 	<select id="teacherList" resultType="match.TeacherVO">
+		select * from teacher
+	</select> -->
+
+	<select id="teacherList" resultType="match.TeacherVO">
+		<![CDATA[ 
+			select * 
+			from (select rownum num,t.* from teacher t)
+			where num <= ((#{count}+1) * 16) 
+			and num > (16 * #{count} )
+		]]> 
+	</select>
+
+	<select id="studentList" resultType="match.StudentVO">
+		<![CDATA[ 
+			select * 
+			from (select rownum num,s.* from student s)
+			where num <= ((#{count}+1) * 16) 
+			and num > (16 * #{count} )
+		]]> 
+	</select>
+	
+	<select id="teacherDetail" resultType="match.TeacherVO">
+		select * from teacher where teacher_id = #{teacher_id}
+	</select>
+	
+	<select id="studentDetail" resultType="match.StudentVO">
+		select * from student where student_id = #{student_id}
+	</select>
+	
+</mapper>

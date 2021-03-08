@@ -4,10 +4,16 @@ import java.sql.Date;
 
 public class BoardVO {
 	private int board_readcount, board_notice, board_num;
-	private String board_id, board_content, board_image_path, id_image_path, board_nickname;
+	private String board_id, board_content, board_image_path, id_image_path, board_nickname, board_image_name;
 	private Date board_write_date;
 	
 	
+	public String getBoard_image_name() {
+		return board_image_name;
+	}
+	public void setBoard_image_name(String board_image_name) {
+		this.board_image_name = board_image_name;
+	}
 	public int getBoard_readcount() {
 		return board_readcount;
 	}

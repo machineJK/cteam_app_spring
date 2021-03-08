@@ -119,7 +119,7 @@ textarea[name=content]{width:calc(100% - 6px); resize: none; height:150px;}
 	width: 30px; height: 32px; border:1px solid gray; text-indent: -99999999999px;
 }
 	
-.file-img{width:24px; cursor:pointer;}
+.file-img{width:100px; height:100px; cursor:pointer;}
 
 .w-pct80 { width:80% }
 .w-pct60 { width:60% }

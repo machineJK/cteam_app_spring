@@ -33,4 +33,20 @@
 		update member set name = #{name}, nickname = #{nickname}, gender = #{gender}
 		where id = #{id} and email = #{email} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
 	</update>
+	
+	<select id="id_check" resultType="integer">
+		select count(*) from member where id = #{id}
+	</select>
+	
+	<insert id="join">
+		insert into member(id,pw,nickname,name,gender,birth,email,addr1,addr2,dbimgpath) 
+		values(#{id},#{pw},#{nickname},#{name},#{gender},#{birth},#{email},#{addr1},#{addr2},#{dbimgpath, jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- <insert id="insert">
+	insert into notice ( id, root, title, content, writer, filename, filepath )
+	values ( seq_notice.nextval, seq_notice.currval, #{title}, #{content}, #{writer}
+			  , #{filename, jdbcType=VARCHAR}
+			  , #{filepath, jdbcType=VARCHAR} )
+	</insert> -->
 </mapper>
