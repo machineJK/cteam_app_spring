@@ -4,6 +4,11 @@
 <html>
 <head>
 	<title>Home</title>
+<style type="text/css">
+body {
+	background-color: #b6c2fa;
+}
+</style>
 </head>
 <body>
 

@@ -4,7 +4,7 @@
 <header style='border-bottom:1px solid #ccc; padding:15px 0; text-align:left'>
 	<div class='category' style='margin-left:100px'>
 		<ul>
-			<li><a href='<c:url value="/" />'><img src='images/kim-logo.png' width="100px" height="100px"/><span style="font-size: 30px; font-weight: bold;">튜더스</span></a></li>
+			<li><a href='<c:url value="/" />'><img src='images/weblogo.png' width="90px" height="90px"/><span style="font-size: 30px; font-weight: bold;"><img src='images/logo.png' width="210px" height="70px"/></span></a></li>
 			<li><a class="${category eq 'cu' ? 'active' : ''}" href='list.cu'>과외매칭</a></li>
 			<li><a class="${category eq 'chat' ? 'active' : ''}" href='list.chat'>채팅하기</a></li>
 			<li><a class="${category eq 'no' ? 'active' : ''}" href='list.bo'>게시판</a></li>
@@ -47,6 +47,10 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+header {
+	background-color: #c5cefa;
+	
 }
 header ul, header ul li { 
 	margin:0; padding:0; display:inline; }
