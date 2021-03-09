@@ -21,7 +21,8 @@
 
 <div class='container'>
 	<div style='height:100px'>
-		<a href='<c:url value="/"/>'><img src='images/kim-logo.png' width="100px" height="100px"/></a>
+		<a href='<c:url value="/"/>'><img src='images/weblogo.png' width="50px" height="50px"/></a>
+		<a href='<c:url value="/"/>'><img src='images/logo.png' width="150px" height="50px"/></a>
 	</div>
 	<div id='login' style="padding:50px 0">
 		<form method="post" action=''>
