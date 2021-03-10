@@ -29,9 +29,9 @@ a.btn {
 </style>
 </head>
 <body>
-	<form method="post" action="insert.bo" enctype="multipart/form-data">
+	<form method="post" action="update.bo" enctype="multipart/form-data">
 		<div id="frame">
-			<h3>글쓰기</h3>
+		<h3>${vo.board_nickname }님의 글 </h3>
 			<div><hr></div>
 			<div class="right file">
 				<label>
@@ -42,14 +42,16 @@ a.btn {
 			<table class="lineNo">
 				<tr valign="top" class="font_size">
 					<th class="lineNo">내용</th>
-					<td class="lineNo"><textarea id="textarea" name="board_content" title="내용"></textarea></td>
+					<td class="lineNo"><textarea id="textarea" name="board_content" title="내용">${vo.board_content }</textarea></td>
 				</tr>
 			</table>
+			<input type="hidden" name="board_num" value="${vo.board_num }"/>
+			<input type="hidden" name="attach"/>
 		</div>
 	</form>
 	<div class="btnSet">
-		<a class="btn-fill" onclick="if(emptyCheck()) $('form').submit()">완료</a>
+		<a class="btn-fill" onclick="$('form').submit()">완료</a>
+		<a class="btn-empty" onclick="history.go(-1)">취소</a>
 	</div>
-<script type="text/javascript" src="js/file_check.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-	$("#attach-file").on("change",function(){
+	$("#pic-file").on("change",function(){
 		if(this.files[0]){
 			$("#file-name").text(this.files[0].name);
 			$("#delete-file").css("display","inline");
