@@ -52,7 +52,7 @@
 <body>
 <h2 id="myChatList">나의 채팅목록</h2>
 <input type="text" id="myId" value="${loginInfo.id}"/>
-<input type="text" id="myNick" value="${loginInfo.nickname }"/>
+<input type="text" id="myNick" value="${loginInfo.nickname}"/>
 <br/><hr/>
 <div>
 <div id="box">
@@ -120,7 +120,6 @@
 	//message send to teacher
 	function sendMsgToTeacher(){
 		//msg 내용
-		var myNick = document.getElementById('myNick').value;
 		var msg = document.getElementById("textBox1").value;
 		var date = new Date();
 
@@ -151,10 +150,10 @@
 	}
 	
 	var studentId;
+	var myNick = document.getElementById('myNick').value;
 	//message send to student
 	function sendMsgToStudent(){
 		//msg 내용
-		var myNick = document.getElementById('myNick').value;
 		var msg = document.getElementById("textBox2").value;
 		var date = new Date();
 
@@ -216,46 +215,67 @@
 	}
 	
 	//teacherList
-	function addTeacherList(teacherId){
+	function addTeacherList(teacherId, teacherName){
 		var div = document.getElementById("teacherList");
 		_teacherId = teacherId;
 		
 		var _teacher = document.createElement("div");
 		_teacher.id = teacherId;
 
-		_teacher.innerHTML = teacherId;
+		_teacher.innerHTML = teacherName;
 		div.appendChild(_teacher);
 	}
 	//studentList
-	function addStudentList(studentId){
+	function addStudentList(studentId, studentName){
 		var div = document.getElementById("studentList");
 		_studentId = studentId;
 		
 		var _student = document.createElement("div");
 		_student.id = _studentId;
 		
-		_student.innerHTML = studentId;
+		_student.innerHTML = studentName;
 		div.appendChild( _student );
 	}
 	
+	var teacherName;
+	var studentName;
 	function FetchAllData(){
 		var teacher = firebase.database().ref(myId + 2).once('value', function(snapshot){
 			snapshot.forEach(
 				function(ChildSnapshot){
+					teacherName = "";
 					var teacherId = ChildSnapshot.key;		
-					var teacherVO = ChildSnapshot.val();	
-					console.log(teacherVO);
-					addTeacherList( teacherId );
+					var teacherVO = ChildSnapshot.val();
+// 					console.log(teacherVO);
+					$.each(teacherVO, function(key, value){
+						if( value.nickname != myNick ){
+// 							console.log(value.nickname);
+							teacherName = value.nickname;
+						}
+					});
+					addTeacherList( teacherId, teacherName );
 				}
 			)			
 		});			
 		var student = firebase.database().ref(myId + 1).once('value', function(snapshot){
 			snapshot.forEach(
 				function(ChildSnapshot){
+					studentName = "";	
 					var studentId = ChildSnapshot.key;
-					
+					var studentVO = ChildSnapshot.val();
+					console.log(studentVO);
+					$.each(studentVO, function(key, value){
+						if( value.nickname != myNick){
+							studentName = value.nickname;
+							console.log(studentName);
+						}
+						if (studentName == ""){ 
+							studentName = "응답하지 않은 학생";
+							console.log(studentName);
+						}
+					});
 // 					console.log(studentName);
-					addStudentList(studentId);
+					addStudentList(studentId, studentName );
 				}		
 			)
 		});
