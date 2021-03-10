@@ -18,15 +18,15 @@ public class MatchServiceImpl implements MatchService{
 	public StudentVO studentDetail(String student_id) {
 		return dao.studentDetail(student_id);
 	}
-
+	
 	@Override
-	public List<TeacherVO> teacherList(int count) {
-		return dao.teacherList(count);
+	public List<TeacherVO> teacherList(ConditionVO vo) {
+		return dao.teacherList(vo);
 	}
 
 	@Override
-	public List<StudentVO> studentList(int count) {
-		return dao.studentList(count);
+	public List<StudentVO> studentList(ConditionVO vo) {
+		return dao.studentList(vo);
 	}
 
 }

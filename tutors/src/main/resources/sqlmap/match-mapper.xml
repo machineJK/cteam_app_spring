@@ -1,28 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="match.mapper">
-	
-<!-- 	<select id="teacherList" resultType="match.TeacherVO">
-		select * from teacher
-	</select> -->
 
+	<!-- 선생 리스트 -->
 	<select id="teacherList" resultType="match.TeacherVO">
-		<![CDATA[ 
-			select * 
-			from (select rownum num,t.* from teacher t)
+			select *
+			from (select rownum num ,t.* 
+        		  from (select t.* from teacher t inner join member m
+		                on m.id = t.teacher_id
+		                where t.teacher_date is not null
+		                <include refid="teacher_addr_where" />
+		                <include refid="teacher_gender_where" />
+		                <include refid="teacher_subject_where" />
+		                <include refid="teacher_pay_where" />
+		                order by teacher_date desc) t)
+		<![CDATA[
 			where num <= ((#{count}+1) * 16) 
-			and num > (16 * #{count} )
-		]]> 
+				and num > (16 * #{count} )
+		]]>
 	</select>
+	
+	<sql id="teacher_addr_where">
+		<if test="addr1 != '' and addr2 != ''">
+			and teacher_addr = #{addr1} || ' ' || #{addr2}
+		</if>
+		<if test="addr1 != '' and addr2 == ''">
+			and teacher_addr like '%' || #{addr1} || '%'
+		</if>
+	</sql>
 
+	<sql id="teacher_gender_where">
+		<if test="gender == '남자'">
+			and m.gender = #{gender}
+		</if>
+		<if test="gender == '여자'">
+			and m.gender = #{gender}
+		</if>
+	</sql>
+	
+	<sql id="teacher_subject_where">
+		<if test="subject != ''">
+			and teacher_subject = #{subject}
+		</if>
+	</sql>
+	
+	<sql id="teacher_pay_where">
+		<if test="pay != ''">
+	 		and to_number(t.teacher_pay) &lt; to_number(#{pay})		
+		</if>
+	</sql>
+
+	<!-- 학생 리스트 -->
 	<select id="studentList" resultType="match.StudentVO">
+		
+			select *
+			from (select rownum num ,s.* 
+				  from (select s.* from student s inner join member m
+		                on m.id = s.student_id
+		                where s.student_date is not null
+				  		<include refid="student_addr_where" />
+				  		<include refid="student_gender_where" />
+				  		<include refid="student_subject_where" />
+				  		order by student_date desc) s)
 		<![CDATA[ 
-			select * 
-			from (select rownum num,s.* from student s)
 			where num <= ((#{count}+1) * 16) 
-			and num > (16 * #{count} )
+				and num > (16 * #{count} )
 		]]> 
 	</select>
+	
+	<sql id="student_addr_where">
+		<if test="addr1 != '' and addr2 != ''">
+			and student_addr = #{addr1} || ' ' || #{addr2}
+		</if>
+		<if test="addr1 != '' and addr2 == ''">
+			and student_addr like '%' || #{addr1} || '%'
+		</if>
+	</sql>
+
+	<sql id="student_gender_where">
+		<if test="gender == '남자'">
+			and m.gender = #{gender}
+		</if>
+		<if test="gender == '여자'">
+			and m.gender = #{gender}
+		</if>
+	</sql>
+	
+	<sql id="student_subject_where">
+		<if test="subject != ''">
+			and student_subject = #{subject}
+		</if>
+	</sql>	
 	
 	<select id="teacherDetail" resultType="match.TeacherVO">
 		select * from teacher where teacher_id = #{teacher_id}
