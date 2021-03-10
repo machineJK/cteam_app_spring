@@ -7,7 +7,7 @@
 		<ul id="nav-1">
 			<li class="slide1"></li>         
     		<li class="slide2"></li>
-			<li><a class="${category eq 'cu' ? 'active' : ''}" href='list.cu'>과외매칭</a></li>
+			<li><a class="${category eq 'cu' ? 'active' : ''}" href='list.mj'>과외매칭</a></li>
 			<li><a class="${category eq 'chat' ? 'active' : ''}" href='list.chat'>채팅하기</a></li>
 			<li><a class="${category eq 'no' ? 'active' : ''}" href='list.bo'>게시판</a></li>
 			<%-- <li><a class="${category eq 'bo' ? 'active' : ''}" href='list.bo'>마이페이지</a></li> --%>
@@ -23,7 +23,7 @@
 		<ul>
 			<!-- 로그인하지 않은 경우 -->
 			<c:if test='${empty loginInfo}'>
-			<li><a class='btn-fill' href='login'>로그인</a></li>
+			<li><a class='btn-fill' href='login' >로그인</a></li>
 			<li><a class='btn-fill' href='member'>회원가입</a></li>
 			</c:if>
 			<!-- 로그인한 경우 -->

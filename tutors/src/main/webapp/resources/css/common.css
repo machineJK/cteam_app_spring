@@ -17,6 +17,7 @@ body{
 	margin:0 auto;
 	text-align:center;
 	font-family: 'S-CoreDream-4Regular';
+	background: rgba(230, 238, 249);
 }
 
 a:link, a:visited { text-decoration:none; color:#000; }
@@ -44,14 +45,10 @@ a.btn-fill, a.btn-empty {
 	box-shadow:2px 2px 3px #022d72; 
 }
 a.btn-fill { 
-	width: 100px;
-	height: 40px;
-	line-height: 40px;
 	background-color: #6875dd;
 	border: none;
 	color: white;
 	border-radius: 20px;
-	text-align: center;
 	display: inline-block;
 	cursor: pointer;
 	outline: none;
@@ -63,11 +60,18 @@ a.btn-fill:hover {
 	background-color: #f5f7b0;
 	color: #2B09F0;
 	
+	
 }
 
 a.btn-empty {
 	background-color: #fff;
-	color: #3367d6;
+	color: #2B09F0;
+	border-radius: 20px;
+	font-size: 1.2rem;
+}
+a.btn-empty:hover {
+	background-color: #f5f7b0;
+	color: #2B09F0;
 }
 
 a.btn-fill-s, a.btn-empty-s {

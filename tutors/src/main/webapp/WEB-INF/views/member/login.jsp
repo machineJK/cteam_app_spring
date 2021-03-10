@@ -8,13 +8,13 @@
 <style>
 .container {
 	position: absolute; left:50%;  top:50%;
-	width: 400px; height:340px;
+	width: 380px; height:340px; border-radius: 20px;
 	margin-left: -200px; margin-top:-300px;   
 }
 #login { width:100%; border:1px solid #ccc; }
-#userid, #userpw { width:48%; height:25px; 
-	padding:5px 10%; margin-bottom:10px  }
-.social img { width:254px; height:42px; }
+#userid, #userpw { width:60%; height:32px; border-radius: 10px; outline: none;
+	padding:5px 10%; margin-bottom:10px; border: 1px solid #ccc;  }
+.social img { width:254px; height:45px; margin: 5px; }
 </style>
 </head>
 <body>
@@ -24,15 +24,16 @@
 		<a href='<c:url value="/"/>'><img src='images/weblogo.png' width="50px" height="50px"/></a>
 		<a href='<c:url value="/"/>'><img src='images/logo.png' width="150px" height="50px"/></a>
 	</div>
-	<div id='login' style="padding:50px 0">
+	<div id='login' style="padding:30px;">
 		<form method="post" action=''>
-			<input type='text' id='userid' placeholder="아이디" />
+			<input type='text' id='userid' placeholder="아이디" /><br>
 			<input type='password' id='userpw' placeholder="비밀번호"
 					onkeypress="if( event.keyCode==13 ) go_login()"	 />
-			<a onclick='go_login()' class='btn-fill' style='display:block; margin:auto; width:63.5%; height:42px; line-height:42px; box-shadow:none;'>로그인</a>
+			<a onclick='go_login()' class='btn-fill' style='display:block; margin:auto; width:58%; height:42px; line-height:42px; box-shadow:none;'>로그인</a>
 		</form>
-		<hr style='width:69%; margin:25px auto'>
-		<a class='social' href='naverlogin'><img src='images/naver_login.png' alt='네이버로그인' /></a>
+		<br>
+		<!-- <hr style='width:69%; margin:25px auto'> -->
+		<a class='social' href='naverlogin'><img src='images/naver_login.png' alt='네이버로그인' /></a><br>
 		<a class='social' href='kakaologin'><img src='images/kakao_login.png' alt='카카오로그인' /></a>
 		
 	</div>
