@@ -2,16 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board.mapper">
 
+	<update id="update">
+		update board set board_content = #{board_content}
+						, board_image_path = #{board_image_path, jdbcType=VARCHAR}
+						, board_image_name = #{board_image_name, jdbcType=VARCHAR}
+		where board_num = #{board_num}
+	</update>
+
+	<update id="read">
+		update board set board_readcount = board_readcount+1 where board_num = #{board_num}
+	</update>
+
 	<select id="view" resultType="board.BoardVO">
 		select b.*, (select name from member
 					where member.id=b.board_id) name
 		from board b
-		where board_num = #{board_num, jdbcType=VARCHAR}
+		where board_num = #{board_num}
 	</select>
 	
 	<insert id="insert">
-		insert into board(board_num, board_id, board_content, board_nickname, board_image_path, board_image_name)
-		values (seq_board.nextval, #{board_id}, #{board_content}, #{board_nickname, jdbcType=VARCHAR}, #{board_image_path, jdbcType=VARCHAR}, #{board_image_name, jdbcType=VARCHAR})
+		insert into board(board_num, board_id, board_content, board_nickname, board_image_path, board_image_name, id_image_path, board_notice)
+		values (seq_board.nextval, #{board_id}, #{board_content}, #{board_nickname, jdbcType=VARCHAR}, #{board_image_path, jdbcType=VARCHAR}
+					, #{board_image_name, jdbcType=VARCHAR}, #{id_image_path, jdbcType=VARCHAR}, #{board_notice})
 	</insert>
 	
 	<select id="totalList" resultType="integer">
@@ -23,7 +35,7 @@
 		select rownum no, n.*, (select name from member m
 								where m.id=n.board_id) name
 		from (select * from board) n
-		order by  board_notice asc, no desc
+		order by  board_notice desc, no desc
 	</select>
 
 </mapper>

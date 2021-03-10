@@ -24,6 +24,33 @@ public class BoardController {
 	@Autowired private BoardServiceImpl service;
 	@Autowired private CommonService common;
 	
+	
+	//방명록 수정 저장처리 요청
+	@RequestMapping("/update.bo")
+	public String update(BoardVO vo, String attatch, HttpSession session, MultipartFile file, Model model) {
+		BoardVO board = service.board_view(vo.getBoard_num());
+//		String uuid = session.getServletContext().getRealPath("resources") + "/" + board.getBoard_image_name();
+		
+		//첨부파일 관련처리
+		
+		
+		//화면에서 입력한 정보를 DB에 변경 저장한 후 view 로 연결
+		service.board_update(vo);
+		
+		model.addAttribute("url", "view.bo");
+		model.addAttribute("id", vo.getBoard_num());
+		return "board/redirect";
+	}
+	
+	
+	//글 수정화면 요청
+	@RequestMapping("/modify.bo")
+	public String modify(int id, Model model) {
+		//해당 글의 정보를 DB에서 조회해와 수정화면에 출력
+		model.addAttribute("vo", service.board_view(id));
+		return "board/modify";
+	}
+	
 	//글 내용 상세보기 화면 요청
 	@RequestMapping("/view.bo")
 	public String view(int id, Model model) {
@@ -41,6 +68,15 @@ public class BoardController {
 	public String insert(BoardVO vo, MultipartFile file, HttpSession session) {
 		MemberVO member = (MemberVO)session.getAttribute("loginInfo");
 		vo.setBoard_id(member.getId());
+		if(member.getId().equals("admin")){
+			vo.setBoard_notice(1);
+		}else {
+			vo.setBoard_notice(0);
+		}
+		vo.setId_image_path(member.getDbimgpath());
+		vo.setBoard_nickname(member.getNickname());
+		vo.setBoard_image_path(vo.getBoard_image_path());
+		vo.setBoard_image_name(vo.getBoard_image_name());
 		//첨부파일이 있다면 데이터객체에 파일정보를 담는다.
 		if(!file.isEmpty()) {
 			vo.setBoard_image_name(file.getOriginalFilename());
@@ -81,7 +117,8 @@ public class BoardController {
 		page.setSearch(search);
 		page.setKeyword(keyword);
 		model.addAttribute("page", service.board_list(page));
-		
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
 		
 		return "board/list";
 	}
