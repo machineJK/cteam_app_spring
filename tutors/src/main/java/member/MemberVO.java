@@ -2,7 +2,7 @@ package member;
 
 public class MemberVO {
 	private String id,pw,nickname,name,gender,birth,email,addr1,addr2,
-				dbimgpath,kakao_login,naver_login;
+				dbimgpath,kakao_login,naver_login, filename;
 
 
 	public String getEmail() {
@@ -100,9 +100,16 @@ public class MemberVO {
 	public void setNaver_login(String naver_login) {
 		this.naver_login = naver_login;
 	}
-	
-	public void updateUimage(String id, String dbimgpath) throws Exception {
+
+	public String getFilename() {
+		return filename;
 	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	
+	
 
 	
 	

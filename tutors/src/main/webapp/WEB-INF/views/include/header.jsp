@@ -23,22 +23,22 @@
 		<ul>
 			<!-- 로그인하지 않은 경우 -->
 			<c:if test='${empty loginInfo}'>
-			<li><a class='btn-fill' href='login' >로그인</a></li>
-			<li><a class='btn-fill' href='member'>회원가입</a></li>
+			<li><a class='btn-fill' href='login' style="font-size: 18px; width: 80px;">로그인</a></li>
+			<li><a class='btn-fill' href='member' style="font-size: 18px; width: 90px;">회원가입</a></li>
 			</c:if>
 			<!-- 로그인한 경우 -->
 			<c:if test='${!empty loginInfo and !empty loginInfo.name}'>
-			<li style='padding-right:30px'>
+			<li style='padding-right:10px'>
 		
 			<a class="${category eq 'pro' ? 'active' : ''}" href='profile.pro?id=${loginInfo.id}'>
 			내 프로필</a></li>
 			<%-- <img src="${loginInfo.dbimgpath}" class="profile_image" style="width: 50px; height: 50px; border-radius: 100px"> --%>
-			<li style='padding-right:20px'><strong>&nbsp;&nbsp;&nbsp;&nbsp;${loginInfo.name}&nbsp;</strong>님</li>
-			<li><a class='btn-fill' href='logout'>로그아웃</a></li>
+			<li style='padding-right:10px'><strong>&nbsp;&nbsp;${loginInfo.name}&nbsp;</strong>님</li>
+			<li><a class='btn-fill' href='logout' style="font-size: 18px; width: 90px;">로그아웃</a></li>
 			</c:if>
 			<c:if test='${!empty loginInfo and empty loginInfo.name}'>
 			<li style='padding-right:10px'><strong>${loginInfo.nickname}</strong>님</li>
-			<li><a class='btn-fill' href='logout'>로그아웃</a></li>
+			<li><a class='btn-fill' href='logout' style="font-size: 18px; width: 90px;">로그아웃</a></li>
 			</c:if>
 
 			</ul>

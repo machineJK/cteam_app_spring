@@ -25,7 +25,7 @@ public class MemberDAO implements MemberService{
 	
 	@Override
 	public void member_update(MemberVO vo) {
-		sql.update("member.mapper.update", vo) ;
+		sql.update("member.mapper.update", vo);
 	}
 
 	@Override

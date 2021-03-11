@@ -53,7 +53,7 @@ a.btn-fill {
 	cursor: pointer;
 	outline: none;
 	margin: 10px auto;
-	font-size: 1.2rem;
+
 	transition: 0.25s;
 }
 a.btn-fill:hover {
@@ -67,7 +67,7 @@ a.btn-empty {
 	background-color: #fff;
 	color: #2B09F0;
 	border-radius: 20px;
-	font-size: 1.2rem;
+	
 }
 a.btn-empty:hover {
 	background-color: #f5f7b0;
@@ -198,108 +198,46 @@ html,
 body {
   height: 100%;
 }
+/* 회원가입 */
 
-  /*---------------------------------------
-      ABOUT            
-  -----------------------------------------*/
-
-  .about {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .about-image img {
-    display: block;
-    margin: 0 auto;
-  }
-
-
-
-  /*---------------------------------------
-      BLOG            
-  -----------------------------------------*/
-
-  .blog-header {
-    border-radius: var(--border-radius-small);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .blog-header img {
-    border-radius: var(--border-radius-small);
-    display: block;
-  }
-
-  .blog-header-info {
-    background: linear-gradient(transparent,rgba(0,0,0,0.95));
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    padding: 2em;
-  }
-
-  .blog-header-info h3 {
-    max-width: 80%;
-  }
-
-  .blog-header-info a {
-    color: var(--white-color);
-  }
-
-  .blog-header-info a:hover {
-    color: var(--secondary-color);
-  }
-
-  .blog-sidebar img {
-    border-radius: var(--border-radius-small);
-    width: 159px;
-    margin-right: 22px;
-  }
-
-  .blog-sidebar h3 {
-    font-size: 18px;
-  }
-
-
-
-  /*---------------------------------------
-     CONTACT              
-  -----------------------------------------*/
-
-  .newsletter-form .form-control,
-  .contact-form .form-control {
-    box-shadow: none;
-    background: var(--project-bg);
-    border: 0;
-    padding: 1.7em 1.3em;
-    margin: 14px 0;
-  }
-
-  .newsletter-form button,
-  .contact-form #submit-button {
-    background: var(--primary-color);
-    border-radius: var(--border-radius-large);
-    color: var(--white-color);
-    cursor: pointer;
-    font-size: var(--p-font-size);
-    line-height: 0px;
-    padding: 1.5em 1.3em;
-  }
-
-  .newsletter-form button {
-    background: var(--secondary-color);
-  }
-
-
-
+/*     프로필 화면       */
+.prot{
+	border: none;
+	background-color: white;
+	border-radius: 10px;
+	padding: 10px;
+}
+.modi{
+	margin: 10px;
+	font-size: 18px; 
+}
+/*     프로필 수정화면       */
+.updiv{
+	margin-right: 200px; margin-bottom: 10px; font-size: 20px;
+}
+.upinput {
+	width: 320px; height: 50px; margin-bottom: 15px; padding-left: 20px;
+	font-size: 18px; outline: none; border: none; border-radius: 5px;
+}
+.title_modify{
+	margin-bottom: 50px;
+}
+.btnSet{
+	margin-bottom: 200px;
+}
   /*---------------------------------------
      FOOTER              
   -----------------------------------------*/
-
+  :root {
+    --secondary-color:      #f1c111;
+    --white-color:          #ffffff;
+    --dark-color:           #373f57;
+    --p-color:              #c7c7c7;
+    --base-font-size:       16px;
+  }
   .site-footer {
     background: var(--dark-color);
-    padding: 7em 0 6em 0;
+    padding: 3em 0 1em 0;
   }
 
   .site-footer a {
@@ -317,26 +255,24 @@ body {
     margin: 0 10px;
   }
 
+  .text-white{
+  color: var(--white-color);}
+  
+  .my-4,
   .copyright-text,
   .footer-link,
   .site-footer .social-icon {
-    margin-top: 6em;
+    margin-top: 1em;
+    color: var(--p-color);
   }
 
   .copyright-text {
-    margin-top: 5.3em;
+    margin-top: 1.3em;
   }
-
-
-
-  /*---------------------------------------
-     SOCIAL ICON              
-  -----------------------------------------*/
-
   .social-icon {
     position: relative;
     padding: 0;
-    margin: 4em 0 0 0;
+    margin: 1em 0 0 0;
   }
 
   .social-icon li {
@@ -360,6 +296,7 @@ body {
 .w-pct50 { width:50% }
 .w-pct40 { width:40% }
 .w-pct30 { width:30% }
+.w-pct20 { width:20% }
 .w-px300 { width:300px; }
 .w-px200 { width:200px; }
 .w-px250 { width:200px; }

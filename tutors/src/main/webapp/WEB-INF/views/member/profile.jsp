@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h3>내 프로필</h3>
+<h2>내 프로필</h2>
 <div class=""><br/>
 
 
@@ -17,43 +17,36 @@
 <br/>
 </div>
 <div class="title_image">
-				<c:choose>
-					<c:when test="${vo.dbimgpath == null}">
-						<img src="/images/noimage.png" class="profile_image" style="width: 200px; height: 200px; border-radius: 100px">
-					</c:when>
-					<c:otherwise>
-						<img src="${vo.dbimgpath}" class="profile_image" style="width: 200px; height: 200px; border-radius: 100px">
-					</c:otherwise>
-				</c:choose>			
+	<img src="${vo.dbimgpath}" class="profile_image" style="width: 200px; height: 200px; border-radius: 100px">
 </div>
-<br>
-	<a href="update/${vo.id}"><i class="far fa-image"></i></a><br>
+ <br>
+	<%-- <a href="update/${vo.id}"><i class="far fa-image"></i></a><br> --%>
 	
 	
-	<a class="" href="modify.pro?id=${vo.id}">프로필 수정하기</a><br><br>
+	<a class="modi" href="modify.pro?id=${vo.id}">프로필 수정하기</a><br><br>
 <form method="post" action="profile.pro">
-<table class="w-pct40">
+<table class="w-pct20 prot" >
 <tr>
-	<td class="w-pct40" colspan="2">이름</td>
-	<td class="" colspan="2">${vo.name}</td>
+	<td class="w-pct40 prot" colspan="2">이름</td>
+	<td class="prot" colspan="2">${vo.name}</td>
 </tr>
 <tr>
 	
-	<td class="" colspan="2">닉네임</td>
-	<td class="" colspan="2">${vo.nickname}</td>
+	<td class="prot" colspan="2">닉네임</td>
+	<td class="prot" colspan="2">${vo.nickname}</td>
 </tr>
 <tr>
 
-	<td class="" colspan="2">이메일</td>
-	<td class="" colspan="2">${vo.email}</td>
+	<td class="prot" colspan="2">이메일</td>
+	<td class="prot" colspan="2">${vo.email}</td>
 </tr>
 <tr>
-	<td class="" colspan="2">성별</td>
-	<td class="" colspan="2">${vo.gender}</td>
+	<td class="prot" colspan="2">성별</td>
+	<td class="prot" colspan="2">${vo.gender}</td>
 </tr>
 <tr>
-	<td class="" colspan="2">과외지역</td>
-	<td class="" colspan="2">${vo.addr1} ${vo.addr2}</td>
+	<td class="prot" colspan="2">과외지역</td>
+	<td class="prot" colspan="2">${vo.addr1} ${vo.addr2}</td>
 </tr>
 </table>
 <h3>매칭된 사람</h3>
@@ -68,7 +61,7 @@
 </c:forEach>
 </table>
 </form>
-
+<script type="text/javascript" src="js/file_check.js"></script>
 
 </body>
 </html>

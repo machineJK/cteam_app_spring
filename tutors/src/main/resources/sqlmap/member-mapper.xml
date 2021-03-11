@@ -8,7 +8,9 @@
 	</select>
 	
 	<update id="update" parameterType="hashMap">
-		update member set pw = #{pw, jdbcType=VARCHAR}, nickname = #{nickname}, email =#{email}
+		update member set pw = #{pw, jdbcType=VARCHAR}
+		,nickname = #{nickname}, email =#{email}
+		, dbimgpath = #{dbimgpath, jdbcType=VARCHAR}
 		where id = #{id}
 	</update>
 	

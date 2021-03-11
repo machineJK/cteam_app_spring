@@ -11,9 +11,9 @@
 	.valid{color:green;}
 	.invalid{color:red;}
 	table, table tr td, table tr th {border:none;}
-	input{border: none; width: 400px; font-size: 16px; height: 40px; border-radius: 15px;}
+	input{border: none; width: 400px; font-size: 16px; height: 40px; border-radius: 15px; outline: none;}
 	input:hover{background-color: #CCCCCC;}
-	input:focus{background-color: #FFFFFF; border: 1px solid gray; outline: none;}
+	input:focus{background-color: #FFFFFF;  outline: none;}
 	input[name=pw]{width: 377px;}
 	/* input:focus {outline:none;} */ /* input태그를 눌렀을 때 나오는 테두리 없애기 */
 	#isblind:hover, .fa-images{cursor: pointer;}
@@ -48,49 +48,64 @@
 
 </head>
 <body>
-<h3>회원가입</h3>
+<br><br><br><br>
+<h2>회원가입</h2>
 
-<form method="post" action="join" style="margin-bottom: 10px;" enctype="multipart/form-data">
+<form method="post" action="join" style="margin: 30px;" enctype="multipart/form-data">
 <table class='w-pct50'>
 <tr>
-	<td><input type='text' name='name' placeholder="이름을 입력하세요"/></td>
+	<td><input type='text' name='name' placeholder="이름을 입력하세요" style="margin: 5px;"/></td>
 </tr>
 <tr>
-	<td><input type='text' name='id' placeholder="아이디를 입력하세요" maxlength="13" />	</td>
+	<td><input type='text' name='id' placeholder="아이디를 입력하세요" maxlength="13" style="margin: 0px 5px 5px 5px;" /><br>
+	<span id="chk-id-circle" ><i class="fas fa-circle"></i></span><span id="chk-id"><i class="fas fa-check"></i></span> 아이디는 영문,숫자를 이용해 6~13자리로 써주세요</td>
 </tr>
 <tr>
-	<td><input type='text' name='nickname' placeholder="닉네임을 입력해주세요"/><br>
+	<td><input type='text' name='nickname' placeholder="닉네임을 입력해주세요"  style="margin: 5px;"/><br>
 	</td>
 </tr>
 <tr>
-	<td><input type='password' name='pw' placeholder="비밀번호를 입력하세요" maxlength="13"/>
+	<td><input type='password' name='pw' placeholder="비밀번호를 입력하세요" maxlength="13" style="margin: 0px 5px 5px 5px;"/>
 		<span id="isblind"><i class="far fa-eye-slash"></i></span>
-		<ul id="checkList">
+		<br><span id="chk-pw-circle"><i class="fas fa-circle"></i></span><span id="chk-pw"><i class="fas fa-check"></i></span> 비밀번호는 6~13자리 이하로 써주세요
+		<br><span id="chk-pwreg-circle"><i class="fas fa-circle"></i></span><span id="chk-pwreg"><i class="fas fa-check"></i></span> 비밀번호는 영어 대문자, 소문자, 특수문자가<br> 1개이상 포함되어야 합니다</td>
+<!-- 		<ul id="checkList">
 			<li><span id="chk-id-circle" ><i class="fas fa-circle"></i></span><span id="chk-id"><i class="fas fa-check"></i></span> 아이디는 영문,숫자를 이용해 6~13자리로 써주세요</li>
 			<li><span id="chk-pw-circle"><i class="fas fa-circle"></i></span><span id="chk-pw"><i class="fas fa-check"></i></span> 비밀번호는 6~13자리 이하로 써주세요</li>
 			<li><span id="chk-pwreg-circle"><i class="fas fa-circle"></i></span><span id="chk-pwreg"><i class="fas fa-check"></i></span> 비밀번호는 영어 대문자, 소문자, 특수문자가 1개이상 포함되어야 합니다</li>
 			<li><span id="chk-email-circle"><i class="fas fa-circle"></i></span><span id="chk-email"><i class="fas fa-check"></i></span> 이메일을 바르게 적어주세요!</li>
-		</ul>
-	</td>
+		</ul> -->
+	
 </tr>
 <tr>
+<!-- 	<td>
+	<label for="opt1" class="radio">
+    	<input type="radio" name="gender" id="man" class="hidden" value='남' checked/>
+    <span class="label"></span>남
+  	</label>
+	<label for="opt2" class="radio">
+    	<input type="radio" name="gender" id="woman" class="hidden" value='여' />
+    <span class="label"></span>여
+  	</label>
+	</td> -->
 	<td><label><input type='radio' name='gender' value='남' checked />남</label>
 		<label><input type='radio' name='gender' value='여' />여</label>
 	</td>
 </tr>
 <tr>
-	<td><input type='text' name='email' placeholder="이메일을 입력해주세요"/><br>
+	<td><input type='text' name='email' placeholder="이메일을 입력해주세요" style="margin: 5px;"/><br>
+	<span id="chk-email-circle"><i class="fas fa-circle"></i></span><span id="chk-email"><i class="fas fa-check"></i></span> 이메일을 바르게 적어주세요!
 	</td>
 </tr>
 <!-- 참고 -->
 <tr>
-	<td><input type='text' name='birth' placeholder="생일을 입력해주세요" readonly="readonly"/>
+	<td><input type='text' name='birth' placeholder="생일을 입력해주세요" readonly="readonly" style="margin: 0px 5px 5px 5px;"/>
 		<span id="delete" style="color:red; position:relative; right:25px; cursor: pointer; display:none;">
 		<i class="fas fa-times"></i></span></td>
 </tr>
 <tr>
 	<td>
-		<select id="addr1" name="addr1">
+		<select id="addr1" name="addr1" style="width: 100px; border-radius: 5px; outline: none;">
 			<option value="광주">광주</option>
 			<option value="부산">부산</option>
 			<option value="대구">대구</option>
@@ -99,7 +114,7 @@
 			<option value="서울">서울</option>
 			<option value="대전">대전</option>
 		</select>
-		<select id="addr2" name="addr2">
+		<select id="addr2" name="addr2" style="width: 100px; border-radius: 5px; outline: none;">
 			<option value='동구'>동구</option>
 			<option value='서구'>서구</option>
 			<option value='북구'>북구</option>
@@ -123,8 +138,8 @@
 </table>
 
 </form>
-<a class="btn-fill" onclick="go_join()">회원가입</a>
-<a class="btn-empty" href="<c:url value='/' />">취소</a>
+<a class="btn-fill" onclick="go_join()" style="font-size: 20px; width: 110px;">가입하기</a>
+<a class="btn-empty" href="<c:url value='/' />" style="font-size: 20px;">취소</a>
 
 <!-- datepicker jQueryUI -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

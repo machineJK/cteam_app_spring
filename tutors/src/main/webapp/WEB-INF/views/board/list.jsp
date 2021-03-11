@@ -27,27 +27,29 @@ $('#delete').click(function(){
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
 h3 {font-size: 20px}
-#frame {margin: 0 auto; width: 55%;}
-.searchBar { width: 100%; margin-bottom: 50px; margin-top: 30px;}
-input[name=keyword]{width:90%;}
-#noti {margin-bottom: 50px; margin-top: 30px; overflow: hidden;}
-.noti_left {float: left; line-height: 50px;}
-.noti_right {float: right; line-height: 50px; margin-right: 5px}
+#frame {margin: 0 auto; width: 60%;}
+.searchBar { width: 100%; margin-bottom: 50px;}
+input[name=keyword]{padding:3px; width:50%; height: 50px; border-radius: 10px; border: 1px solid #6875dd; padding: 5px; outline: none;}
+#noti {margin-bottom: 20px; margin-top: 20px; overflow: hidden;}
+.noti_left {float: left; line-height: 60px;}
+.noti_right {float: right; margin-right: 5px;}
+
 ._content { 
 	width: 100%;
 	font-size: 18px;
+	border: 1px solid #ccc;
 }
 .lineNo {
  	border: 0px;
  	border-top: 1px;
 }
 .lineNo2 {
-	border: 1px solid;
+	border: 1px solid #ccc;
 	margin-bottom: 20px;
 }
 .c_detail {
 	height: 100px;
-	padding: 22px 30px;;
+	padding: 22px 30px;
 	width: 20%;
 	
 }
@@ -64,19 +66,20 @@ p { margin-bottom: 35px; }
 	
 }
 .color{ color: #3982f7; margin-top: 10px; cursor: pointer; width: 15%}
+
+
 </style>
 </head>
 <body>
 	<div id="frame">
 		<table>
-			<h3>게시판</h3>
-			<div><hr></div>
+			<h1>게시판</h1>
 			<form method="post" action="list.bo">
 				<div>
 				 	<div>
 				 		<div id="noti">
 				 			<div class="noti_left">공지사항과 질문 및 답변이 있는 페이지입니다.</div>
-						 	<div class="right po noti_right"><c:if test="${!empty loginInfo }"><a class="btn-fill" href="new.bo">글쓰기</a></c:if></div>
+						 	<div class="right po noti_right"><c:if test="${!empty loginInfo }"><a class="btn-fill" href="new.bo" style="font-size: 18px; width: 90px;">글쓰기</a></c:if></div>
 				 		</div>
 					 	<div class="searchBar">
 				 			<input type="text" name="keyword" value="${page.keyword}" placeholder="검색어입력" /> 
@@ -94,7 +97,7 @@ p { margin-bottom: 35px; }
 				<c:forEach items="${page.list }" var="vo">
 					<table class="_content">
 					 	<tr class="left divi">
-					 		<th class="w-px60 lineNo" rowspan="2" >프로필사진</th>
+					 		<th class="w-px60 lineNo" rowspan="2" ><img src="${loginInfo.dbimgpath}" style="width: 50px; height: 50px; border-radius: 100px"></th>
 					 		<td class="lineNo">${vo.board_id}</td>
 					 	</tr>
 					 	<tr class="left divi">

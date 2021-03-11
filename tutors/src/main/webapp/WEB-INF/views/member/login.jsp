@@ -8,13 +8,16 @@
 <style>
 .container {
 	position: absolute; left:50%;  top:50%;
-	width: 380px; height:340px; border-radius: 20px;
+	width: 380px; height:340px; 
 	margin-left: -200px; margin-top:-300px;   
 }
 #login { width:100%; border:1px solid #ccc; }
-#userid, #userpw { width:60%; height:32px; border-radius: 10px; outline: none;
-	padding:5px 10%; margin-bottom:10px; border: 1px solid #ccc;  }
+#userid, #userpw { width:70%; height:45px; border-radius: 10px; outline: none;
+	padding:5px 10%; margin-bottom:10px; border: 1px solid #ccc; font-size: 16px; }
 .social img { width:254px; height:45px; margin: 5px; }
+input{background-color: #FFFFFF;}
+input:hover{background-color: #CCCCCC;}
+input:focus{background-color: #FFFFFF;  outline: none;}
 </style>
 </head>
 <body>
@@ -29,7 +32,7 @@
 			<input type='text' id='userid' placeholder="아이디" /><br>
 			<input type='password' id='userpw' placeholder="비밀번호"
 					onkeypress="if( event.keyCode==13 ) go_login()"	 />
-			<a onclick='go_login()' class='btn-fill' style='display:block; margin:auto; width:58%; height:42px; line-height:42px; box-shadow:none;'>로그인</a>
+			<a onclick='go_login()' class='btn-fill' style='display:block; font-size: 20px; width: 110px;'>로그인</a>
 		</form>
 		<br>
 		<!-- <hr style='width:69%; margin:25px auto'> -->

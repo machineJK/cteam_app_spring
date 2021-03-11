@@ -8,22 +8,15 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
 h3 {font-size: 20px}
-#frame {margin: 0 auto; width: 55%; }
+#frame {margin: 0 auto; width: 60%;}
 .file {margin-top: 40px;}
-.file_img { width: 40px; cursor: pointer; text-align: right; margin-right: 5px}
-#textarea { width: 95%; height: 300px; padding: 20px; font-size: 20px; resize: none;}
+.file_img { width: 40px; cursor: pointer; text-align: right; margin: 5px;}
+#textarea { width: 100%; height: 300px; margin: 0 auto; padding: 10px; font-size: 20px; resize: none;
+border: 1px solid #ccc; outline: none;}
 table { width: 100%; margin-top: 1px;}
 .lineNo {
  	border: 0px;
-}
-a.btn {
-	text-align:center;
-	padding: 7px 80px;
-	border:1px solid #3367d6;
-	border-radius:3px; 
-	box-shadow:2px 2px 3px #022d72; 
-	background-color: #3367d6;
-	color: #fff;
+ 	padding: 0px;
 }
 </style>
 </head>
@@ -35,7 +28,7 @@ a.btn {
 			<div class="right file">
 				<label>
 					<input type="file" name="file" id="pic_file" style="display: none;"/>
-					<div><img src="images/pngwing.png" class="file_img" /></div>
+					<div><img src="images/camera.png" class="file_img" /></div>
 				</label>
 			</div>
 			<table class="lineNo">
@@ -47,7 +40,7 @@ a.btn {
 		</div>
 	</form>
 	<div class="btnSet">
-		<a class="btn" onclick="if(emptyCheck()) $('form').submit()">완료</a>
+		<a class="btn-fill" style="width: 100px; font-size: 20px;" onclick="if(emptyCheck()) $('form').submit()">등록</a>
 	</div>
 <script type="text/javascript" src="js/file_check.js"></script>
 </body>
