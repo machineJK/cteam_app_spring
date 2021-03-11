@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import match.ConditionVO;
 import match.MatchServiceImpl;
 import match.StudentVO;
 import match.TeacherVO;
@@ -27,14 +28,18 @@ public class MatchController {
 	}
 
 	@ResponseBody @RequestMapping("/data/teacher_list")
-	public List<TeacherVO> teacher_list(int count) {
-		//System.out.println(count);
-		return service.teacherList(count);
+	public List<TeacherVO> teacher_list(ConditionVO vo) {
+		return service.teacherList(vo);
 	}
 	
 	@ResponseBody @RequestMapping("/data/student_list")
-	public List<StudentVO> student_list(int count) {
-		return service.studentList(count);
+	public List<StudentVO> student_list(ConditionVO vo) {
+		System.out.println(vo.getCount());
+		System.out.println("addr1 : " + vo.getAddr1());
+		System.out.println("addr2 : " + vo.getAddr2());
+		System.out.println("gender : " + vo.getGender());
+		System.out.println("subject : " + vo.getSubject());
+		return service.studentList(vo);
 	}
 	
 	@RequestMapping("/teacherDetail.match")

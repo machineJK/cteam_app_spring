@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +26,7 @@ $('#delete').click(function(){
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
 h3 {font-size: 20px}
+
 #frame {margin: 0 auto; width: 60%;}
 .searchBar { width: 100%; margin-bottom: 50px;}
 input[name=keyword]{padding:3px; width:50%; height: 50px; border-radius: 10px; border: 1px solid #6875dd; padding: 5px; outline: none;}
@@ -42,6 +42,8 @@ input[name=keyword]{padding:3px; width:50%; height: 50px; border-radius: 10px; b
 .lineNo {
  	border: 0px;
  	border-top: 1px;
+ 	padding: 2px;
+    padding-right: 5px;
 }
 .lineNo2 {
 	border: 1px solid #ccc;
@@ -63,10 +65,13 @@ p { margin-bottom: 35px; }
     -webkit-box-orient: vertical;
     line-height: 2.2em;
 	height: 10.6em;
-	
 }
 .color{ color: #3982f7; margin-top: 10px; cursor: pointer; width: 15%}
-
+.pic_size { width: 100px; height:100px; margin: 0px; border-radius: 100px;}
+.readcount {
+	margin-bottom: 20px;
+	color: #9e9e9e;
+}
 
 </style>
 </head>
@@ -80,6 +85,7 @@ p { margin-bottom: 35px; }
 				 		<div id="noti">
 				 			<div class="noti_left">공지사항과 질문 및 답변이 있는 페이지입니다.</div>
 						 	<div class="right po noti_right"><c:if test="${!empty loginInfo }"><a class="btn-fill" href="new.bo" style="font-size: 18px; width: 90px;">글쓰기</a></c:if></div>
+
 				 		</div>
 					 	<div class="searchBar">
 				 			<input type="text" name="keyword" value="${page.keyword}" placeholder="검색어입력" /> 
@@ -97,7 +103,7 @@ p { margin-bottom: 35px; }
 				<c:forEach items="${page.list }" var="vo">
 					<table class="_content">
 					 	<tr class="left divi">
-					 		<th class="w-px60 lineNo" rowspan="2" ><img src="${loginInfo.dbimgpath}" style="width: 50px; height: 50px; border-radius: 100px"></th>
+					 		<th class="w-px60 lineNo" rowspan="2" ><img src="${vo.id_image_path}" class="pic_size"></th>
 					 		<td class="lineNo">${vo.board_id}</td>
 					 	</tr>
 					 	<tr class="left divi">
@@ -107,7 +113,10 @@ p { margin-bottom: 35px; }
 					<table class="_content">
 					 	<tr valign="top" class="">
 							<td class="lineNo2 left c_detail ">
-							<span class="ellip">${fn:replace(vo.board_content, crlf, '</br>') }</span><div class="color" onclick="clickTrEvent(${vo.board_num})">···전체보기<div></td>
+								<span class="ellip">${fn:replace(vo.board_content, crlf, '</br>')}</span>
+								<div class="color" onclick="clickTrEvent(${vo.board_num})">···전체보기</div><br>
+								<div class="readcount">글이&nbsp;${vo.board_readcount}번 읽혔습니다. </div>
+							</td>
 					 	</tr>
 					</table>
 					<p></p>

@@ -27,20 +27,19 @@ public class BoardDAO implements BoardService {
 
 	@Override
 	public void board_read(int id) {
-		// TODO Auto-generated method stub
+		sql.update("board.mapper.read", id);
 
 	}
 
 	@Override
-	public void board_update(BoardVO vo) {
-		// TODO Auto-generated method stub
-
+	public int board_update(BoardVO vo) {
+		return sql.update("board.mapper.update", vo);
 	}
 
 	@Override
-	public void board_delete(int id) {
+	public int board_delete(int id) {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 	@Override

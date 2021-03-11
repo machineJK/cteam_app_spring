@@ -21,13 +21,13 @@ public class MatchDAO implements MatchService{
 	}
 
 	@Override
-	public List<TeacherVO> teacherList(int count) {
-		return sql.selectList("match.mapper.teacherList", count);
+	public List<TeacherVO> teacherList(ConditionVO vo) {
+		return sql.selectList("match.mapper.teacherList", vo);
 	}
 
 	@Override
-	public List<StudentVO> studentList(int count) {
-		return sql.selectList("match.mapper.studentList", count);
+	public List<StudentVO> studentList(ConditionVO vo) {
+		return sql.selectList("match.mapper.studentList", vo);
 	}
 
 }
