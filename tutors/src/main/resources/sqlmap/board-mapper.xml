@@ -30,11 +30,26 @@
 		select count(*) from board where board_content like '%'|| #{keyword, jdbcType=VARCHAR} ||'%'
 	</select>
 	
+	<sql id="search_where">
+		<if test=" search == 'content' ">
+		where board_content like '%' || #{keyword} || '%'
+		</if>
+		<if test=" search == 'writer' ">
+		where <include refid="writer_where"/>
+		</if>
+		<if test=" search=='all' ">
+		where board_content like '%' || #{keyword} || '%'
+		or <include refid="writer_where"/>
+		</if>
+	</sql>
+	<sql id='writer_where'>
+		board_nickname in (select nickname from member where nickname like '%' || #{keyword} || '%')
+	</sql>
 	
 	<select id="list" resultType="board.BoardVO">
 		select rownum no, n.*, (select name from member m
 								where m.id=n.board_id) name
-		from (select * from board) n
+		from (select * from board <include refid="search_where"/>) n
 		order by  board_notice desc, no desc
 	</select>
 

@@ -88,12 +88,19 @@ p { margin-bottom: 35px; }
 
 				 		</div>
 					 	<div class="searchBar">
-				 			<input type="text" name="keyword" value="${page.keyword}" placeholder="검색어입력" /> 
-				 			<!-- <span id="delete" style="display: none; color: gray; position: relative; right: 25px; cursor: pointer;"><i class="fas fa-times"></i></span> -->
-				 			<span id="btn_search" 
+					 	<ul>
+							<li><select name='search' class='w-px80'>
+									<option value='all' ${page.search eq 'all' ? 'selected' :''} >전체</option>
+									<option value='content' ${page.search eq 'content' ? 'selected' :''}>내용</option>
+									<option value='writer' ${page.search eq 'writer' ? 'selected' :''}>작성자</option>
+								</select>
+							</li>
+							<li><input type='text' name='keyword' value='${page.keyword}' placeholder="검색어입력" class='w-px300'/></li>
+							<li><span id="btn_search" 
 				 				onclick="$('form').submit()" 
 				 				style="width: 50px; color:#3982f7; position: relative; right: 25px; cursor: pointer;"><i class="fas fa-search"></i></span>
-				 				
+				 				</li>
+						</ul>
 					 	</div>
 				 	</div>
 				</div>
@@ -104,7 +111,7 @@ p { margin-bottom: 35px; }
 					<table class="_content">
 					 	<tr class="left divi">
 					 		<th class="w-px60 lineNo" rowspan="2" ><img src="${vo.id_image_path}" class="pic_size"></th>
-					 		<td class="lineNo">${vo.board_id}</td>
+					 		<td class="lineNo">${vo.board_nickname}</td>
 					 	</tr>
 					 	<tr class="left divi">
 					 		<td class="lineNo">${vo.board_write_date}</td>
