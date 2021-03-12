@@ -51,8 +51,8 @@
 </head>
 <body>
 <h2 id="myChatList">나의 채팅목록</h2>
-<input type="text" id="myId" value="${loginInfo.id}"/>
-<input type="text" id="myNick" value="${loginInfo.nickname}"/>
+<input type="hidden" id="myId" value="${loginInfo.id}"/>
+<input type="hidden" id="myNick" value="${loginInfo.name}"/>
 <br/><hr/>
 <div>
 <div id="box">
