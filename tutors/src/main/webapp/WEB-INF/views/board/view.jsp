@@ -42,12 +42,12 @@
 				<a class='btn-fill' href='list.bo?curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'>목록으로</a>
 					<c:if test="${!empty loginInfo }">
 						<c:if test="${loginInfo.id eq vo.board_id }">
-							<a class="btn-fill" onclick="$('form').submit();">수정하기</a>
+							<a class="btn-fill" onclick="$('#modify').submit();">수정하기</a>
 							<a class="btn-fill" onclick="if( confirm('정말 삭제?') ){ location='delete.bo?board_num=${vo.board_num}' }">삭제하기</a>
 						</c:if>
 					</c:if>
 				</div>
-				<form action="modify.bo">
+				<form id="modify" action="modify.bo">
 					<input type="hidden" name="id" value="${vo.board_num }"/>
 				</form>
 				
@@ -72,5 +72,39 @@
 			</table>
 		</div>
 	</div>
+	<form id="reply" action="reply.bo">
+	<table style='margin:20px auto; padding-top:20px; width:55%;' >
+		<tr id='comment_regist'>
+			<c:if test="${!empty loginInfo}">
+				<td class='w-px100'><span class='left'><strong>댓글작성</strong></span></td>
+				<td><textarea id='comment' name="board_content" style='margin-top:5px; width:96%; height:60px; resize:none'></textarea></td>
+				<td class='w-px100'><span class='right'><a class='btn-fill-s'  onclick="$('#reply').submit();">댓글등록</a></span>
+				<input type="hidden" name="board_id" value="${loginInfo.id }" />
+				<input type="hidden" name="board_nickname" value="${loginInfo.nickname }" />
+				<input type="hidden" name="board_image_path" value="${loginInfo.dbimgpath }" />
+				<input type="hidden" name="board_num" value="${vo.board_num }" /></td>
+			</c:if>
+		</tr>
+	 	<tr id='comment_list' style='text-align:left'>
+	 	<c:if test="${fn:length(cvo) > 0 }">
+	 		<c:forEach items="${cvo}" var="cvo">
+	 			<td>
+	 			<c:if test="${!empty cvo.board_image_path }">
+					<img class="file-img" src="${cvo.board_image_path }"/>
+				</c:if>
+	 			<span>${cvo.board_nickname}</span>
+	 			<span>${cvo.board_write_date}</span></td>
+	 			<td>${cvo.board_content}</td>
+	 			<td><a class="btn-fill" onclick="if( confirm('정말 삭제?') ){ location='deleteC.bo?board_num=${cvo.board_num}' }">삭제</a></td>
+	 		</c:forEach>
+	 	</c:if>
+	 	</tr>
+	</table>
+	</form>
+	<div id='popup-background' onclick="$('#popup, #popup-background').css('display', 'none');"></div>
+	<div id='popup'></div>
+	
+<script type="text/javascript" src="js/file_check.js"></script>	
+
 </body>
 </html>

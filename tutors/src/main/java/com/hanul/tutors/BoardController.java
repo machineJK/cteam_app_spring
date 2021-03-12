@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import board.BoardPage;
@@ -25,6 +26,31 @@ public class BoardController {
 	@Autowired private BoardServiceImpl service;
 	@Autowired private CommonService common;
 	
+	//답글저장처리 요청
+	@RequestMapping("/reply.bo")
+	public String reply_insert(BoardVO vo) {
+		service.board_comment_insert(vo);
+		return "redirect:list.bo?board_num=" + vo.getBoard_num();
+	}
+	
+	//댓글 삭제
+	@RequestMapping("/deleteC.bo")
+	public String deleteC(int board_num, HttpSession session, Model model) {
+		//첨부파일이 있는 글의 경우 물리적 서버의 영역에서 파일을 삭제
+		BoardVO vo = service.board_view(board_num);
+		if( vo.getBoard_image_name()!=null  ) {
+			File file = new File( session.getServletContext()
+									.getRealPath("resources")
+											+ "/" + vo.getBoard_image_path() );
+			if( file.exists() ) file.delete();
+		}
+		//선택한 글을 DB에서 삭제한 후 목록화면으로 연결
+		service.board_delete(board_num);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("url", "list.bo");
+		return "redirect:list.bo?board_num=" + vo.getBoard_num();
+	}
 	//글 삭제 요청
 	@RequestMapping("/delete.bo")
 	public String delete(int board_num, HttpSession session, Model model) {
@@ -98,8 +124,10 @@ public class BoardController {
 	@RequestMapping("/view.bo")
 	public String view(int id, Model model) {
 		service.board_read(id);
+		List<BoardVO> cvo = service.board_comment_list(id);
 		//선택한 글의 정보를 DB에서 조회해와 보기화면에 출력
 		model.addAttribute("vo", service.board_view(id));
+		model.addAttribute("cvo", cvo);
 		model.addAttribute("crlf", "\r\n");
 		model.addAttribute("lf", "\n");
 		model.addAttribute("page", page);

@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board.mapper">
 	
+	<select id="comment_list" resultType="board.BoardVO">
+		select * from board 
+		where qna_ref_num = #{id}
+		and qna_ref_num != board_num
+		order by board_notice, board_write_date desc
+	</select>
+	
+	<insert id="comment_insert">
+		insert into board(board_id,board_nickname, board_content,board_image_path,board_num,qna_ref_num)
+		values(#{board_id},#{board_nickname},#{board_content},#{board_image_path},seq_board.nextval, #{board_num})
+	</insert>
+
 	<delete id="delete">
 		delete from board where board_num = #{board_num}
 	</delete>
@@ -25,9 +37,9 @@
 	</select>
 	
 	<insert id="insert">
-		insert into board(board_num, board_id, board_content, board_nickname, board_image_path, board_image_name, id_image_path, board_notice)
+		insert into board(board_num, board_id, board_content, board_nickname, board_image_path, board_image_name, id_image_path, board_notice, qna_ref_num)
 		values (seq_board.nextval, #{board_id}, #{board_content}, #{board_nickname, jdbcType=VARCHAR}, #{board_image_path, jdbcType=VARCHAR}
-					, #{board_image_name, jdbcType=VARCHAR}, #{id_image_path, jdbcType=VARCHAR}, #{board_notice})
+					, #{board_image_name, jdbcType=VARCHAR}, #{id_image_path, jdbcType=VARCHAR}, #{board_notice}, seq_board.currval)
 	</insert>
 	
 	<select id="totalList" resultType="integer">
@@ -54,6 +66,7 @@
 		select rownum no, n.*, (select name from member m
 								where m.id=n.board_id) name
 		from (select * from board <include refid="search_where"/>) n
+		where board_num = qna_ref_num
 		order by  board_notice desc, no desc
 	</select>
 

@@ -46,4 +46,13 @@ public class BoardServiceImpl implements BoardService {
 		return dao.board_list(page);
 	}
 
+	@Override
+	public int board_comment_insert(BoardVO vo) {
+		return dao.board_comment_insert(vo);
+	}
+
+	public List<BoardVO> board_comment_list(int id) {
+		return dao.board_comment_list(id);		
+	}
+
 }

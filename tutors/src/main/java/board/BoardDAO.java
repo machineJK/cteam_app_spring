@@ -48,4 +48,15 @@ public class BoardDAO implements BoardService {
 		return page;
 	}
 
+	@Override
+	public int board_comment_insert(BoardVO vo) {
+		return sql.insert("board.mapper.comment_insert", vo);
+	}
+
+	@Override
+	public List<BoardVO> board_comment_list(int id) {
+		return sql.selectList("board.mapper.comment_list", id);
+	}
+
+
 }

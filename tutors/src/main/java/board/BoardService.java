@@ -10,4 +10,8 @@ public interface BoardService {
 	int board_update(BoardVO vo); //글 변경저장
 	int board_delete(int board_num); //글 삭제
 	BoardPage board_list(BoardPage page);
+	
+	int board_comment_insert(BoardVO vo); //댓글저장처리
+	List<BoardVO> board_comment_list(int id); //댓글 불러오기
+	
 }
