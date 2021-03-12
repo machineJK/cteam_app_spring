@@ -1,5 +1,6 @@
 package com.hanul.tutors;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,16 +25,58 @@ public class BoardController {
 	@Autowired private BoardServiceImpl service;
 	@Autowired private CommonService common;
 	
+	//글 삭제 요청
+	@RequestMapping("/delete.bo")
+	public String delete(int board_num, HttpSession session, Model model) {
+		//첨부파일이 있는 글의 경우 물리적 서버의 영역에서 파일을 삭제
+		BoardVO vo = service.board_view(board_num);
+		if( vo.getBoard_image_name()!=null  ) {
+			File file = new File( session.getServletContext()
+									.getRealPath("resources")
+											+ "/" + vo.getBoard_image_path() );
+			if( file.exists() ) file.delete();
+		}
+		//선택한 글을 DB에서 삭제한 후 목록화면으로 연결
+		service.board_delete(board_num);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("url", "list.bo");
+		return "board/redirect";
+//		return "redirect:list.bo";
+	}
 	
-	//방명록 수정 저장처리 요청
+	
+	//글 수정 저장처리 요청
 	@RequestMapping("/update.bo")
-	public String update(BoardVO vo, String attatch, HttpSession session, MultipartFile file, Model model) {
+	public String update(BoardVO vo, String attach, HttpSession session, MultipartFile file, Model model) {
 		BoardVO board = service.board_view(vo.getBoard_num());
-//		String uuid = session.getServletContext().getRealPath("resources") + "/" + board.getBoard_image_name();
-		
+		String uuid = session.getServletContext().getRealPath("resources")
+						+ "/" + board.getBoard_image_path();
 		//첨부파일 관련처리
-		
-		
+		if( ! file.isEmpty() ) { //첨부파일 있는 경우
+			vo.setBoard_image_name( file.getOriginalFilename() );
+			vo.setBoard_image_path( common.fileUpload(session, file, "board") );
+			
+			//원래 첨부된 파일이 있었다면 서버에서 삭제
+			if( board.getBoard_image_name() != null ) {
+				File f = new File( uuid );
+				if( f.exists() ) f.delete();
+			}
+		}else {
+			//원래 첨부된 파일을 삭제/ 원래부터 첨부파일이 없는 경우
+			if( attach.isEmpty() ) {
+				if( board.getBoard_image_name() != null ) {
+					File f = new File( uuid );
+					if( f.exists() ) f.delete();
+				}
+				
+			}else {
+				//원래 첨부된 파일을 그대로 사용하는 경우
+				vo.setBoard_image_name( board.getBoard_image_name() );
+				vo.setBoard_image_path( board.getBoard_image_path() );
+			}
+		}
+				
 		//화면에서 입력한 정보를 DB에 변경 저장한 후 view 로 연결
 		service.board_update(vo);
 		
@@ -73,15 +116,14 @@ public class BoardController {
 		}else {
 			vo.setBoard_notice(0);
 		}
+		
 		vo.setId_image_path(member.getDbimgpath());
 		vo.setBoard_nickname(member.getNickname());
-		vo.setBoard_image_path(vo.getBoard_image_path());
-		vo.setBoard_image_name(vo.getBoard_image_name());
-		//첨부파일이 있다면 데이터객체에 파일정보를 담는다.
-		if(!file.isEmpty()) {
-			vo.setBoard_image_name(file.getOriginalFilename());
-			vo.setBoard_image_path(common.fileUpload(session, file, "board"));
+		if( ! file.isEmpty() ) {
+			vo.setBoard_image_name( file.getOriginalFilename() );
+			vo.setBoard_image_path( common.fileUpload(session, file, "board") );
 		}
+		
 		//화면에서 입력한 정보를 저장한 후 목록화면으로 연결
 		service.board_insert(vo);
 		return "redirect:list.bo";
@@ -116,6 +158,8 @@ public class BoardController {
 		page.setCurPage(curPage);
 		page.setSearch(search);
 		page.setKeyword(keyword);
+		String zzg =  session.getServletContext().getRealPath("resources");
+		model.addAttribute("realpath", session.getServletContext().getRealPath("resources"));
 		model.addAttribute("page", service.board_list(page));
 		model.addAttribute("crlf", "\r\n");
 		model.addAttribute("lf", "\n");

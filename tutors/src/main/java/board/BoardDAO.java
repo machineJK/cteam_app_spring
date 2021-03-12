@@ -37,9 +37,8 @@ public class BoardDAO implements BoardService {
 	}
 
 	@Override
-	public int board_delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int board_delete(int board_num) {
+		return sql.delete("board.mapper.delete", board_num);
 	}
 
 	@Override

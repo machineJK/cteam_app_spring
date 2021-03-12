@@ -8,6 +8,6 @@ public interface BoardService {
 	BoardVO board_view(int id); //글 상세보기
 	void board_read(int id); //글 조회수 증가 처리
 	int board_update(BoardVO vo); //글 변경저장
-	int board_delete(int id); //글 삭제
+	int board_delete(int board_num); //글 삭제
 	BoardPage board_list(BoardPage page);
 }

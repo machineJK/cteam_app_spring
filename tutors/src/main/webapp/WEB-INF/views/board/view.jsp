@@ -39,10 +39,11 @@
 		<div class="top">
 			<!-- 로그인한 이용자가 글작성자 정보와 일치하면 수정/삭제하기 버튼 보임 -->
 				<div class="right noti_right">
+				<a class='btn-fill' href='list.bo?curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'>목록으로</a>
 					<c:if test="${!empty loginInfo }">
 						<c:if test="${loginInfo.id eq vo.board_id }">
 							<a class="btn-fill" onclick="$('form').submit();">수정하기</a>
-							<a class="btn-fill" href="new.bo">삭제하기</a>
+							<a class="btn-fill" onclick="if( confirm('정말 삭제?') ){ location='delete.bo?board_num=${vo.board_num}' }">삭제하기</a>
 						</c:if>
 					</c:if>
 				</div>
@@ -63,6 +64,9 @@
 			 	<tr valign="top" class="">
 					<td class="lineNo2 left c_detail ">
 						${fn:replace(vo.board_content, crlf, '</br>')}
+						<c:if test="${!empty vo.board_image_path }">
+							<img class="file-img" src="${vo.board_image_path }"/>
+						</c:if>
 					</td>
 			 	</tr>
 			</table>

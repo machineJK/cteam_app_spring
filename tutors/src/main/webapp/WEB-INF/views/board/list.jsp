@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-function clickTrEvent(id) {
-	$("[name=id]").val(id);
+function clickTrEvent(board_num) {
+	$("[name=id]").val(board_num);
 	$("form").attr("action", "view.bo");
 	$("form").submit();
 }
@@ -121,6 +121,9 @@ p { margin-bottom: 35px; }
 					 	<tr valign="top" class="">
 							<td class="lineNo2 left c_detail ">
 								<span class="ellip">${fn:replace(vo.board_content, crlf, '</br>')}</span>
+								<c:if test="${!empty vo.board_image_path }">
+									<img class="file-img" src="${vo.board_image_path }"/>
+								</c:if>
 								<div class="color" onclick="clickTrEvent(${vo.board_num})">···전체보기</div><br>
 								<div class="readcount">글이&nbsp;${vo.board_readcount}번 읽혔습니다. </div>
 							</td>

@@ -13,7 +13,7 @@ h3 {font-size: 20px}
 .file_img { width: 40px; cursor: pointer; text-align: right; margin: 5px;}
 #textarea { width: 100%; height: 300px; margin: 0 auto; padding: 10px; font-size: 20px; resize: none;
 border: 1px solid #ccc; outline: none;}
-.file_img { width: 40px; cursor: pointer; text-align: right; margin-right: 25px}
+.file_img { width: 40px; height:40px; cursor: pointer; text-align: right; margin-right: 25px}
 
 
 table { width: 100%; margin-top: 1px;}
@@ -30,10 +30,14 @@ table { width: 100%; margin-top: 1px;}
 			<h3>글쓰기</h3>
 			<div><hr></div>
 			<div class="right file">
+				
 				<label>
-					<input type="file" name="file" id="pic_file" style="display: none;"/>
-					<div><img src="images/camera.png" class="file_img" /></div>
+					<input type="file" name="file" id="attach-file"/>
+					<img src="images/camera.png" class="file_img" />
 				</label>
+				<span id='preview'></span>
+				<span id='file-name'></span>
+				<span id='delete-file'><i class="fas fa-times"></i></span>			
 			</div>
 			<table class="lineNo">
 				<tr valign="top" class="font_size">

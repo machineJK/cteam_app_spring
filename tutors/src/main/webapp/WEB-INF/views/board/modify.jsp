@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,7 @@ a.btn {
 			<div><hr></div>
 			<div class="right file">
 				<label>
-					<input type="file" name="file" id="pic_file" style="display: none;"/>
+					<input type="file" name="file" id="attach-file" style="display: none;"/>
 					<div><img src="images/pngwing.png" class="file_img" /></div>
 				</label>
 			</div>
@@ -44,14 +45,28 @@ a.btn {
 					<th class="lineNo">내용</th>
 					<td class="lineNo"><textarea id="textarea" name="board_content" title="내용">${vo.board_content }</textarea></td>
 				</tr>
+				<tr><th>첨부파일</th>
+					<td class='left'>
+						<span id='preview'></span>
+						<span id='file-name'>
+						<c:if test="${!empty vo.board_image_path }">
+							<img class="file-img" src="${vo.board_image_path }"/>
+							<span id='delete-file' style="display: inline;"><i class='fas fa-times'></i></span>
+						</c:if>
+						</span>
+						
+					</td>
+				</tr>
 			</table>
 			<input type="hidden" name="board_num" value="${vo.board_num }"/>
 			<input type="hidden" name="attach"/>
 		</div>
 	</form>
 	<div class="btnSet">
-		<a class="btn-fill" onclick="$('form').submit()">완료</a>
+		<a class="btn-fill" onclick="$('[name=attach]').val( $('#file-name').text() ); $('form').submit()">완료</a>
 		<a class="btn-empty" onclick="history.go(-1)">취소</a>
 	</div>
+<script type="text/javascript" src="js/file_check.js"></script>
+	
 </body>
 </html>

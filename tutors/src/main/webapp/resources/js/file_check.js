@@ -1,16 +1,37 @@
-	$("#pic-file").on("change",function(){
+	
+	//선택한 첨부파일이 이미지파일인 경우 미리보기되게
+	$('#attach-file').on('change',function(){
 		if(this.files[0]){
 			$("#file-name").text(this.files[0].name);
 			$("#delete-file").css("display","inline");
 		}
-	});
+		var attach = this.files[0];
+		if(attach){
+			if(isImage(attach.name)){
+				var img = '<img src="" class="file-img" id="preview-img"/>';
+				$('#preview').html(img);
+				
+				var reader = new FileReader();
+				reader.onload = function(e){
+					$('#preview-img').attr('src',e.target.result);
+				}
+				reader.readAsDataURL(attach);
+				
+			}else{
+				$('#preview').html('');
+			}
+		}
+	
+	}); 
+
+	
 	
 	$("#delete-file").on("click",function(){
 		$("#file-name").text("");
 		$("#attach-file").val("");
 		$("#delete-file").css("display","none");
 		//삭제시 이미지 미리보기태그가 있는 경우 미리보기 이미지 없애기
-		if($('#preview').length > 0) $('#preview').html('<img src="images/blank-profile-picture.png" width="100" height="100">'); 
+		if($('#preview').length > 0) $('#preview').html('<img src="images/blank-profile-picture.png" width="100" height="100">');
 	});
 
 
@@ -36,26 +57,4 @@
 		if(imgs.indexOf(ext) > -1) return true;
 		else return false;
 	}
-	
-	//선택한 첨부파일이 이미지파일인 경우 미리보기되게
-	$('#attach-file').on('change',function(){
-		var attach = this.files[0];
-		if(attach){
-			if(isImage(attach.name)){
-				var img = '<img src="" class="file-img" id="preview-img"/>';
-				$('#preview').html(img);
-				
-				var reader = new FileReader();
-				reader.onload = function(e){
-					$('#preview-img').attr('src',e.target.result);
-				}
-				reader.readAsDataURL(attach);
-				
-			}else{
-				$('#preview').html('');
-			}
-		}
-	
-	}); 
-
 	
