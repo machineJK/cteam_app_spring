@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <header style='border-bottom:1px solid #ccc; padding:15px 0; text-align:left'>
 <div>
-	<div style="margin-left:100px"><a href='<c:url value="/" />'><img src='images/weblogo.png' width="90px" height="90px"/><span style="font-size: 30px; font-weight: bold;"><img src='images/logo.png' width="210px" height="70px"/></span></a>
+	<div style="margin-left:5%;">
+	<a href='<c:url value="/" />'>
+	<img src='images/weblogo.png' width="90px" height="90px"/>
+	<span><img src='images/logo.png' width="210px" height="70px"/></span></a>
 		<ul id="nav-1">
 			<li class="slide1"></li>         
     		<li class="slide2"></li>
