@@ -30,19 +30,21 @@
 }
 #goMatch{
 	position: absolute;
-	top:80px;
-	right:80px;
-	font-size: 50px;
+	top:4px;
+	right:400px;
+	font-size: 25px;
 	text-align: center;
 }
 #nickname{
 	font-size: 35px;
+	padding-top: 10px;
 }
 #intro{
 	width: 1000px;
 	margin: 0 auto;
 	text-align: left;
 }
+.left{ padding-left: 25px; }
 
 </style>
 </head>

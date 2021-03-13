@@ -27,51 +27,7 @@ $('#delete').click(function(){
 <style type="text/css">
 h3 {font-size: 20px}
 
-#frame {margin: 0 auto; width: 60%;}
-.searchBar { width: 100%; margin-bottom: 50px;}
-input[name=keyword]{padding:3px; width:50%; height: 50px; border-radius: 10px; border: 1px solid #6875dd; padding: 5px; outline: none;}
-#noti {margin-bottom: 20px; margin-top: 20px; overflow: hidden;}
-.noti_left {float: left; line-height: 60px;}
-.noti_right {float: right; margin-right: 5px;}
 
-._content { 
-	width: 100%;
-	font-size: 18px;
-	border: 1px solid #ccc;
-}
-.lineNo {
- 	border: 0px;
- 	border-top: 1px;
- 	padding: 2px;
-    padding-right: 5px;
-}
-.lineNo2 {
-	border: 1px solid #ccc;
-	margin-bottom: 20px;
-}
-.c_detail {
-	height: 100px;
-	padding: 22px 30px;
-	width: 20%;
-	
-}
-p { margin-bottom: 35px; }
-
-.ellip{
-	overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 7; 
-    -webkit-box-orient: vertical;
-    line-height: 2.2em;
-	height: 10.6em;
-}
-.color{ color: #3982f7; margin-top: 10px; cursor: pointer; width: 15%}
-.pic_size { width: 100px; height:100px; margin: 0px; border-radius: 100px;}
-.readcount {
-	margin-bottom: 20px;
-	color: #9e9e9e;
-}
 
 </style>
 </head>
@@ -89,17 +45,18 @@ p { margin-bottom: 35px; }
 				 		</div>
 					 	<div class="searchBar">
 					 	<ul>
-							<li><select name='search' class='w-px80'>
+							<li><select name='search' class='w-px80 option'>
 									<option value='all' ${page.search eq 'all' ? 'selected' :''} >전체</option>
 									<option value='content' ${page.search eq 'content' ? 'selected' :''}>내용</option>
 									<option value='writer' ${page.search eq 'writer' ? 'selected' :''}>작성자</option>
 								</select>
 							</li>
-							<li><input type='text' name='keyword' value='${page.keyword}' placeholder="검색어입력" class='w-px300'/></li>
-							<li><span id="btn_search" 
+							<li><input type='text' name='keyword' value='${page.keyword}' placeholder="검색어입력"
+							style="height: 50px; font-family: 'S-CoreDream-4Regular'; font-size: 16px;
+							padding-left: 15px;"/> <span id="btn_search" 
 				 				onclick="$('form').submit()" 
-				 				style="width: 50px; color:#3982f7; position: relative; right: 25px; cursor: pointer;"><i class="fas fa-search"></i></span>
-				 				</li>
+				 				style="width: 50px; color:#3982f7; position: relative; right: 25px; cursor: pointer;">
+				 				<i class="fas fa-search" style="padding-left:-5px;"></i></span></li>
 						</ul>
 					 	</div>
 				 	</div>
@@ -111,10 +68,10 @@ p { margin-bottom: 35px; }
 					<table class="_content">
 					 	<tr class="left divi">
 					 		<th class="w-px60 lineNo" rowspan="2" ><img src="${vo.id_image_path}" class="pic_size"></th>
-					 		<td class="lineNo">${vo.board_nickname}</td>
+					 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_nickname}</td>
 					 	</tr>
 					 	<tr class="left divi">
-					 		<td class="lineNo">${vo.board_write_date}</td>
+					 		<td class="lineNo" style="padding-left: 20px; font-size: 14px;">${vo.board_write_date}</td>
 					 	</tr>
 					</table>
 					<table class="_content">

@@ -11,8 +11,6 @@ h3 {font-size: 20px}
 #frame {margin: 0 auto; width: 60%;}
 .file {margin-top: 40px;}
 .file_img { width: 40px; cursor: pointer; text-align: right; margin: 5px;}
-#textarea { width: 100%; height: 300px; margin: 0 auto; padding: 10px; font-size: 20px; resize: none;
-border: 1px solid #ccc; outline: none;}
 .file_img { width: 40px; height:40px; cursor: pointer; text-align: right; margin-right: 25px}
 
 

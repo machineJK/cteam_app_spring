@@ -15,6 +15,7 @@
 	grid-gap: 20px;
 	/* background-color: #2196F3; */
 	margin-top: 30px;
+	
 }
 
 .grid-container > div {
@@ -22,6 +23,9 @@
 	border: 1px solid black;
 	text-align: center;
 	font-size: 30px;
+	border-radius: 10px;
+	
+	
 }
 
 .grid-item{
@@ -61,10 +65,12 @@ ul{
   width:880px;
   height:240px;
   margin: 0 auto;
+  border: none;
+  border-radius: 10px;
 }
 .search-item {
   background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  border: none;
   padding: 20px;
   font-size: 29px;
   cursor: pointer;
@@ -215,8 +221,8 @@ ul{
 <body>
 
 	<div class="listOption">
-		<a class="btn-fill">선생님 찾기</a>
-		<a class="btn-empty">학생 찾기</a>
+		<a class="btn-fill" style="font-size: 18px;">선생님 찾기</a>
+		<a class="btn-empty" style="font-size: 18px;">학생 찾기</a>
 	</div>
 	
 	<div class="search-container">

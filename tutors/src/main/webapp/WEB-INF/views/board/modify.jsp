@@ -33,20 +33,20 @@ a.btn {
 	<form method="post" action="update.bo" enctype="multipart/form-data">
 		<div id="frame">
 		<h3>${vo.board_nickname }님의 글 </h3>
-			<div><hr></div>
+			
 			<div class="right file">
 				<label>
 					<input type="file" name="file" id="attach-file" style="display: none;"/>
-					<div><img src="images/pngwing.png" class="file_img" /></div>
+					<div><img src="images/camera.png" class="file_img" /></div>
 				</label>
 			</div>
 			<table class="lineNo">
 				<tr valign="top" class="font_size">
-					<th class="lineNo">내용</th>
-					<td class="lineNo"><textarea id="textarea" name="board_content" title="내용">${vo.board_content }</textarea></td>
+					<th class="lineNo w-pct10">내용</th>
+					<td class="lineNo"><textarea id="textarea" name="board_content" title="내용" class="font out">${vo.board_content }</textarea></td>
 				</tr>
-				<tr><th>첨부파일</th>
-					<td class='left'>
+				<tr><th class="w-pct15 lineNo2">첨부파일</th>
+					<td class='left lineNo2'>
 						<span id='preview'></span>
 						<span id='file-name'>
 						<c:if test="${!empty vo.board_image_path }">
@@ -63,8 +63,8 @@ a.btn {
 		</div>
 	</form>
 	<div class="btnSet">
-		<a class="btn-fill" onclick="$('[name=attach]').val( $('#file-name').text() ); $('form').submit()">완료</a>
-		<a class="btn-empty" onclick="history.go(-1)">취소</a>
+		<a class="btn-fill" style="font-size: 20px; width: 60px;" onclick="$('[name=attach]').val( $('#file-name').text() ); $('form').submit()">등록</a>
+		<a class="btn-empty" onclick="history.go(-1)" style="font-size: 20px; width: 80px;">취소</a>
 	</div>
 <script type="text/javascript" src="js/file_check.js"></script>
 	

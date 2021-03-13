@@ -12,6 +12,7 @@
     font-weight: normal;
     font-style: normal;
 }
+.font{ font-family: 'S-CoreDream-4Regular'; }
 
 body{
 	margin:0 auto;
@@ -198,6 +199,9 @@ html,
 body {
   height: 100%;
 }
+/*      과외매칭      */
+.listOption{ margin: 10px; }
+
 /* 채팅 */
 @font-face {
      font-family: 'DungGeunMo';
@@ -255,8 +259,64 @@ width: 10%; height: 7%; border-radius: 5px; outline: none; margin-top: 5px;}
 #myChatList{ text-align: center; position: absolute;
 top:18%; left: 15%; font-size: 35px; font-family: 'DungGeunMo'; color: white; }
 #teacherList, #studentList{ font-size: 25px; cursor: pointer; }
-
 .textContent{ height: 5%; }
+
+/*    게시판    */
+#frame {margin: 0 auto; width: 60%;}
+.searchBar { width: 100%; margin-bottom: 50px;}
+input[name=keyword]{padding:3px; width:50%; height: 50px; border-radius: 10px; border: 1px solid #6875dd; padding: 5px; outline: none;}
+#noti {margin-bottom: 20px; margin-top: 20px; overflow: hidden;}
+.noti_left {float: left; font-size: 20px; } 
+.noti_right {float: right; margin-right: 5px;}
+.option{ border: none; outline: none; border-radius: 5px; float: right;
+font-family: 'S-CoreDream-4Regular'; font-size: 16px;
+height: 40px; }
+
+._content { 
+	width: 100%;
+	font-size: 18px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+}
+.lineNo {
+ 	border: 0px;
+ 	border-top: 1px;
+ 	padding: 2px;
+    padding-right: 5px;
+}
+.lineNo2 {
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+}
+.c_detail {
+	height: 100px;
+	padding: 22px 30px;
+	width: 20%;
+	
+}
+p { margin-bottom: 35px; }
+
+.ellip{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7; 
+    -webkit-box-orient: vertical;
+    line-height: 2.2em;
+	height: 10.6em;
+}
+.color{ color: #3982f7; margin-top: 10px; cursor: pointer; width: 15%}
+.pic_size { width: 100px; height:100px; margin: 5px; border-radius: 100px;}
+.readcount {
+	margin-bottom: 20px;
+	color: #9e9e9e;
+}
+.modifybtn{ font-size: 18px; width: 60px; }
+.out { outline: none; }
+#textarea { width: 100%; height: 300px; margin: 0 auto; padding: 10px; font-size: 20px; resize: none;
+border: 1px solid #ccc; outline: none; font-family:'S-CoreDream-4Regular'; }
+.replyline{ background-color: #F8F8F8; border-radius: 10px; }
+
 /*     프로필 화면       */
 .prot{
 	border: none;
@@ -354,6 +414,8 @@ top:18%; left: 15%; font-size: 35px; font-family: 'DungGeunMo'; color: white; }
 .w-pct40 { width:40% }
 .w-pct30 { width:30% }
 .w-pct20 { width:20% }
+.w-pct15 { width:15% }
+.w-pct10 { width:10% }
 .w-px300 { width:300px; }
 .w-px200 { width:200px; }
 .w-px250 { width:200px; }
