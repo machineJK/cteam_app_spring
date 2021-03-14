@@ -82,24 +82,29 @@
 				<td class='w-pct15 lineNo'><span class='right'><a class='btn-fill' style="font-size: 16px; width: 90px; margin-right: 3px;" onclick="$('#reply').submit();">댓글등록</a></span>
 				<input type="hidden" name="board_id" value="${loginInfo.id }" />
 				<input type="hidden" name="board_nickname" value="${loginInfo.nickname }" />
-				<input type="hidden" name="board_image_path" value="${loginInfo.dbimgpath }" />
+				<input type="hidden" name="id_image_path" value="${loginInfo.dbimgpath }" />
 				<input type="hidden" name="board_num" value="${vo.board_num }" /></td>
 			</c:if>
 		</tr>
-	 	<tr id='comment_list' style='text-align:left'>
 	 	<c:if test="${fn:length(cvo) > 0 }">
+	 	<tr class='comment_list' style='text-align:left'>
 	 		<c:forEach items="${cvo}" var="cvo">
 	 			<td class="lineNo w-pct15">
-	 			<c:if test="${!empty cvo.board_image_path }">
-					<img class="pic_size" src="${cvo.board_image_path }"/>
+	 			<c:if test="${!empty cvo.id_image_path }">
+					<img class="pic_size" src="${cvo.id_image_path }"/>
 				</c:if>
 	 			<span style="padding-left:25px; font-size: 20px;">${cvo.board_nickname}</span>
 	 			<span style="padding-left: 18px; font-size: 12px; color: #959595;">${cvo.board_write_date}</span></td>
 	 			<td class="lineNo" style="padding-left: 20px;">${cvo.board_content}</td>
-	 			<td class="lineNo"><a style="color: #959595;" onclick="if( confirm('정말 삭제?') ){ location='deleteC.bo?board_num=${cvo.board_num}' }">삭제</a></td>
+	 			
+	 			<td class="lineNo">
+		 			<c:if test="${loginInfo.id eq cvo.board_id}">
+		 				<a style="color: #959595;" onclick="if( confirm('정말 삭제?') ){ location='deleteC.bo?board_num=${cvo.board_num}' }">삭제</a>
+		 			</c:if>
+	 			</td>
 	 		</c:forEach>
-	 	</c:if>
 	 	</tr>
+	 	</c:if>
 	</table>
 	</form>
 	<div id='popup-background' onclick="$('#popup, #popup-background').css('display', 'none');"></div>

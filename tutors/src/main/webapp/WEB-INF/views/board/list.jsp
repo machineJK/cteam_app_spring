@@ -67,7 +67,10 @@ h3 {font-size: 20px}
 				<c:forEach items="${page.list }" var="vo">
 					<table class="_content">
 					 	<tr class="left divi">
-					 		<th class="w-px60 lineNo" rowspan="2" ><img src="${vo.id_image_path}" class="pic_size"></th>
+					 		<th class="w-px60 lineNo" rowspan="2" >
+					 		<c:if test="${!empty vo.board_image_path }">
+								<img class="file-img" style="" src="${vo.board_image_path }" class="pic_size" />
+							</c:if></th>
 					 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_nickname}</td>
 					 	</tr>
 					 	<tr class="left divi">
@@ -91,6 +94,9 @@ h3 {font-size: 20px}
 				</c:forEach>
 			</div>
 		</table>
+		<div class='btnSet'>
+			<jsp:include page="/WEB-INF/views/include/page.jsp"/>
+		</div>
 		<form action="list.bo" method="post">
 			<input type="hidden" name="id"/>
 			<input type="hidden" name="curPage" value="1"/>

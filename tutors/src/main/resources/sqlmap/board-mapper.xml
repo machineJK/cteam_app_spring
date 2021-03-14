@@ -10,8 +10,8 @@
 	</select>
 	
 	<insert id="comment_insert">
-		insert into board(board_id,board_nickname, board_content,board_image_path,board_num,qna_ref_num)
-		values(#{board_id},#{board_nickname},#{board_content},#{board_image_path},seq_board.nextval, #{board_num})
+		insert into board(board_id,board_nickname, board_content,id_image_path,board_num,qna_ref_num)
+		values(#{board_id},#{board_nickname},#{board_content},#{id_image_path},seq_board.nextval, #{board_num})
 	</insert>
 
 	<delete id="delete">
@@ -63,11 +63,15 @@
 	</sql>
 	
 	<select id="list" resultType="board.BoardVO">
-		select rownum no, n.*, (select name from member m
-								where m.id=n.board_id) name
-		from (select * from board <include refid="search_where"/>) n
-		where board_num = qna_ref_num
-		order by  board_notice desc, no desc
-	</select>
+		select b.*
+		from (
+		select rownum no, b.*
+		from (select * 
+		from board 
+		where board_num = qna_ref_num 
+		order by board_notice desc, board_num asc) b ) b
+		where no between #{beginList} and #{endList}
+		order by board_notice desc, board_num desc, no desc
+  	</select>
 
 </mapper>
