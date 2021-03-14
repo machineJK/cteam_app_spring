@@ -14,7 +14,7 @@
   grid-template-columns: 250px 800px;
   grid-template-rows: 250px;
   grid-gap: 20px;
-  width: 1000px;
+  width: 700px;
   margin: 0 auto;
   position: relative;
   margin-bottom: 30px;
@@ -32,19 +32,21 @@
 }
 #goMatch,#goModify{
 	position: absolute;
-	top:80px;
-	right:80px;
-	font-size: 50px;
+	top:4px;
+	left:500px;
+	font-size: 25px;
 	text-align: center;
 }
 #nickname{
 	font-size: 35px;
+	font-weight: bold;
 }
 #intro{
 	width: 1000px;
 	margin: 0 auto;
 	text-align: left;
 }
+.left{ padding-left: 25px; padding-top: 10px; font-size: 25px; }
 
 </style>
 </head>
