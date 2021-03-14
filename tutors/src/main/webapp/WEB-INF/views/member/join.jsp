@@ -88,8 +88,8 @@
     <span class="label"></span>여
   	</label>
 	</td> -->
-	<td><label><input type='radio' name='gender' value='남' checked />남</label>
-		<label><input type='radio' name='gender' value='여' />여</label>
+	<td><label><input type='radio' name='gender' value='남자' checked />남자</label>
+		<label><input type='radio' name='gender' value='여자' />여자</label>
 	</td>
 </tr>
 <tr>
@@ -140,6 +140,8 @@
 </form>
 <a class="btn-fill" onclick="go_join()" style="font-size: 20px; width: 110px;">가입하기</a>
 <a class="btn-empty" href="<c:url value='/' />" style="font-size: 20px;">취소</a>
+<br>
+<a class="btn-empty" href="tsjoinmenu">테스트용</a>
 
 <!-- datepicker jQueryUI -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

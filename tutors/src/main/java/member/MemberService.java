@@ -2,18 +2,25 @@ package member;
 
 import java.util.HashMap;
 
+import match.StudentVO;
+import match.TeacherVO;
+
 
 
 public interface MemberService {
-	boolean member_join(MemberVO vo); //È¸¿ø°¡ÀÔ½Ã È¸¿øÁ¤º¸ ÀúÀå
-	MemberVO member_login(HashMap<String, Object> map); //È¸¿ø ·Î±×ÀÎÃ³¸®
-	boolean member_delete(String id); //È¸¿øÅ»Åð
-	boolean member_id_check(String id); //È¸¿ø°¡ÀÔ½Ã ¾ÆÀÌµðÁßº¹È®ÀÎ
-	boolean member_social_id(MemberVO vo);//¼Ò¼È·Î±×ÀÎ½Ã È¸¿øÀÇ Á¸Àç¿©ºÎ
-	boolean member_social_insert(MemberVO vo);//¼Ò¼È·Î±×ÀÎ½Ã È¸¿ø ½Å±ÔÀúÀå
-	boolean member_social_update(MemberVO vo);//¼Ò¼È·Î±×ÀÎ½Ã È¸¿ø º¯°æÀúÀå
-	MemberVO member_select(String id); //³» ÇÁ·ÎÇÊ º¯°æÆäÀÌÁö
-	void member_update(MemberVO vo); //È¸¿øÁ¤º¸ º¯°æ ÀúÀå
+	boolean member_join(MemberVO vo); //È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	MemberVO member_login(HashMap<String, Object> map); //È¸ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
+	boolean member_delete(String id); //È¸ï¿½ï¿½Å»ï¿½ï¿½
+	boolean member_id_check(String id); //È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ßºï¿½È®ï¿½ï¿½
+	boolean member_social_id(MemberVO vo);//ï¿½Ò¼È·Î±ï¿½ï¿½Î½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ç¿©ï¿½ï¿½
+	boolean member_social_insert(MemberVO vo);//ï¿½Ò¼È·Î±ï¿½ï¿½Î½ï¿½ È¸ï¿½ï¿½ ï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean member_social_update(MemberVO vo);//ï¿½Ò¼È·Î±ï¿½ï¿½Î½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	MemberVO member_select(String id); //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	void member_update(MemberVO vo); //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	void teacher_join(TeacherVO vo);
+	void student_join(StudentVO vo);
+	boolean teacher_check(String id);
+	boolean student_check(String id);
 //	void updateUimage(String id, String dbimgpath);
 //	void modifyUimage(String uid, String uimage);
 

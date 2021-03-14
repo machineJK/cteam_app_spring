@@ -15,8 +15,8 @@
 		                <include refid="teacher_pay_where" />
 		                order by teacher_date desc) t)
 		<![CDATA[
-			where num <= ((#{count}+1) * 16) 
-				and num > (16 * #{count} )
+			where num <= ((#{count}+1) * 8) 
+				and num > (8 * #{count} )
 		]]>
 	</select>
 	
@@ -63,8 +63,8 @@
 				  		<include refid="student_subject_where" />
 				  		order by student_date desc) s)
 		<![CDATA[ 
-			where num <= ((#{count}+1) * 16) 
-				and num > (16 * #{count} )
+			where num <= ((#{count}+1) * 8) 
+				and num > (8 * #{count} )
 		]]> 
 	</select>
 	
@@ -99,5 +99,29 @@
 	<select id="studentDetail" resultType="match.StudentVO">
 		select * from student where student_id = #{student_id}
 	</select>
+	
+	<select id="teacher_check" resultType="Integer">
+		select count(*) from teacher where teacher_id = #{id} 
+	</select>
+	
+	<select id="student_check" resultType="Integer">
+		select count(*) from student where student_id = #{id} 
+	</select>
+	
+	<update id="teacherUpdate">
+		update teacher set 
+		teacher_univ = #{teacher_univ},teacher_major = #{teacher_major},
+		teacher_univnum = #{teacher_univnum},teacher_subject = #{teacher_subject},
+		teacher_worktime = #{teacher_worktime},teacher_pay = #{teacher_pay},
+		teacher_intro = #{teacher_intro}, teacher_date = sysdate
+		where teacher_id = #{teacher_id}
+	</update>
+	
+	<update id="studentUpdate">
+		update student set
+		student_grade = #{student_grade}, student_subject = #{student_subject},
+		student_intro = #{student_intro}, student_date = sysdate
+		where student_id = #{student_id}
+	</update>
 	
 </mapper>

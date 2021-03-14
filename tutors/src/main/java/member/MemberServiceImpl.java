@@ -5,6 +5,9 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import match.StudentVO;
+import match.TeacherVO;
+
 @Service
 public class MemberServiceImpl implements MemberService{
 	@Autowired private MemberDAO dao;
@@ -55,6 +58,30 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public boolean member_social_update(MemberVO vo) {
 		return dao.member_social_update(vo);
+	}
+
+
+	@Override
+	public void teacher_join(TeacherVO vo) {
+		dao.teacher_join(vo);
+	}
+
+
+	@Override
+	public void student_join(StudentVO vo) {
+		dao.student_join(vo);
+	}
+
+
+	@Override
+	public boolean teacher_check(String id) {
+		return dao.teacher_check(id);
+	}
+
+
+	@Override
+	public boolean student_check(String id) {
+		return dao.student_check(id);
 	}
 
 

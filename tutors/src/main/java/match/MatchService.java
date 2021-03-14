@@ -7,5 +7,8 @@ public interface MatchService {
 	List<StudentVO> studentList(ConditionVO vo);
 	TeacherVO teacherDetail(String teacher_id);
 	StudentVO studentDetail(String student_id);
-	
+	boolean isTeacher(String id);
+	boolean isStudent(String id);
+	void teacherUpdate(TeacherVO vo);
+	void studentUpdate(StudentVO vo);
 }

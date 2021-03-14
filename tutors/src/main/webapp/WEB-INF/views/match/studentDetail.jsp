@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +31,7 @@
   grid-template-rows: 50px auto;
   grid-gap: 10px;
 }
-#goMatch{
+#goMatch,#goModify{
 	position: absolute;
 	top:4px;
 	left:500px;
@@ -65,11 +67,36 @@
 		<div class="left"> <i class="fas fa-book"></i> ${studentDetail.student_subject }</div>
 		<div class="left"> <i class="fas fa-map-marker-alt"></i> ${studentDetail.student_addr }</div>
 	</div>
-	<a href="#" class="btn-fill" id="goMatch">상담하기</a><!-- 채팅방으로 이동하게 수정 -->
+	<c:if test="${loginInfo.id ne studentDetail.student_id }">
+	<a href="#" class="btn-fill" id="goMatch" onclick="goChat('${loginInfo.id}');">상담하기</a>
+	</c:if>
+	<c:if test="${loginInfo.id eq studentDetail.student_id }">
+	<a href="studentModify.match?student_id=${studentDetail.student_id }" class="btn-fill" id="goModify">수정하기</a>
+	</c:if>
 </div>
 <div id="intro">
-	${studentDetail.student_intro }
+	${fn: replace(  fn:replace(studentDetail.student_intro, crlf, '<br>'), lf, '<br>') }
 </div>
-	
+
+<script type="text/javascript">
+function goChat(my_id){
+	$.ajax({
+		url: "teacher_check",
+		data : {id : my_id},
+		success : function(response){
+			if(response == true){
+				//alert("선생 아이디가 있어요! 채팅 가능 합니다!");
+				/* 여기서 메세지 보내기 */
+			}else{
+				alert("먼저 선생으로 등록해주세요!");
+				location.href = "list.match";
+			}
+		},
+		error : function(req,text){
+			alert(text + " : " + req.status);
+		}
+	});
+}
+</script>
 </body>
 </html>

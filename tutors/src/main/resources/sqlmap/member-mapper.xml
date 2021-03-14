@@ -45,6 +45,29 @@
 		values(#{id},#{pw},#{nickname},#{name},#{gender},#{birth},#{email},#{addr1},#{addr2},#{dbimgpath, jdbcType=VARCHAR})
 	</insert>
 	
+	<insert id="teacher">
+		insert into teacher(teacher_id, teacher_univ, teacher_major, teacher_univnum, teacher_subject,
+					 teacher_worktime, teacher_pay, teacher_intro, teacher_image_path, teacher_nickname, teacher_addr)
+		values (#{teacher_id},#{teacher_univ},#{teacher_major},#{teacher_univnum},#{teacher_subject},
+				#{teacher_worktime},#{teacher_pay},#{teacher_intro},#{teacher_image_path},#{teacher_nickname},#{teacher_addr})
+	</insert>
+	
+	<insert id="student">
+		insert into student(student_id,student_subject,student_grade,student_intro,student_image_path,
+						student_addr,student_nickname)
+		values(#{student_id},#{student_subject},#{student_grade},#{student_intro},#{student_image_path},
+				#{student_addr},#{student_nickname})
+	</insert>
+	
+	<select id="teacher_check" resultType="Integer">
+		select count(*) from teacher where teacher_id = #{id} 
+	</select>
+	
+	<select id="student_check" resultType="Integer">
+		select count(*) from student where student_id = #{id} 
+	</select>
+	
+	
 	<!-- <insert id="insert">
 	insert into notice ( id, root, title, content, writer, filename, filepath )
 	values ( seq_notice.nextval, seq_notice.currval, #{title}, #{content}, #{writer}

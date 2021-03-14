@@ -11,7 +11,7 @@
 	display: grid;
 	width: 1268px;
 	margin: 0 auto;
-	grid-template-columns: 300px 300px 300px 300px;
+	grid-template-columns: 302px 302px 302px 302px;
 	grid-gap: 20px;
 	/* background-color: #2196F3; */
 	margin-top: 30px;
@@ -21,10 +21,8 @@
 .grid-container > div {
 	background-color: rgba(255, 255, 255, 0.6);
 	text-align: center;
-	font-size: 30px;
+	font-size: 28px;
 	border-radius: 10px;
-	
-	
 }
 
 .grid-item{
@@ -54,15 +52,17 @@ ul{
 .chked{
 	background-color: #CCCCFF;
 }
+.student-join{display:none;}
+#noitem{display: none; height: 200px; line-height: 200px;}
 
 .search-container {
   display: grid;
   grid-template-columns: 220px 220px 220px 220px;
-  grid-template-rows:120px 120px;
+  grid-template-rows:120px;
   background-color: #2196F3;
   text-align: center;
   width:880px;
-  height:240px;
+  height:120px;
   margin: 0 auto;
   border: none;
   border-radius: 10px;
@@ -215,14 +215,47 @@ ul{
 .addr1{
 	display: inline-block;
 }
+.teacher-join, .student-join{  
+    border: 1px solid gray;
+    font-size: 20px;
+    border-radius: 30px;
+    padding: 10px;
+    width: 200px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.teacher-join:hover, .student-join:hover{
+	background-color: gold;
+}
 </style>
 </head>
 <body>
-
 	<div class="listOption">
 		<a class="btn-fill" style="font-size: 18px;">선생님 찾기</a>
 		<a class="btn-empty" style="font-size: 18px;">학생 찾기</a>
 	</div>
+	
+	<c:if test="${!empty loginInfo}">
+		<c:choose>
+			<c:when test="${isTeacher eq true and isStudent eq true}">
+				<div class="teacher-join" onclick="location.href='teacherDetail.match?teacher_id=${loginInfo.id}';">내 선생님 프로필</div>
+				<div class="student-join" onclick="location.href='studentDetail.match?student_id=${loginInfo.id}';">내 학생 프로필</div>		
+			</c:when>
+			<c:when test="${isTeacher eq true and isStudent eq false}">
+				<div class="teacher-join" onclick="location.href='teacherDetail.match?teacher_id=${loginInfo.id}';">내 선생님 프로필</div>
+				<div class="student-join" onclick="location.href='studentjoin';">학생 등록하기</div>		
+			</c:when>
+			<c:when test="${isTeacher eq false and isStudent eq true}">
+				<div class="teacher-join" onclick="location.href='teacherjoin';">선생님 등록하기</div>
+				<div class="student-join" onclick="location.href='studentDetail.match?student_id=${loginInfo.id}';">내 학생 프로필</div>	
+			</c:when>
+			<c:when test="${isTeacher eq false and isStudent eq false}">
+				<div class="teacher-join" onclick="location.href='teacherjoin';">선생님 등록하기</div>
+				<div class="student-join" onclick="location.href='studentjoin';">학생 등록하기</div>		
+			</c:when>
+		</c:choose>
+	</c:if>
 	
 	<div class="search-container">
 		<div class="search-item" id="addr"><i class="fas fa-map-marker-alt"></i><br><span>지역</span></div>
@@ -230,7 +263,6 @@ ul{
 		<div class="search-item" id="subject"><i class="fas fa-book"></i><br><span>과목</span></div>  
 		<div class="search-item" id="pay"><i class="fas fa-comment-dollar"></i><br><span>수업료</span></div>
 <!-- 		<div class="search-item" id="univ"><i class="fas fa-university"></i><br><span>대학교</span></div>
-		<div class="search-item" id="major"><i class="fas fa-book-open"></i><br><span>전공</span></div>  
 		<div class="search-item" id="univNum"><i class="far fa-address-card"></i><br><span>학번</span></div> -->
 	</div>
 	
@@ -285,9 +317,6 @@ ul{
 <!-- 	<div id="univ_modal" class="modal">
 		대학교
 	</div>
-	<div id="major_modal" class="modal">
-		전공
-	</div>
 	<div id="univNum_modal" class="modal">
 		학번
 	</div> -->
@@ -295,13 +324,33 @@ ul{
 	<!-- 데이터 나열하는 곳 -->
 	<div class="grid-container"></div>
 
+	<div id="noitem">검색 결과가 없습니다!</div>
 	<div class="loading"><img src="images/loading.gif" /></div>
 	<div id="more"><a onclick="more_list();" class="btn-empty">더보기</a></div>
+	
+	<div class="dummy" style="display:none;">${loginInfo.id }</div>
+	<!-- <br><button onclick="moreSchools();">학교 더보기</button> -->
 	
 <script type="text/javascript">
 var addr1 = "", addr2 = "", gender = "", subject="", pay="";
 var cnt = 0;
 teacher_list();
+
+/* function moreSchools(){
+	alert("시작 합니다")
+	$.ajax({
+		url: "schools",
+		success: function(response){
+			for(let i = 0; i < response.content.length; i++){
+				console.log(response.content[i].schoolName + "[" + response.content[i].campusName + "]"); //ICT폴리텍대학[본교]
+			}
+		},
+		error: function(req,text){
+			alert(text + " : " + req.status);
+		}
+
+	});
+} */
 
 
 //모달창 생성 및 없애기
@@ -426,8 +475,14 @@ $(".listOption > a").click(function(){
 	var idx = $(this).index();
 	if(idx == 0){
 		teacher_list();
+		$(".search-container").css("width","880px");
+		$(".teacher-join").css("display","block");
+		$(".student-join").css("display","none");
 	}else{
 		student_list();
+		$(".search-container").css("width","660px");
+		$(".teacher-join").css("display","none");
+		$(".student-join").css("display","block");
 	} 
 });
 
@@ -442,21 +497,28 @@ function teacher_list(){
 			//$(".grid-container").html("");
 			//console.log("teacher_list : " + cnt);
 			//console.log(response);
-			for(let i=0; i< response.length; i++){
-				var tag = "";
-				tag += "<div class='grid-item' onclick='teacherDetail(\"" + response[i].teacher_id + "\")'>"
-					+  "<div><img src='" + response[i].teacher_image_path + "' width='300' height='200'/></div>"
-					+  "<div>" + response[i].teacher_nickname + "</div>"
-					+  "<div class='left'> <i class='fas fa-graduation-cap'></i> " + response[i].teacher_univ + " " + response[i].teacher_major + "</div>"
-					+  "<div class='left'> <i class='far fa-address-card'></i> " + response[i].teacher_univnum + "</div>"
-					+  "<div class='left'> <i class='fas fa-book'></i> " + response[i].teacher_subject + "</div>"
-					+  "<div class='left'> <i class='fas fa-comment-dollar'></i> " + response[i].teacher_worktime + "주 " + response[i].teacher_pay + "만원</div>"
-					+  "<div class='left'> <i class='fas fa-map-marker-alt'></i> " + response[i].teacher_addr + "</div>"
-					+  "</div>";
-				$(".grid-container").append(tag);
+			if(response.length != 0){
+				for(let i=0; i< response.length; i++){
+					var tag = "";
+					tag += "<div class='grid-item' onclick='teacherDetail(\"" + response[i].teacher_id + "\")'>"
+						+  "<div><img src='" + response[i].teacher_image_path + "' width='300' height='200'/></div>"
+						+  "<div>" + response[i].teacher_nickname + "</div>"
+						+  "<div class='left'> <i class='fas fa-graduation-cap'></i> " + response[i].teacher_univ + " " + response[i].teacher_major + "</div>"
+						+  "<div class='left'> <i class='far fa-address-card'></i> " + response[i].teacher_univnum.substring(2,4) + "학번</div>"
+						+  "<div class='left'> <i class='fas fa-book'></i> " + response[i].teacher_subject + "</div>"
+						+  "<div class='left'> <i class='fas fa-comment-dollar'></i> " + response[i].teacher_worktime + "주 " + response[i].teacher_pay + "만원</div>"
+						+  "<div class='left'> <i class='fas fa-map-marker-alt'></i> " + response[i].teacher_addr + "</div>"
+						+  "</div>";
+					$(".grid-container").append(tag);
+				}
+				$(".loading").attr("display","none");
+				$("#noitem").css("display","none");
+				cnt += 1;
+			}else{
+				$("#noitem").css("display","block");
 			}
-			$(".loading").attr("display","none");
-			cnt += 1;
+
+			
 		},
 		error:function(req,text){
 			alert(text + " : " + req.status);
@@ -474,20 +536,24 @@ function student_list(){
 		success:function(response){
 			//console.log(response.length);
 			//$(".grid-container").html("");
-			for(let i=0; i< response.length; i++){
-				var tag = "";
-				tag += "<div class='grid-item' onclick='studentDetail(\"" + response[i].student_id + "\")'>"
-					+  "<div><img src='" + response[i].student_image_path + "' width='300' height='200'/></div>"
-					+  "<div>" + response[i].student_nickname + "</div>"
-					+  "<div class='left'> <i class='fas fa-graduation-cap'></i> " + response[i].student_grade + "</div>"
-					+  "<div class='left'> <i class='fas fa-book'></i> " + response[i].student_subject + "</div>"
-					+  "<div class='left'> <i class='fas fa-map-marker-alt'></i> " + response[i].student_addr + "</div>"
-					+  "</div>";
-				$(".grid-container").append(tag);
+			if(response.length != 0){
+				for(let i=0; i< response.length; i++){
+					var tag = "";
+					tag += "<div class='grid-item' onclick='studentDetail(\"" + response[i].student_id + "\")'>"
+						+  "<div><img src='" + response[i].student_image_path + "' width='300' height='200'/></div>"
+						+  "<div>" + response[i].student_nickname + "</div>"
+						+  "<div class='left'> <i class='fas fa-graduation-cap'></i> " + response[i].student_grade + "</div>"
+						+  "<div class='left'> <i class='fas fa-book'></i> " + response[i].student_subject + "</div>"
+						+  "<div class='left'> <i class='fas fa-map-marker-alt'></i> " + response[i].student_addr + "</div>"
+						+  "</div>";
+					$(".grid-container").append(tag);
+				}
+				$(".loading").attr("display","none");
+				$("#noitem").css("display","none");
+				cnt += 1;
+			}else{
+				$("#noitem").css("display","block");
 			}
-			$(".loading").attr("display","none");
-			cnt += 1;
-			
 		},
 		error:function(req,text){
 			alert(text + " : " + req.status);
@@ -497,12 +563,22 @@ function student_list(){
 
 //선생 상세정보 페이지 이동
 function teacherDetail(teacher_id){
-	location.href = "teacherDetail.match?teacher_id=" + teacher_id;
+	if($(".dummy").text() != ""){
+		location.href = "teacherDetail.match?teacher_id=" + teacher_id;
+	}else{
+		alert("먼저 로그인을 해주세요!");
+		location.href = "login";
+	}
 }
 
 //학생 상세정보 페이지 이동
 function studentDetail(student_id){
-	location.href = "studentDetail.match?student_id=" + student_id;
+	if($(".dummy").text() != ""){
+		location.href = "studentDetail.match?student_id=" + student_id;
+	}else{
+		alert("먼저 로그인을 해주세요!");
+		location.href = "login";
+	}
 }
 
 //도시가 어디냐에 따라 구군이 달라짐(배경색, chked 클래스 toggle)
