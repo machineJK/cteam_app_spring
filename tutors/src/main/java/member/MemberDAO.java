@@ -90,6 +90,18 @@ public class MemberDAO implements MemberService{
 	}
 
 
+	@Override
+	public void updateKakaoNaverExtra(MemberVO vo) {
+		sql.update("member.mapper.updateKakaoNaverExtra", vo);
+	}
+
+
+	@Override
+	public boolean isKakaoNaverPw(MemberVO vo) {
+		return sql.selectOne("member.mapper.isKakaoNaverPw", vo) == null ? false : true;
+	}
+
+
 	
 
 }

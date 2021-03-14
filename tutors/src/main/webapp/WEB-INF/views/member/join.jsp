@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 <style type="text/css">
 	table tr td { text-align:center; }
-	.valid, .invalid{font-size: 13px; font-weight: bold;}
-	.valid{color:green;}
-	.invalid{color:red;}
 	table, table tr td, table tr th {border:none;}
 	input{border: none; width: 400px; font-size: 16px; height: 40px; border-radius: 15px; outline: none;}
 	input:hover{background-color: #CCCCCC;}
@@ -141,7 +138,6 @@
 <a class="btn-fill" onclick="go_join()" style="font-size: 20px; width: 110px;">가입하기</a>
 <a class="btn-empty" href="<c:url value='/' />" style="font-size: 20px;">취소</a>
 <br>
-<a class="btn-empty" href="tsjoinmenu">테스트용</a>
 
 <!-- datepicker jQueryUI -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

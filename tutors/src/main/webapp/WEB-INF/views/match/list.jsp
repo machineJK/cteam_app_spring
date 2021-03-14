@@ -245,15 +245,15 @@ ul{
 			</c:when>
 			<c:when test="${isTeacher eq true and isStudent eq false}">
 				<div class="teacher-join" onclick="location.href='teacherDetail.match?teacher_id=${loginInfo.id}';">내 선생님 프로필</div>
-				<div class="student-join" onclick="location.href='studentjoin';">학생 등록하기</div>		
+				<div class="student-join" onclick="studentjoin('${loginInfo.id}','${loginInfo.kakao_login }','${loginInfo.naver_login }');">학생 등록하기</div>		
 			</c:when>
 			<c:when test="${isTeacher eq false and isStudent eq true}">
-				<div class="teacher-join" onclick="location.href='teacherjoin';">선생님 등록하기</div>
+				<div class="teacher-join" onclick="teacherjoin('${loginInfo.id}','${loginInfo.kakao_login }','${loginInfo.naver_login }');">선생님 등록하기</div>
 				<div class="student-join" onclick="location.href='studentDetail.match?student_id=${loginInfo.id}';">내 학생 프로필</div>	
 			</c:when>
 			<c:when test="${isTeacher eq false and isStudent eq false}">
-				<div class="teacher-join" onclick="location.href='teacherjoin';">선생님 등록하기</div>
-				<div class="student-join" onclick="location.href='studentjoin';">학생 등록하기</div>		
+				<div class="teacher-join" onclick="teacherjoin('${loginInfo.id}','${loginInfo.kakao_login }','${loginInfo.naver_login }');">선생님 등록하기</div>
+				<div class="student-join" onclick="studentjoin('${loginInfo.id}','${loginInfo.kakao_login }','${loginInfo.naver_login }');">학생 등록하기</div>		
 			</c:when>
 		</c:choose>
 	</c:if>
@@ -337,21 +337,48 @@ var addr1 = "", addr2 = "", gender = "", subject="", pay="";
 var cnt = 0;
 teacher_list();
 
-/* function moreSchools(){
-	alert("시작 합니다")
-	$.ajax({
-		url: "schools",
-		success: function(response){
-			for(let i = 0; i < response.content.length; i++){
-				console.log(response.content[i].schoolName + "[" + response.content[i].campusName + "]"); //ICT폴리텍대학[본교]
+function teacherjoin(teacher_id,kakao_login,naver_login){
+	if(kakao_login == '0' && naver_login == '0'){
+		location.href="teacherjoin";
+	}else{
+		$.ajax({
+			url:"isKakaoNaverPw",
+			data: {id: teacher_id, kakao_login: kakao_login, naver_login: naver_login},
+			success : function(response){
+				if(response == false){
+					location.href = "kakaoNaverExtra";
+				}else{
+					location.href = "teacherjoin";
+				}
+			},
+			response : function(req,text){
+				alert(text + " : " + req.status);
 			}
-		},
-		error: function(req,text){
-			alert(text + " : " + req.status);
-		}
+		});
+	}
+	
+}
 
-	});
-} */
+function studentjoin(student_id,kakao_login,naver_login){
+	if(kakao_login == '0' && naver_login == '0'){
+		location.href="studentjoin";
+	}else{
+		$.ajax({
+			url:"isKakaoNaverPw",
+			data: {id: student_id, kakao_login: kakao_login, naver_login: naver_login},
+			success : function(response){
+				if(response == false){
+					location.href = "kakaoNaverExtra";
+				}else{
+					location.href = "studentjoin";
+				}
+			},
+			response : function(req,text){
+				alert(text + " : " + req.status);
+			}
+		});
+	}	
+}
 
 
 //모달창 생성 및 없애기

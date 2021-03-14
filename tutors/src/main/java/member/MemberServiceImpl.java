@@ -85,6 +85,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public void updateKakaoNaverExtra(MemberVO vo) {
+		dao.updateKakaoNaverExtra(vo);
+	}
+
+
+	@Override
+	public boolean isKakaoNaverPw(MemberVO vo) {
+		return dao.isKakaoNaverPw(vo);
+	}
+
+
 	
 
 }

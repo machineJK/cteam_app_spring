@@ -75,7 +75,7 @@ public class MemberController {
 	
 	@RequestMapping("/kakaocallback")
 	public String kakaocallback(HttpSession session, String state
-								, String code, String error) {
+								, String code, String error, Model model) {
 		if( !state.equals( (String)session.getAttribute("state") ) 
 				|| error!=null )
 			return "redirect:/";
@@ -115,7 +115,7 @@ public class MemberController {
 			vo.setEmail(json.getString("email"));
 			String gender 
 			= json.has("gender") ? json.getString("gender") : "male";
-			vo.setGender( gender.equals("female") ? "占쏙옙占쏙옙" : "占쏙옙占쏙옙" );
+			vo.setGender( gender.equals("female") ? "여자" : "남자" );
 		
 			json = json.getJSONObject("profile");
 			vo.setNickname( json.getString("nickname") );
@@ -124,12 +124,31 @@ public class MemberController {
 			
 			if( service.member_social_id(vo) ) { //id占쏙옙 占쏙옙占쏙옙占쏙옙 update
 				service.member_social_update(vo);
+				session.setAttribute("loginInfo", vo);
 			}else { //id占쏙옙 占쏙옙占쏙옙占쏙옙 insert
 				service.member_social_insert(vo);
+				//model.addAttribute("needInfo", vo);
+				session.setAttribute("loginInfo", vo);
+				
 			}
-			session.setAttribute("loginInfo", vo);
 		}
 		return "redirect:/";
+		
+	}
+	
+	@RequestMapping("/kakaoNaverExtra")
+	public String kakaoExtra() {
+		return "member/kakaoNaverExtra";
+	}
+	
+	@RequestMapping("/insertKakaoNaverExtra")
+	public String insertKakao(MemberVO vo, MultipartFile file, HttpSession session) {
+		if( ! file.isEmpty() ) {
+			vo.setDbimgpath( common.fileUpload(session, file, "notice") );
+		}
+		service.updateKakaoNaverExtra(vo);
+		session.setAttribute("loginInfo", service.member_select(vo.getId()));
+		return "redirect:/teacherjoin";
 	}
 	
 	//占쏙옙占싱뱄옙占싸깍옙占싸울옙청
@@ -152,8 +171,6 @@ public class MemberController {
 		
 		return "redirect:" + url.toString();
 	}
-	
-	
 	
 	@RequestMapping("/navercallback")
 	public String navercallback(HttpSession session, String state
@@ -192,7 +209,7 @@ public class MemberController {
 			vo.setNaver_login("1");
 			vo.setId(json.getString("id"));
 			vo.setGender( json.has("gender") 
-					    ? ( json.getString("gender").equals("F") ? "占쏙옙占쏙옙" :"占쏙옙占쏙옙" ) 
+					    ? ( json.getString("gender").equals("F") ? "여자" :"남자" ) 
 					    : "占쏙옙占쏙옙");
 			vo.setName(json.has("name") ? json.getString("name") : json.getString("nickname"));
 			vo.setNickname(json.has("nickname") ? json.getString("nickname") : json.getString("name"));
@@ -343,6 +360,11 @@ public class MemberController {
 		service.member_update(vo);
 		return "redirect:profile.pro?id=" + vo.getId();
 		
+	}
+	
+	@ResponseBody @RequestMapping("/isKakaoNaverPw")
+	public boolean isKakaoNaverPw(MemberVO vo) {
+		return service.isKakaoNaverPw(vo);
 	}
 		
 		

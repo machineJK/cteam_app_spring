@@ -67,6 +67,18 @@
 		select count(*) from student where student_id = #{id} 
 	</select>
 	
+	<update id="updateKakaoNaverExtra">
+		update member
+		set pw = #{pw}, birth = #{birth}, addr1 = #{addr1}, addr2 = #{addr2}, dbimgpath = #{dbimgpath, jdbcType=VARCHAR}
+		where id = #{id} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
+	</update>
+	
+	<select id="isKakaoNaverPw" resultType="String">
+		select pw 
+		from member 
+		where id = #{id} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
+	</select>
+	
 	
 	<!-- <insert id="insert">
 	insert into notice ( id, root, title, content, writer, filename, filepath )

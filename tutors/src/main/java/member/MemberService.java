@@ -21,6 +21,8 @@ public interface MemberService {
 	void student_join(StudentVO vo);
 	boolean teacher_check(String id);
 	boolean student_check(String id);
+	boolean isKakaoNaverPw(MemberVO vo);
+	void updateKakaoNaverExtra(MemberVO vo);
 //	void updateUimage(String id, String dbimgpath);
 //	void modifyUimage(String uid, String uimage);
 

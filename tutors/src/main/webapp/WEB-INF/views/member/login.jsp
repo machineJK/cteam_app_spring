@@ -37,7 +37,9 @@ input:focus{background-color: #FFFFFF;  outline: none;}
 		<br>
 		<!-- <hr style='width:69%; margin:25px auto'> -->
 		<a class='social' href='naverlogin'><img src='images/naver_login.png' alt='네이버로그인' /></a><br>
-		<a class='social' href='kakaologin'><img src='images/kakao_login.png' alt='카카오로그인' /></a>
+		<a class='social' href='kakaologin'><img src='images/kakao_login.png' alt='카카오로그인' /></a><br><br>
+		
+		<div>아직 회원이 아니세요? <a href="member" style="color:blue;">회원가입</a> 하기</div>
 		
 	</div>
 </div>
