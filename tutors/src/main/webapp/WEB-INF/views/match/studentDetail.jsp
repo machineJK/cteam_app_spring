@@ -12,15 +12,16 @@
   grid-template-columns: 250px 800px;
   grid-template-rows: 250px;
   grid-gap: 20px;
-  width: 700px;
+  width: 1000px;
   margin: 0 auto;
   position: relative;
   margin-bottom: 30px;
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
   text-align: left;
+  border-radius: 10px;
 }
 .grid-content {
   display: grid;
@@ -32,7 +33,7 @@
 	position: absolute;
 	top:4px;
 	left:500px;
-	font-size: 25px;
+	font-size: 23px;
 	text-align: center;
 }
 #nickname{
@@ -40,9 +41,15 @@
 	font-weight: bold;
 }
 #intro{
-	width: 1000px;
+	width: 900px;
+	height: 300px;
 	margin: 0 auto;
 	text-align: left;
+	background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 25px;
+    font-size: 20px;
+    padding-left: 30px;
 }
 .left{ padding-left: 25px; padding-top: 10px; font-size: 25px; }
 
