@@ -28,17 +28,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class CommonService {
 	
-	//ÆÄÀÏ´Ù¿î·Îµå
+	//ï¿½ï¿½ï¿½Ï´Ù¿ï¿½Îµï¿½
 	public File fileDownload(String filename, String filepath, 
 					HttpSession session, HttpServletResponse response) {
-		//´Ù¿î·ÎµåÇÒ ÆÄÀÏ°´Ã¼¸¦ »ý¼º
+		//ï¿½Ù¿ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		File file = new File(session.getServletContext().getRealPath("resources") + "/" + filepath);
-		//content type ÁöÁ¤À» À§ÇÑ ÆÄÀÏÀÇ MIMEtype
+		//content type ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ MIMEtype
 		String mime = session.getServletContext().getMimeType(filename);
 		
 		response.setContentType(mime);
 		try {
-			//ÇÑ±Û ¾È±úÁü, ºó°ø°£ÀÌ +·Î Ãâ·ÂµÇ´Â°É °ø¹éÀ¸·Î Ã³¸®(¾Æ½ºÅ°ÄÚµå Âü°í)
+			//ï¿½Ñ±ï¿½ ï¿½È±ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ +ï¿½ï¿½ ï¿½ï¿½ÂµÇ´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½(ï¿½Æ½ï¿½Å°ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½)
 			filename = URLEncoder.encode(filename, "utf-8").replaceAll(
 					"\\+", "%20");
 			response.setHeader("content-disposition", "attachment; filename=" + filename);
@@ -57,7 +57,7 @@ public class CommonService {
 	
 	
 	public String fileUpload(HttpSession session, MultipartFile file, String category) {
-		//¼­¹öÀÇ ¹°¸®ÀûÀ§Ä¡(getServletContext±îÁö´Â iot±îÁö ³ª¿È)
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡(getServletContextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ iotï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		String resources = session.getServletContext().getRealPath("resources");
 		// D://Study_Spring/.../iot/resources/upload/notice/2021/02/03/abc.txt
 		String upload =  resources + "/upload";		//upload
@@ -82,16 +82,16 @@ public class CommonService {
 	
 	
 	
-	//ÀÌ¸ÞÀÏ Àü¼Û ¸Þ¼Òµå
+	//ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	public void sendEmail(HttpSession session, String email, String name) {
 		
-		//±âº» ÀÌ¸ÞÀÏÀü¼Û
+		//ï¿½âº» ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//sendSimple(email,name);
 		
-		//ÆÄÀÏÃ·ºÎÀÌ¸ÞÀÏÀü¼Û
+		//ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//sendAttach(session,email,name);
 		
-		//HTML ÇüÅÂ ÀÌ¸ÞÀÏ Àü¼Û
+		//HTML ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		sendHtml(session,email,name);
 	}
 	
@@ -105,20 +105,20 @@ public class CommonService {
 		mail.setSSLOnConnect(true);
 		
 		try {
-			mail.setFrom("wai95@naver.com","ÇÑ¿ï°ü¸®ÀÚ");
+			mail.setFrom("wai95@naver.com","ï¿½Ñ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			mail.addTo(email,name);
 			
-			mail.setSubject("È¸¿ø°¡ÀÔÃàÇÏ -HTML");
+			mail.setSubject("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -HTML");
 			StringBuffer msg = new StringBuffer();
 			msg.append("<html>");
 			msg.append("<body>");
 			msg.append("<a href='https://humoruniv.com'><img src='https://upload2.inven.co.kr/upload/2019/06/06/bbs/i15412326664.jpg'/></a>");
 			msg.append("<hr>");
-			msg.append("<h2>ÇÑ¿ï IoT°úÁ¤ °¡ÀÔ ÃàÇÏ</h2>");
-			msg.append("<p>È¸¿ø°¡ÀÔÀ» ÃàÇÏÇÕ´Ï´Ù</p>");
-			msg.append("<p>Ã·ºÎµÈ ÆÄÀÏÀ» ²À È®ÀÎÇØ ÁÖ½Ã°í</p>");
-			msg.append("<p>ÇÁ·ÎÁ§Æ®±îÁö ¸¶¹«¸®ÇØ¼­</p>");
-			msg.append("<p>Ãë¾÷¿¡ ¼º°øÇÏ½Ã±â ¹Ù¶ø´Ï´Ù</p>");
+			msg.append("<h2>ï¿½Ñ¿ï¿½ IoTï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</h2>");
+			msg.append("<p>È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½</p>");
+			msg.append("<p>Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½Ã°ï¿½</p>");
+			msg.append("<p>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½</p>");
+			msg.append("<p>ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã±ï¿½ ï¿½Ù¶ï¿½ï¿½Ï´ï¿½</p>");
 			msg.append("</body>");
 			msg.append("</html>");
 			mail.setHtmlMsg(msg.toString());
@@ -146,18 +146,18 @@ public class CommonService {
 		mail.setSSLOnConnect(true);
 		
 		try {
-			mail.setFrom("wai95@naver.com","ÇÑ¿ï°ü¸®ÀÚ");
+			mail.setFrom("wai95@naver.com","ï¿½Ñ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			mail.addTo(email,name);
-			mail.setSubject("È¸¿ø°¡ÀÔÃàÇÏ ¸Þ¼¼Áö - Ã·ºÎÆÄÀÏÈ®ÀÎ¿ä¸Á");
-			mail.setMsg("È¸¿ø°¡ÀÔÀ» ÃàÇÏÇÕ´Ï´Ù. Ã·ºÎµÈ ÆÄÀÏÀ» È®ÀÎÇÏ¼¼¿ä!");
-			//ÆÄÀÏÃ·ºÎÇÏ±â
+			mail.setSubject("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ - Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È®ï¿½Î¿ï¿½ï¿½");
+			mail.setMsg("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½!");
+			//ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½Ï±ï¿½
 			EmailAttachment file = new EmailAttachment();
-			//Àý´ë°æ·Î
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			file.setPath("C:\\Users\\hanul\\Desktop\\images\\isely.jpg");
 			mail.attach(file);
 			
 			file = new EmailAttachment();
-			//»ó´ë°æ·Î
+			//ï¿½ï¿½ï¿½ï¿½ï¿½
 			file.setPath(session.getServletContext().getRealPath("resources") 
 					 + "/images/kakao_login");
 			mail.attach(file);
@@ -178,26 +178,26 @@ public class CommonService {
 	private void sendSimple(String email, String name) {
 		SimpleEmail mail = new SimpleEmail();
 		
-		mail.setHostName("smtp.naver.com");	//¸ÞÀÏ¼­¹öÁöÁ¤
+		mail.setHostName("smtp.naver.com");	//ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mail.setCharset("utf-8");
 		mail.setDebug(true);
 		
-		//·Î±×ÀÎÇÏ±â À§ÇÑ ¾ÆÀÌµð/ºñ¹ø ÁöÁ¤
+		//ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		mail.setAuthentication("wai95", "5c2d1596c3");
 		mail.setSSLOnConnect(true);
 		
 		try {
-			//¸ÞÀÏ ¼Û½ÅÀÎ ÁöÁ¤
-			mail.setFrom("wai95@naver.com","ÇÑ¿ï°ü¸®ÀÚ");
-			//¸ÞÀÏ ¼ö½ÅÀÎ ÁöÁ¤
-			mail.addTo(email,name);	//¿©·¯ ¸í¿¡°Ô º¸³¾¶§´Â addTo ¸¸ Ãß°¡
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½Û½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			mail.setFrom("wai95@naver.com","ï¿½Ñ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			mail.addTo(email,name);	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ addTo ï¿½ï¿½ ï¿½ß°ï¿½
 			
-			//¸ÞÀÏÁ¦¸ñ
-			mail.setSubject("È¸¿ø°¡ÀÔÃàÇÏ ¸Þ¼¼Áö");
-			mail.setMsg("È¸¿ø°¡ÀÔÀ» ÃàÇÏÇÕ´Ï´Ù! ÀÌÁ¦ºÎÅÍ ´ç½ÅÀº ÇÑ¿ïÈ¸»çÀÇ ÁÖÁÖ°¡ µÇ¾úÀ¸¸ç ¿­½ÉÈ÷ ÀÏÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù"
-					+ "\n\n ±Ç±Ø¸ð");
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			mail.setSubject("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½");
+			mail.setMsg("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½! ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¿ï¿½È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö½Ã±ï¿½ ï¿½Ù¶ï¿½ï¿½Ï´ï¿½"
+					+ "\n\n ï¿½Ç±Ø¸ï¿½");
 			
-			//¸ÞÀÏ Àü¼Û¹öÆ° Å¬¸¯
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¹ï¿½Æ° Å¬ï¿½ï¿½
 			mail.send();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -267,6 +267,8 @@ public class CommonService {
 		return result;
 	}
 	
+	
+	
 	public String json_list(String list) {
 		JSONObject json = null;
 		
@@ -279,6 +281,16 @@ public class CommonService {
 		json.put("count", count);
 		return json.toString();
 	}
+	
+	/*
+	 * public String json_list_school(String list) { JSONObject json = null;
+	 * 
+	 * json = new JSONObject(list); json = (JSONObject) json.get("dataSearch");
+	 * //json = (JSONObject) json.get("content"); //int count =
+	 * json.getInt("totalCount"); //json = (JSONObject) json.get("items");
+	 * 
+	 * //json.put("count", count); return json.toString(); }
+	 */
 	
 	
 	

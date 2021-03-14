@@ -6,6 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import match.StudentVO;
+import match.TeacherVO;
+
 
 
 @Repository
@@ -60,6 +63,30 @@ public class MemberDAO implements MemberService{
 	@Override
 	public boolean member_social_update(MemberVO vo) {
 		return sql.update("member.mapper.social_update", vo) > 0 ? true : false;
+	}
+
+
+	@Override
+	public void teacher_join(TeacherVO vo) {
+		sql.insert("member.mapper.teacher", vo);
+	}
+
+
+	@Override
+	public void student_join(StudentVO vo) {
+		sql.insert("member.mapper.student", vo);
+	}
+
+
+	@Override
+	public boolean teacher_check(String id) {
+		return (Integer)sql.selectOne("member.mapper.teacher_check",id) == 0 ? false : true;
+	}
+
+
+	@Override
+	public boolean student_check(String id) {
+		return (Integer)sql.selectOne("member.mapper.student_check",id) == 0 ? false : true;
 	}
 
 

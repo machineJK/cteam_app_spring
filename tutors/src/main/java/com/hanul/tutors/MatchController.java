@@ -11,19 +11,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import common.CommonService;
 import match.ConditionVO;
 import match.MatchServiceImpl;
 import match.StudentVO;
 import match.TeacherVO;
+import member.MemberVO;
 
 @Controller
 public class MatchController {
 	@Autowired private MatchServiceImpl service;
+	@Autowired private CommonService common;
+	
+	/*
+	 * @ResponseBody @RequestMapping(value = "/schools", produces =
+	 * "application/json; charset = utf-8") public Object schools() { StringBuffer
+	 * url = new StringBuffer(
+	 * "http://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=6e83295f45bcc45b5b6133c50b0f281f&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list&thisPage=1&perPage=500"
+	 * ); return common.json_list_school(common.requestAPI(url)); }
+	 */
 	
 	@RequestMapping("/list.match")
 	public String match(HttpSession session, Model model) {
-		session.setAttribute("category","match");	
-		
+		session.setAttribute("category","match");
+		if(session.getAttribute("loginInfo") != null) {
+			MemberVO vo = (MemberVO) session.getAttribute("loginInfo");
+			String id = vo.getId();
+			model.addAttribute("isTeacher", service.isTeacher(id));
+			model.addAttribute("isStudent", service.isStudent(id));
+		}
 		return "match/list";
 	}
 
@@ -34,28 +50,52 @@ public class MatchController {
 	
 	@ResponseBody @RequestMapping("/data/student_list")
 	public List<StudentVO> student_list(ConditionVO vo) {
-		System.out.println(vo.getCount());
-		System.out.println("addr1 : " + vo.getAddr1());
-		System.out.println("addr2 : " + vo.getAddr2());
-		System.out.println("gender : " + vo.getGender());
-		System.out.println("subject : " + vo.getSubject());
 		return service.studentList(vo);
 	}
 	
 	@RequestMapping("/teacherDetail.match")
 	public String teacherDetail(String teacher_id, Model model) {
 		model.addAttribute("teacherDetail", service.teacherDetail(teacher_id));
-		
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
 		return "match/teacherDetail";
 	}
 	
 	@RequestMapping("/studentDetail.match")
 	public String studentDetail(String student_id, Model model) {
 		model.addAttribute("studentDetail", service.studentDetail(student_id));
-		
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");		
 		return "match/studentDetail";
 	}
 	
+	@RequestMapping("/teacherModify.match")
+	public String teacherModify(String teacher_id,Model model) {
+		model.addAttribute("vo", service.teacherDetail(teacher_id));
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");	
+		return "match/teacherModify";
+	}
+	
+	@RequestMapping("/teacherUpdate.match")
+	public String teacherUpdate(TeacherVO vo) {
+		service.teacherUpdate(vo);
+		return "redirect:/teacherDetail.match?teacher_id=" + vo.getTeacher_id();
+	}
+
+	@RequestMapping("/studentModify.match")
+	public String studentModify(String student_id,Model model) {
+		model.addAttribute("vo", service.studentDetail(student_id));
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");			
+		return "match/studentModify";
+	}
+	
+	@RequestMapping("/studentUpdate.match")
+	public String studentUpdate(StudentVO vo) {
+		service.studentUpdate(vo);
+		return "redirect:/studentDetail.match?student_id=" + vo.getStudent_id();
+	}
 	
 	
 }

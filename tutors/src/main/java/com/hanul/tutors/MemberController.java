@@ -23,6 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import board.BoardVO;
 import common.CommonService;
+import match.StudentVO;
+import match.TeacherVO;
 import member.MemberServiceImpl;
 import member.MemberVO;
 
@@ -256,7 +258,46 @@ public class MemberController {
 		}
 		//��硫댁���� ���ν�� ��蹂대�� DB�� ���ν�� �� 紐⑸���硫댁�쇰� �곌껐
 		service.member_join(vo);
+		//return "redirect:/";
 		return "redirect:/";
+	}
+	
+	//선생님 등록하기 창 이동
+	@RequestMapping("/teacherjoin")
+	public String teacherjoin() {
+		return "member/teacherjoin";
+	}
+
+	//학생 등록하기 창 이동
+	@RequestMapping("/studentjoin")
+	public String studentjoin() {
+		return "member/studentjoin";
+	}
+	
+	//선생 가입
+	@RequestMapping("/teacher_join")
+	public String teacher_join(TeacherVO vo) {
+		service.teacher_join(vo);
+		return "redirect:/list.match";
+	}
+
+	//학생 가입
+	@RequestMapping("/student_join")
+	public String student_join(StudentVO vo) {
+		service.student_join(vo);
+		return "redirect:/list.match";
+	}
+	
+	//선생 가입 중복 확인
+	@ResponseBody @RequestMapping("/teacher_check")
+	public boolean teacher_check(String id) {
+		return service.teacher_check(id);
+	}
+	
+	//학생 가입 중복 확인
+	@ResponseBody @RequestMapping("/student_check")
+	public boolean student_check(String id) {
+		return service.student_check(id);
 	}
 	
 	//占쏙옙占쏙옙占쏙옙占쏙옙 화占쏙옙 占쏙옙청

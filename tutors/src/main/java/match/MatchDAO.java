@@ -30,4 +30,28 @@ public class MatchDAO implements MatchService{
 		return sql.selectList("match.mapper.studentList", vo);
 	}
 
+	@Override
+	public boolean isTeacher(String id) {
+		return (Integer)sql.selectOne("match.mapper.teacher_check", id) > 0 ? true : false;
+	}
+
+	@Override
+	public boolean isStudent(String id) {
+		return (Integer)sql.selectOne("match.mapper.student_check", id) > 0 ? true : false;
+	}
+
+	@Override
+	public void teacherUpdate(TeacherVO vo) {
+		sql.update("match.mapper.teacherUpdate", vo);
+	}
+
+	@Override
+	public void studentUpdate(StudentVO vo) {
+		sql.update("match.mapper.studentUpdate",vo);
+	}
+
+
+
+
+
 }

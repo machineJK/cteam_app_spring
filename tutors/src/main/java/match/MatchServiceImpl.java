@@ -29,4 +29,28 @@ public class MatchServiceImpl implements MatchService{
 		return dao.studentList(vo);
 	}
 
+	@Override
+	public boolean isTeacher(String id) {
+		return dao.isTeacher(id);
+	}
+
+	@Override
+	public boolean isStudent(String id) {
+		return dao.isStudent(id);
+	}
+
+	@Override
+	public void teacherUpdate(TeacherVO vo) {
+		dao.teacherUpdate(vo);
+	}
+
+	@Override
+	public void studentUpdate(StudentVO vo) {
+		dao.studentUpdate(vo);
+	}
+
+
+
+
+
 }
