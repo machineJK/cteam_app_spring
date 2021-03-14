@@ -21,8 +21,9 @@
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
   text-align: left;
+  border-radius: 10px;
 }
 .grid-content {
   display: grid;
@@ -34,7 +35,7 @@
 	position: absolute;
 	top:4px;
 	right:400px;
-	font-size: 25px;
+	font-size: 23px;
 	text-align: center;
 }
 #nickname{
@@ -42,9 +43,15 @@
 	padding-top: 10px;
 }
 #intro{
-	width: 1000px;
+	width: 900px;
+	height: 300px;
 	margin: 0 auto;
 	text-align: left;
+	background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 25px;
+    padding-left: 30px;
+    font-size: 20px;
 }
 .left{ padding-left: 25px; }
 

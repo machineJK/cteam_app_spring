@@ -171,6 +171,7 @@ public class BoardController {
 	//글 목록 조회
 	@RequestMapping("/list.bo")
 	public String list(Model model, HttpSession session,
+						@RequestParam(defaultValue="10") int pageList,
 						@RequestParam(defaultValue = "1") int curPage, String search, String keyword) {
 		
 //		//관리자계정 임시저장 -----
@@ -186,7 +187,7 @@ public class BoardController {
 		page.setCurPage(curPage);
 		page.setSearch(search);
 		page.setKeyword(keyword);
-		String zzg =  session.getServletContext().getRealPath("resources");
+		page.setPageList(pageList);
 		model.addAttribute("realpath", session.getServletContext().getRealPath("resources"));
 		model.addAttribute("page", service.board_list(page));
 		model.addAttribute("crlf", "\r\n");
