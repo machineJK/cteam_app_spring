@@ -11,7 +11,7 @@
 	width: 380px; height:340px; 
 	margin-left: -200px; margin-top:-300px;   
 }
-#login { width:100%; border:1px solid #ccc; }
+#login { width:100%; border:1px solid #DCDCDC; border-radius: 10px; }
 #userid, #userpw { width:70%; height:45px; border-radius: 10px; outline: none;
 	padding:5px 10%; margin-bottom:10px; border: 1px solid #ccc; font-size: 16px; }
 .social img { width:254px; height:45px; margin: 5px; }
@@ -29,8 +29,8 @@ input:focus{background-color: #FFFFFF;  outline: none;}
 	</div>
 	<div id='login' style="padding:30px;">
 		<form method="post" action=''>
-			<input type='text' id='userid' placeholder="아이디" /><br>
-			<input type='password' id='userpw' placeholder="비밀번호"
+			<input type='text' id='userid' placeholder="아이디" class="font" /><br>
+			<input type='password' id='userpw' placeholder="비밀번호" class="font"
 					onkeypress="if( event.keyCode==13 ) go_login()"	 />
 			<a onclick='go_login()' class='btn-fill' style='display:block; font-size: 20px; width: 110px;'>로그인</a>
 		</form>
