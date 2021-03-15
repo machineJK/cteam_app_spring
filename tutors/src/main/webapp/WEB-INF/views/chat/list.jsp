@@ -13,13 +13,13 @@
 	margin: 0px;
 }
 #chat{
-width: 90%;
+width: 85%;
 height: 100%;
 background-image: url("images/pc.png");
 background-size: 100% 100%;
 background-repeat: no-repeat;
 background-position: center;
-position: relative; top: 50%; left:1%;
+position: relative; top: 50%; left:5%;
  }
 
 </style>

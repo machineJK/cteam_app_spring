@@ -21,8 +21,11 @@
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1.5px solid #DCDCDC;
   text-align: left;
+  border-radius: 10px;
+ 
 }
 .grid-content {
   display: grid;
@@ -39,10 +42,13 @@
 }
 #nickname{
 	font-size: 35px;
+	font-weight: bold;
 }
+.left{ padding-left: 25px; padding-top: 10px;}
 
-textarea{resize: none; width: 1000px; height: 400px;}
-
+textarea{resize: none; width: 1000px; height: 400px; outline: none;
+border: 1.5px solid #dcdcdc; border-radius:10px; padding: 20px; font-size: 18px;}
+.moption{border: 1.5px solid #DCDCDC; outline: none; border-radius: 5px; padding: 2px;}
 </style>
 </head>
 <body>
@@ -53,7 +59,7 @@ textarea{resize: none; width: 1000px; height: 400px;}
 			<div class="grid-content">
 				<div class="left" id="nickname"> ${vo.student_nickname }</div>
 				<div class="left"> 학년 : 
-					<select name="student_grade">
+					<select name="student_grade" class="moption font" >
 						<option value="초1">초1</option>
 						<option value="초2">초2</option>
 						<option value="초3">초3</option>
@@ -69,7 +75,7 @@ textarea{resize: none; width: 1000px; height: 400px;}
 					</select>
 				</div>
 				<div class="left"> 과목 : 
-					<select name="student_subject">
+					<select name="student_subject" class="moption font">
 						<option value="국어">국어</option>
 						<option value="수학">수학</option>
 						<option value="사회">사회</option>
@@ -81,11 +87,11 @@ textarea{resize: none; width: 1000px; height: 400px;}
 			</div>
 		</div>
 		<div id="intro">
-			<textarea name="student_intro">${vo.student_intro }</textarea>
+			<textarea name="student_intro" class="font">${vo.student_intro }</textarea>
 		</div>
 		<input type="hidden" name="student_id" value="${vo.student_id }" />
 	</form>
-	<a class="btn-fill" onclick="$('form').submit();">수정</a>
-	<a class="btn-empty" onclick="history.go(-1);">취소</a>
+	<a class="btn-fill" style="font-size: 18px; width: 60px;" onclick="$('form').submit();">수정</a>
+	<a class="btn-empty" style="font-size: 18px; width: 60px;" onclick="history.go(-1);">취소</a>
 </body>
 </html>

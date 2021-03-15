@@ -22,6 +22,7 @@
 
 .grid-container > div {
   background-color: rgba(255, 255, 255, 0.5);
+  border: 1.5px solid #DCDCDC;
   text-align: left;
   border-radius: 10px;
 }
@@ -48,6 +49,7 @@
 	margin: 0 auto;
 	text-align: left;
 	background-color: rgba(255, 255, 255, 0.5);
+	border: 1.5px solid #DCDCDC;
     border-radius: 10px;
     padding: 25px;
     font-size: 20px;

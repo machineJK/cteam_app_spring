@@ -141,7 +141,7 @@ textarea[name=content]{width:calc(100% - 6px); resize: none; height:150px;}
 
 /* 카테고리 */
 #nav-1 {
-  position:absolute; right:35%; top:2.5%;
+  position:absolute; right:35%; top:2%;
   border: none;
   border-radius: 10em;
   display: -webkit-box;
@@ -157,7 +157,7 @@ textarea[name=content]{width:calc(100% - 6px); resize: none; height:150px;}
 }
 #nav-1 li a {
   position: relative;
-  padding: 0.6em 2em;
+  padding: 0.3em 2em;
   font-size: 22px;
   border: none;
   outline: none;
@@ -169,7 +169,7 @@ textarea[name=content]{width:calc(100% - 6px); resize: none; height:150px;}
 #nav-1 .slide2 {
   position: absolute;
   display: inline-block;
-  height: 3em;
+  height: 2.5em;
   border-radius: 10em;
   -webkit-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1.05);
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1.05);
@@ -277,6 +277,7 @@ height: 40px; }
 	font-size: 18px;
 	border: 1px solid #ccc;
 	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.5);
 }
 .lineNo {
  	border: 0px;
