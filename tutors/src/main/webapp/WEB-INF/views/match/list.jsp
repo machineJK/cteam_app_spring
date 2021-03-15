@@ -19,7 +19,8 @@
 }
 
 .grid-container > div {
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: rgba(255, 255, 255, 0.5);
+	border: 1.5px solid #DCDCDC;
 	text-align: center;
 	font-size: 28px;
 	border-radius: 10px;

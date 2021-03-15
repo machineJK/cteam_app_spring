@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.mapper">
+	
+	<select id="comment_list" resultType="board.BoardVO">
+		select * from board 
+		where qna_ref_num = #{id}
+		and qna_ref_num != board_num
+		order by board_notice, board_write_date desc
+	</select>
+	
+	<insert id="comment_insert">
+		insert into board(board_id,board_nickname, board_content,id_image_path,board_num,qna_ref_num)
+		values(#{board_id},#{board_nickname},#{board_content},#{id_image_path},seq_board.nextval, #{board_num})
+	</insert>
+
+	<delete id="delete">
+		delete from board where board_num = #{board_num}
+	</delete>
+
+	<update id="update">
+		update board set board_content = #{board_content}
+						, board_image_path = #{board_image_path, jdbcType=VARCHAR}
+						, board_image_name = #{board_image_name, jdbcType=VARCHAR}
+		where board_num = #{board_num}
+	</update>
+
+	<update id="read">
+		update board set board_readcount = board_readcount+1 where board_num = #{board_num}
+	</update>
+
+	<select id="view" resultType="board.BoardVO">
+		select b.*, (select name from member
+					where member.id=b.board_id) name
+		from board b
+		where board_num = #{board_num}
+	</select>
+	
+	<insert id="insert">
+		insert into board(board_num, board_id, board_content, board_nickname, board_image_path, board_image_name, id_image_path, board_notice, qna_ref_num)
+		values (seq_board.nextval, #{board_id}, #{board_content}, #{board_nickname, jdbcType=VARCHAR}, #{board_image_path, jdbcType=VARCHAR}
+					, #{board_image_name, jdbcType=VARCHAR}, #{id_image_path, jdbcType=VARCHAR}, #{board_notice}, seq_board.currval)
+	</insert>
+	
+	<select id="totalList" resultType="integer">
+		select count(*) from board where board_content like '%'|| #{keyword, jdbcType=VARCHAR} ||'%'
+	</select>
+	
+	<sql id="search_where">
+		<if test=" search == 'content' ">
+		where board_content like '%' || #{keyword} || '%'
+		</if>
+		<if test=" search == 'writer' ">
+		where <include refid="writer_where"/>
+		</if>
+		<if test=" search=='all' ">
+		where board_content like '%' || #{keyword} || '%'
+		or <include refid="writer_where"/>
+		</if>
+	</sql>
+	<sql id='writer_where'>
+		board_nickname in (select nickname from member where nickname like '%' || #{keyword} || '%')
+	</sql>
+	
+	<select id="list" resultType="board.BoardVO">
+		select b.*
+		from (
+		select rownum no, b.*
+		from (select * 
+		from board 
+		where board_num = qna_ref_num 
+		order by board_notice desc, board_num asc) b ) b
+		where no between #{beginList} and #{endList}
+		order by board_notice desc, board_num desc, no desc
+  	</select>
+
+</mapper>

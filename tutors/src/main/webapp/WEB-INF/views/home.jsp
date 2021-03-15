@@ -45,21 +45,21 @@ $(document).ready(function(){
   <div><p style="font-size: 2rem; font-weight: bold;">진행중인 과외</p></div>
   <div class="slider">
     <div style="position:absolute;"><h3>국어</h3>
-      <a href='login'><img src="images/korean.png" id="slider" title="국어"></a>
+      <a href='list.match'><img src="images/korean.png" id="slider" title="국어"></a>
     </div>
     <div style="position:absolute;"><h3>수학</h3>
-      <a href='login'><img src="images/math.jpg" id="slider" title="수학"></a>
+      <a href='list.match'><img src="images/math.jpg" id="slider" title="수학"></a>
     </div>
     <div style="position:absolute;"><h3>영어</h3>
-      <a href='login'><img src="images/english.jpg" id="slider" title="영어"></a>
+      <a href='list.match'><img src="images/english.jpg" id="slider" title="영어"></a>
     
     </div>
     <div style="position:absolute;"><h3>사회</h3>
-      <a href='login'><img src="images/society.jpg" id="slider" title="사회"></a>
+      <a href='list.match'><img src="images/society.jpg" id="slider" title="사회"></a>
     
     </div>
     <div style="position:absolute;"><h3>과학</h3>
-      <a href='login'><img src="images/science.jpg" id="slider" title="과학"></a>
+      <a href='list.match'><img src="images/science.jpg" id="slider" title="과학"></a>
     </div>
   </div>
 

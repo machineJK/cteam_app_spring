@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member.mapper">
+
+	<select id="select" resultType="member.MemberVO">
+		select * from member where id = #{id} 
+		<!-- and pw = #{pw} and nickname = #{nickname} and email = #{email} -->
+	</select>
+	
+	<update id="update" parameterType="hashMap">
+		update member set pw = #{pw, jdbcType=VARCHAR}
+		,nickname = #{nickname}, email =#{email}
+		, dbimgpath = #{dbimgpath, jdbcType=VARCHAR}
+		where id = #{id}
+	</update>
+	
+	<select id="login" resultType="member.MemberVO">
+		select * from member where id = #{id} and pw = #{pw}
+	</select>
+
+	<select id="social_id" resultType="integer">
+		select count(*) from member where id = #{id} and email = #{email} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
+	</select>
+	
+	<insert id="social_insert">
+		insert into member(id, gender,name, nickname, kakao_login, naver_login, email)
+		values ( #{id}, #{gender},#{name, jdbcType = VARCHAR}, #{nickname, jdbcType = VARCHAR}, #{kakao_login}, #{naver_login}, #{email} )
+	</insert>
+	
+	<update id="social_update">
+		<if test="name == null">
+		update member set nickname = #{nickname}, gender = #{gender}
+		where id = #{id} and email = #{email} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
+		</if>
+		update member set name = #{name}, nickname = #{nickname}, gender = #{gender}
+		where id = #{id} and email = #{email} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
+	</update>
+	
+	<select id="id_check" resultType="integer">
+		select count(*) from member where id = #{id}
+	</select>
+	
+	<insert id="join">
+		insert into member(id,pw,nickname,name,gender,birth,email,addr1,addr2,dbimgpath) 
+		values(#{id},#{pw},#{nickname},#{name},#{gender},#{birth},#{email},#{addr1},#{addr2},#{dbimgpath, jdbcType=VARCHAR})
+	</insert>
+	
+	<insert id="teacher">
+		insert into teacher(teacher_id, teacher_univ, teacher_major, teacher_univnum, teacher_subject,
+					 teacher_worktime, teacher_pay, teacher_intro, teacher_image_path, teacher_nickname, teacher_addr)
+		values (#{teacher_id},#{teacher_univ},#{teacher_major},#{teacher_univnum},#{teacher_subject},
+				#{teacher_worktime},#{teacher_pay},#{teacher_intro},#{teacher_image_path},#{teacher_nickname},#{teacher_addr})
+	</insert>
+	
+	<insert id="student">
+		insert into student(student_id,student_subject,student_grade,student_intro,student_image_path,
+						student_addr,student_nickname)
+		values(#{student_id},#{student_subject},#{student_grade},#{student_intro},#{student_image_path},
+				#{student_addr},#{student_nickname})
+	</insert>
+	
+	<select id="teacher_check" resultType="Integer">
+		select count(*) from teacher where teacher_id = #{id} 
+	</select>
+	
+	<select id="student_check" resultType="Integer">
+		select count(*) from student where student_id = #{id} 
+	</select>
+	
+	<update id="updateKakaoNaverExtra">
+		update member
+		set pw = #{pw}, birth = #{birth}, addr1 = #{addr1}, addr2 = #{addr2}, dbimgpath = #{dbimgpath, jdbcType=VARCHAR}
+		where id = #{id} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
+	</update>
+	
+	<select id="isKakaoNaverPw" resultType="String">
+		select pw 
+		from member 
+		where id = #{id} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
+	</select>
+	
+	
+	<!-- <insert id="insert">
+	insert into notice ( id, root, title, content, writer, filename, filepath )
+	values ( seq_notice.nextval, seq_notice.currval, #{title}, #{content}, #{writer}
+			  , #{filename, jdbcType=VARCHAR}
+			  , #{filepath, jdbcType=VARCHAR} )
+	</insert> -->
+</mapper>

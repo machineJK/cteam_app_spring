@@ -45,7 +45,7 @@ h3 {font-size: 20px}
 				 		</div>
 					 	<div class="searchBar">
 					 	<ul>
-							<li><select name='search' class='w-px80 option'>
+							<li><select name='search' class='w-px80 option font'>
 									<option value='all' ${page.search eq 'all' ? 'selected' :''} >전체</option>
 									<option value='content' ${page.search eq 'content' ? 'selected' :''}>내용</option>
 									<option value='writer' ${page.search eq 'writer' ? 'selected' :''}>작성자</option>
