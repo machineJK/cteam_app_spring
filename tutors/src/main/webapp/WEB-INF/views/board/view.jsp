@@ -54,7 +54,10 @@
 				
 			<table class="_content">
 			 	<tr class="left divi">
-			 		<th class="w-px60 lineNo" rowspan="2" ><img src="${vo.id_image_path }" class="pic_size"></th>
+			 		<th class="w-px60 lineNo" rowspan="2" >
+			 		<c:if test="${!empty vo.id_image_path }">
+						<img class="file-img" src="${vo.id_image_path }"/>
+					</c:if></th>
 			 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_id}</td> 
 			 	</tr>
 			 	<tr class="left divi">
@@ -87,8 +90,8 @@
 			</c:if>
 		</tr>
 	 	<c:if test="${fn:length(cvo) > 0 }">
-	 	<tr class='comment_list' style='text-align:left'>
-	 		<c:forEach items="${cvo}" var="cvo">
+	 	<c:forEach items="${cvo}" var="cvo">
+	 		<tr class='comment_list' style='text-align:left'>
 	 			<td class="lineNo w-pct15">
 	 			<c:if test="${!empty cvo.id_image_path }">
 					<img class="pic_size" src="${cvo.id_image_path }"/>
@@ -98,12 +101,12 @@
 	 			<td class="lineNo" style="padding-left: 20px;">${cvo.board_content}</td>
 	 			
 	 			<td class="lineNo">
-		 			<c:if test="${loginInfo.id eq cvo.board_id}">
+		 			<c:if test="${loginInfo.id eq cvo.board_id || loginInfo.id eq 'admin'}">
 		 				<a style="color: #959595;" onclick="if( confirm('정말 삭제?') ){ location='deleteC.bo?board_num=${cvo.board_num}' }">삭제</a>
 		 			</c:if>
 	 			</td>
-	 		</c:forEach>
-	 	</tr>
+	 		</tr>
+	 	</c:forEach>
 	 	</c:if>
 	</table>
 	</form>

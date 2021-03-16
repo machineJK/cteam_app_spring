@@ -43,7 +43,7 @@
 	</insert>
 	
 	<select id="totalList" resultType="integer">
-		select count(*) from board where board_content like '%'|| #{keyword, jdbcType=VARCHAR} ||'%'
+		select count(*) from board where board_num = qna_ref_num  and board_content like '%'|| #{keyword, jdbcType=VARCHAR} ||'%'
 	</select>
 	
 	<sql id="search_where">
@@ -63,15 +63,13 @@
 	</sql>
 	
 	<select id="list" resultType="board.BoardVO">
-		select b.*
-		from (
-		select rownum no, b.*
-		from (select * 
-		from board 
+		select * from 
+		(select rownum no, b.* from 
+		(select *
+		from board
 		where board_num = qna_ref_num 
-		order by board_notice desc, board_num asc) b ) b
-		where no between #{beginList} and #{endList}
-		order by board_notice desc, board_num desc, no desc
+		order by board_notice , qna_ref_num , board_num desc) b
+		order by no desc) where no between  #{beginList} and #{endList}
   	</select>
 
 </mapper>
