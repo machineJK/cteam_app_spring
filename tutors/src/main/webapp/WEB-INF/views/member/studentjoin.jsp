@@ -6,12 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	textarea {outline:none; width: 600px; height: 200px; font-size: 16px; border-radius: 15px; resize: none;}
+	textarea {outline:none; width: 600px; height: 200px; font-size: 16px; border-radius: 15px; 
+	border:none; padding:10px; resize: none;}
 </style>
 </head>
 <body>
 	<form action="student_join" method="post">
-		<select name="student_grade">
+		<select name="student_grade"  class="font upinput" style="height: 32px; width: 80px;">
 			<option value="초1">초1</option>
 			<option value="초2">초2</option>
 			<option value="초3">초3</option>
@@ -25,7 +26,7 @@
 			<option value="고2">고2</option>
 			<option value="고3">고3</option>
 		</select>	
-		<select name="student_subject">
+		<select name="student_subject"  class="font upinput" style="height: 32px; width: 80px;">
 			<option value="국어">국어</option>
 			<option value="수학">수학</option>
 			<option value="영어">영어</option>
@@ -33,7 +34,7 @@
 			<option value="과학">과학</option>
 		</select>
 		<br><br>
-		<textarea name="student_intro" placeholder="소개말"></textarea>
+		<textarea name="student_intro" placeholder="소개말" class="font"></textarea>
 		
 		<input type="hidden" name="student_id" value="${loginInfo.id }"/>
 		<input type="hidden" name="student_image_path" value="${loginInfo.dbimgpath }"/>

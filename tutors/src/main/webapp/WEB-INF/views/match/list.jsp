@@ -217,7 +217,7 @@ ul{
 	display: inline-block;
 }
 .teacher-join, .student-join{  
-    border: 1px solid gray;
+    border: none;
     font-size: 20px;
     border-radius: 30px;
     padding: 10px;
@@ -225,9 +225,11 @@ ul{
     margin: 0 auto;
     margin-bottom: 10px;
     cursor: pointer;
+    background-color: #7C67F5;
+    color: #ffffff;
 }
 .teacher-join:hover, .student-join:hover{
-	background-color: gold;
+	background-color: #f1c111;
 }
 </style>
 </head>
