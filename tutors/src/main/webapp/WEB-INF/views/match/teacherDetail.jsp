@@ -62,6 +62,7 @@
 <body>
 
 <div class="grid-container">
+
 	<div><img src="${teacherDetail.teacher_image_path }" width="250" height="250"/></div>
 	<div class="grid-content">
 		<div class="left" id="nickname"> ${teacherDetail.teacher_nickname }</div>
@@ -81,16 +82,33 @@
 <div id="intro">
 	${fn: replace(  fn:replace(teacherDetail.teacher_intro, crlf, '<br>'), lf, '<br>') }
 </div>
-	
+<input type="hidden" id="t_id" value="${teacherDetail.teacher_id}"/>
+<input type="hidden" id="t_nickname" value="${teacherDetail.teacher_nickname}"/>
+<input type="hidden" id="t_intro" value="${teacherDetail.teacher_intro}"/>
+<input type="hidden" id="myId" value="${loginInfo.id}"/>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+<script src="js/chat.js"></script>
+
 <script type="text/javascript">
+var t_id = $('#t_id').val() + '1';
+var t_nickname = $('#t_nickname').val();
+var t_intro = $('#t_intro').val();
+var myId = $('#myId').val();
+
 function goChat(my_id){
 	$.ajax({
 		url: "student_check",
 		data : {id : my_id},
 		success : function(response){
 			if(response == true){
-				//alert("학생 아이디가 있어요! 채팅 가능 합니다!");
-				/* 여기서 메세지 보내기 */
+				chatWithTeacher(t_id, t_nickname, t_intro, myId);
+				setTimeout(function() {
+					location.href = "list.chat?receiveId=" + t_id;
+				}, 1000);
 			}else{
 				alert("먼저 학생으로 등록해주세요!");
 				location.href = "list.match";
@@ -102,6 +120,6 @@ function goChat(my_id){
 	});
 }
 </script>
-	
+
 </body>
 </html>

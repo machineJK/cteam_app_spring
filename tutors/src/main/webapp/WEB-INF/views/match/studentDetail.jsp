@@ -79,16 +79,33 @@
 <div id="intro">
 	${fn: replace(  fn:replace(studentDetail.student_intro, crlf, '<br>'), lf, '<br>') }
 </div>
+<input type="hidden" id="s_id" value="${studentDetail.student_id}"/>
+<input type="hidden" id="s_nickname" value="${studentDetail.student_nickname}"/>
+<input type="hidden" id="s_subject" value="${studentDetail.student_subject}"/>
+<input type="hidden" id="myId" value="${loginInfo.id}"/>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+<script src="js/chat.js"></script>
 
 <script type="text/javascript">
+var s_id = $('#s_id').val() + '2';
+var s_nickname = $('#s_nickname').val();
+var s_intro = $('#s_subject').val() + '을(를) 배우고 싶어요';
+var myId = $('#myId').val();
+
 function goChat(my_id){
 	$.ajax({
 		url: "teacher_check",
 		data : {id : my_id},
 		success : function(response){
 			if(response == true){
-				//alert("선생 아이디가 있어요! 채팅 가능 합니다!");
-				/* 여기서 메세지 보내기 */
+				chatWithStudent(s_id, s_nickname, s_intro, myId);
+				setTimeout(function() {
+					location.href = "list.chat?receiveId=" + s_id;
+				}, 1000);
 			}else{
 				alert("먼저 선생으로 등록해주세요!");
 				location.href = "list.match";
