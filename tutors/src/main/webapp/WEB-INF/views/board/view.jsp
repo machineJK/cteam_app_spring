@@ -31,8 +31,8 @@
 	width: 20%;
 }
 
-
 .noti_right {float: right; margin-bottom: 5px;}
+.img-view {width: 300px; height: 400px;}
 </style>
 </head>
 <body>
@@ -69,7 +69,7 @@
 					<td class="lineNo2 left c_detail ">
 						${fn:replace(vo.board_content, crlf, '</br>')}
 						<c:if test="${!empty vo.board_image_path }">
-							<br><img class="file-img" style="" src="${vo.board_image_path }"/>
+							<br><br><br><img class="img-view" style="" src="${vo.board_image_path }"/>
 						</c:if>
 					</td>
 			 	</tr>
