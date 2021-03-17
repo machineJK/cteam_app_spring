@@ -198,20 +198,22 @@
 	var teacherName;
 	var studentName;
 	function FetchAllData(){
+		var myNick = document.getElementById('myNick').value;
 		var teacher = firebase.database().ref(myId + 2).once('value', function(snapshot){
 			snapshot.forEach(
 				function(ChildSnapshot){
 					teacherName = "";
 					var teacherId = ChildSnapshot.key;		
 					var teacherVO = ChildSnapshot.val();
-// 					console.log(teacherVO);
+					
+ 					console.log(teacherVO);
 					$.each(teacherVO, function(key, value){
 						if( value.nickname != myNick ){
-// 							console.log(value.nickname);
+ 							console.log(value.nickname);
 							teacherName = value.nickname;
 						}
 						if ( teacherName == ""){
-							teacherName = "미응답 학생";
+							teacherName = "미응답 선생님";
 							console.log(teacherName);
 						}
 					});
@@ -230,15 +232,18 @@
 						if( value.nickname != myNick){
 							studentName = value.nickname;
 							console.log(studentName);
+							
 						}
 						if (studentName == ""){ 
-							studentName = "응답하지 않은 학생";
-							console.log(studentName);
+							studentName = "미응답 학생";
+						//	console.log(studentName);
 						}
 					});
-// 					console.log(studentName);
-					addStudentList(studentId, studentName );
+					addStudentList(studentId, studentName);
+ 					//console.log(studentName);
+					
 				}		
 			)
 		});
-	} 
+		
+}
