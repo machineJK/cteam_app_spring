@@ -35,15 +35,18 @@ h3 {font-size: 20px}
 	<div id="frame">
 		<table>
 			<h1>게시판</h1>
-			<form method="post" action="list.bo">
+			<form method="post" action="list.bo"  >
+				<input type="hidden" name="id"/>
+				<input type="hidden" name="curPage" value="1"/>
 				<div>
-				 	<div>
-				 		<div id="noti">
-				 			<div class="noti_left">공지사항과 질문 및 답변이 있는 페이지입니다.</div>
-						 	<div class="right po noti_right"><c:if test="${!empty loginInfo }"><a class="btn-fill" href="new.bo" style="font-size: 18px; width: 90px;">글쓰기</a></c:if></div>
-
-				 		</div>
-					 	<div class="searchBar">
+			 		<div id="noti">
+			 			<div class="noti_left">공지사항과 질문 및 답변이 있는 페이지입니다.</div>
+					 	<div class="right po noti_right">
+					 		<c:if test="${!empty loginInfo }"><a class="btn-fill" href="new.bo" style="font-size: 18px; width: 90px;">글쓰기</a>
+					 		</c:if>
+					 	</div>
+			 		</div>
+				 	<div class="searchBar">
 					 	<ul>
 							<li><select name='search' class='w-px80 option font'>
 									<option value='all' ${page.search eq 'all' ? 'selected' :''} >전체</option>
@@ -51,15 +54,14 @@ h3 {font-size: 20px}
 									<option value='writer' ${page.search eq 'writer' ? 'selected' :''}>작성자</option>
 								</select>
 							</li>
-							<li><input type='text' name='keyword' value='${page.keyword}' placeholder="검색어입력"
-							style="height: 50px; font-family: 'S-CoreDream-4Regular'; font-size: 16px;
-							padding-left: 15px;"/> <span id="btn_search" 
-				 				onclick="$('form').submit()" 
-				 				style="width: 50px; color:#3982f7; position: relative; right: 25px; cursor: pointer;">
-				 				<i class="fas fa-search" style="padding-left:-5px;"></i></span></li>
+							<li>
+								<input type='text' name='keyword' value='${page.keyword}' placeholder="검색어입력" style="height: 50px; font-family: 'S-CoreDream-4Regular'; font-size: 16px; padding-left: 15px;"/>
+								<a id="btn_search" onclick="$('form').submit()" 
+									style="width: 50px; color:#3982f7; position: relative; right: 25px; cursor: pointer;">
+				 				<i class="fas fa-search" style="padding-left:-5px;"></i></a>
+				 			</li>
 						</ul>
-					 	</div>
-				 	</div>
+					</div>
 				</div>
 				<input type="hidden" name="curPage" value="1">
 				</form>
@@ -97,10 +99,6 @@ h3 {font-size: 20px}
 		<div class='btnSet'>
 			<jsp:include page="/WEB-INF/views/include/page.jsp"/>
 		</div>
-		<form action="list.bo" method="post">
-			<input type="hidden" name="id"/>
-			<input type="hidden" name="curPage" value="1"/>
-		</form>
 	</div>
 </body>
 </html>

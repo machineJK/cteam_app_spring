@@ -54,8 +54,8 @@
 		and <include refid="writer_where" />
 		</if>
 		<if test="search=='all' ">
-		and board_content like '%' || #{keyword} || '%'
-		or <include refid="writer_where" />
+		and (board_content like '%' || #{keyword} || '%'
+		or <include refid="writer_where" />)
 		</if>
 	</sql>
 	<sql id='writer_where'>
