@@ -101,6 +101,9 @@
 		});
 		
 		$('#textBox1').val('');
+		setTimeout(function() {
+			$('#chatListToTeacher').scrollTop($('#chatListToTeacher')[0].scrollHeight);
+		}, 100);
 		
 		//prevent form from submitting
 		return false;
@@ -135,7 +138,9 @@
 		});
 		
 		$('#textBox2').val('');
-		
+		setTimeout(function() {
+			$('#chatListToStudent').scrollTop($('#chatListToStudent')[0].scrollHeight);
+		}, 500);
 		//prevent form from submitting
 		return false;
 	}
@@ -153,7 +158,6 @@
 					+ '<h6><span style="background-color:#ffffff; display:inline-block; max-width: 200px; min-width:50px; border-radius: 10px; margin-bottom:5px; font-size:20px; padding: 10px;">'
 					+ snapshot.val().msg + '</span><span style="display: inline-block; color:white; margin-left:5px;">' + snapshot.val().date + '</span></h6></div>');
 			$('#chatListToTeacher').append(html);
-			
 		});
 	}
 	//메세지 받아오기
@@ -168,7 +172,6 @@
 					+ '<h6><span style="background-color:#ffffff; margin-bottom:5px; border-radius: 10px; display:inline-block; max-width: 150px; min-width:50px; border-radius: 10px margin: 5px 0px; font-size:20px; padding: 10px;">'
 					+ snapshot.val().msg + '</span><span style="display: inline-block; color:white; margin-left:5px;">' + snapshot.val().date + '</span></h6></div>');
 			$('#chatListToStudent').append(html);
-			
 		});
 	}
 	
@@ -206,15 +209,15 @@
 					var teacherId = ChildSnapshot.key;		
 					var teacherVO = ChildSnapshot.val();
 					
- 					console.log(teacherVO);
+ 					//console.log(teacherVO);
 					$.each(teacherVO, function(key, value){
 						if( value.nickname != myNick ){
- 							console.log(value.nickname);
+ 							//console.log(value.nickname);
 							teacherName = value.nickname;
 						}
 						if ( teacherName == ""){
 							teacherName = "미응답 선생님";
-							console.log(teacherName);
+							//console.log(teacherName);
 						}
 					});
 					addTeacherList( teacherId, teacherName );
@@ -227,11 +230,11 @@
 					studentName = "";	
 					var studentId = ChildSnapshot.key;
 					var studentVO = ChildSnapshot.val();
-					console.log(studentVO);
+					//console.log(studentVO);
 					$.each(studentVO, function(key, value){
 						if( value.nickname != myNick){
 							studentName = value.nickname;
-							console.log(studentName);
+							//console.log(studentName);
 							
 						}
 						if (studentName == ""){ 

@@ -27,6 +27,7 @@ position: relative; top: 50%; left:5%;
 .textContent {
 	height: 10%;
 }
+.textList { overflow-y : auto;}
 </style>
 </head>
 <body>
@@ -97,31 +98,28 @@ $(function(){
 });
 
 $(document).on('click', '#teacherList div', function(){
-	$('#chatStudent').css('height','0px');
-	$('#chatTeacher').css('height','57%');
  	$('#chatListToTeacher').empty('div');
- 	
+	$('#chatStudent').css('height','0px');
  	
  	teacherId = $(this).attr('id');
- 	/*
-	console.log( chattingData );
-	$.each(chattingData, function(key, value){
-		console.log(value);
-		
-		$('#chatList').append(
-			(value.nickname == $('#myNick').val() ?
-				'<div style="text-align:right;"><h6><span style="display: inline-block;">' + value.date + ' <span style="background-color:#f8fc00; display:inline-block; max-width: 150px; min-width:50px; border-radius: 10px">' + value.msg + '</span></h6></div>' :		
-				'<div style="text-align:left;"><h5>' + value.nickname + '<h5><h6><span style="background-color:#ffffff; display:inline-block; max-width: 150px; min-width:50px; border-radius: 10px">' + value.msg + '</span><span style="display: inline-block">' + value.date + '</span></h6></div>'
-			)
-		);
-	}); */
+ 	
+// 	var top = $('#chatListToTeacher').prop('scrollHeight');
+// 	$('#chatListToTeacher').animate({scrollTop : top}, 5000);
 	receiveMsgImStudent( teacherId );
+	setTimeout(function() {
+		$('#chatListToTeacher').scrollTop($('#chatListToTeacher')[0].scrollHeight);
+		$('#chatTeacher').css('height','57%');
+	}, 500);
+	
 }).on('click', '#studentList div', function(){
 	$('#chatTeacher').css('height','0px');
-	$('#chatStudent').css('height','57%');
 	
  	$('#chatListToStudent').empty('div');
- 
+
+	setTimeout(function() {
+		$('#chatListToStudent').scrollTop($('#chatListToStudent')[0].scrollHeight);
+		$('#chatStudent').css('height','57%');
+	}, 500);
  	
  	studentId = $(this).attr('id');
  	
