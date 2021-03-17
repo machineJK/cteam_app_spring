@@ -57,8 +57,8 @@ position: relative; top: 50%; left:5%;
 	<div id="chatListToTeacher" class="textList"></div>
 	<div class="textContent">
 		<form onsubmit="return sendMsgToTeacher();" id="teachertxt">
-			<input type="text" id="textBox1" autocomplete="off" />
-			<input type="submit" value="보내기" id="send" />
+			<input type="text" id="textBox1" autocomplete="off" class="chk" onkeypress="if(event.keyCode==13){return emptyCheck1();}"/>
+			<input type="button" value="보내기" class="send" onclick="$('#teachertxt').submit();" />
 		</form>
 	</div>
 </div>
@@ -71,8 +71,8 @@ position: relative; top: 50%; left:5%;
 	<div id="chatListToStudent" class="textList"></div>
 	<div class="textContent">
 		<form onsubmit="return sendMsgToStudent();" id="studenttxt">
-			<input type="text" id="textBox2" autocomplete="off"/>
-			<input type="submit" value="보내기" id="send"/>
+			<input type="text" id="textBox2" autocomplete="off"  class="chk"  onkeypress="if(event.keyCode==13){return emptyCheck2();}"/>
+			<input type="button" value="보내기" class="send"  onclick="$('#studenttxt').submit();"/>
 		</form>
 	</div>
 </div>
@@ -127,12 +127,40 @@ $(document).on('click', '#teacherList div', function(){
 })	
 var receiveId = $('#receiveId').val();
 
+
+
+function emptyCheck1(){
+	var ok = true;
+	var val = $('#textBox1').val().trim().length;
+	console.log(val);
+	
+	if( val == 0 ){
+		$('#textBox1').focus();
+		ok = false;
+		return ok;
+	}
+	return ok;
+}
+
+function emptyCheck2(){
+	var ok = true;
+	var val = $('#textBox2').val().trim().length;
+	console.log(val);
+	
+	if( val == 0 ){
+		$('#textBox2').focus();
+		ok = false;
+		return ok;
+	}
+	return ok;
+}
+
 //alert(receiveId);
 if(receiveId != null){
 	var targetId = receiveId;
 	//alert(targetId);
  	setTimeout(function() {
- 		$('#' + targetId).trigger('click');
+ 		$('#'+targetId).trigger('click');
 	}, 1000); 
 	
 }
