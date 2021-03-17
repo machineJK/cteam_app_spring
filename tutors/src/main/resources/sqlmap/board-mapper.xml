@@ -43,19 +43,19 @@
 	</insert>
 	
 	<select id="totalList" resultType="integer">
-		select count(*) from board where board_num = qna_ref_num  and board_content like '%'|| #{keyword, jdbcType=VARCHAR} ||'%'
+		select count(*) from board where board_num = qna_ref_num <include refid="search_where" />
 	</select>
 	
 	<sql id="search_where">
-		<if test=" search == 'content' ">
-		where board_content like '%' || #{keyword} || '%'
+		<if test="search == 'content' ">
+		and board_content like '%' || #{keyword} || '%'
 		</if>
-		<if test=" search == 'writer' ">
-		where <include refid="writer_where"/>
+		<if test="search == 'writer' ">
+		and <include refid="writer_where" />
 		</if>
-		<if test=" search=='all' ">
-		where board_content like '%' || #{keyword} || '%'
-		or <include refid="writer_where"/>
+		<if test="search=='all' ">
+		and board_content like '%' || #{keyword} || '%'
+		or <include refid="writer_where" />
 		</if>
 	</sql>
 	<sql id='writer_where'>
@@ -67,7 +67,8 @@
 		(select rownum no, b.* from 
 		(select *
 		from board
-		where board_num = qna_ref_num 
+		where board_num = qna_ref_num
+		<include refid="search_where"/>
 		order by board_notice , qna_ref_num , board_num desc) b
 		order by no desc) where no between  #{beginList} and #{endList}
   	</select>
