@@ -58,7 +58,7 @@
 			 		<c:if test="${!empty vo.id_image_path }">
 						<img class="file-img" src="${vo.id_image_path }"/>
 					</c:if></th>
-			 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_id}</td> 
+			 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_nickname}</td> 
 			 	</tr>
 			 	<tr class="left divi">
 			 		<td class="lineNo" style="padding-left: 20px; font-size: 14px;">${vo.board_write_date}</td>
