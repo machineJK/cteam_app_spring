@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +31,7 @@ public class BoardController {
 	@RequestMapping("/reply.bo")
 	public String reply_insert(BoardVO vo) {
 		service.board_comment_insert(vo);
-		return "redirect:list.bo?board_num=" + vo.getBoard_num();
+		return "redirect:view.bo?id=" + vo.getBoard_num();
 	}
 	
 	//댓글 삭제
