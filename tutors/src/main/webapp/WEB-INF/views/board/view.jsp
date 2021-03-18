@@ -56,7 +56,7 @@
 			 	<tr class="left divi">
 			 		<th class="w-px60 lineNo" rowspan="2" >
 			 		<c:if test="${!empty vo.id_image_path }">
-						<img class="file-img" src="${vo.id_image_path }"/>
+						<img class="pic_size" src="${vo.id_image_path }"/>
 					</c:if></th>
 			 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_nickname}</td> 
 			 	</tr>

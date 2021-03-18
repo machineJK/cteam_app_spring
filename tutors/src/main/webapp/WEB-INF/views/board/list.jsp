@@ -71,7 +71,7 @@ h3 {font-size: 20px}
 					 	<tr class="left divi">
 					 		<th class="w-px60 lineNo" rowspan="2" >
 					 		<c:if test="${!empty vo.id_image_path }">
-								<img class="file-img" style="" src="${vo.id_image_path }" class="pic_size" />
+								<img class="pic_size" src="${vo.id_image_path }"  />
 							</c:if></th>
 					 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_nickname}</td>
 					 	</tr>
@@ -96,9 +96,9 @@ h3 {font-size: 20px}
 				</c:forEach>
 			</div>
 		</table>
-		<div class='btnSet'>
+		<%-- <div class='btnSet'>
 			<jsp:include page="/WEB-INF/views/include/page.jsp"/>
-		</div>
+		</div> --%>
 	</div>
 </body>
 </html>
