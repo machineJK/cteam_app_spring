@@ -96,9 +96,9 @@ h3 {font-size: 20px}
 				</c:forEach>
 			</div>
 		</table>
-		<%-- <div class='btnSet'>
+		<div class='btnSet'>
 			<jsp:include page="/WEB-INF/views/include/page.jsp"/>
-		</div> --%>
+		</div>
 	</div>
 </body>
 </html>
