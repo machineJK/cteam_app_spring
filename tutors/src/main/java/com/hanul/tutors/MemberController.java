@@ -269,7 +269,7 @@ public class MemberController {
 	@RequestMapping("/join")
 	public String join(MemberVO vo, MultipartFile file, HttpSession session) {
 		if( ! file.isEmpty() ) {
-			vo.setDbimgpath( common.fileUpload(session, file, "notice") );
+			vo.setDbimgpath( common.fileUpload(session, file, "member") );
 		}
 		service.member_join(vo);
 		return "redirect:/";

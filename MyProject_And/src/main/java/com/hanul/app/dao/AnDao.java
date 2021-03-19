@@ -778,7 +778,7 @@ public class AnDao {
 		try {
 			connection = dataSource.getConnection();
 			String query = "select * from board where qna_ref_num = board_num" 
-							+ " order by board_notice, board_write_date desc";
+							+ " order by board_notice desc, board_write_date desc";
 			prepareStatement = connection.prepareStatement(query);
 			resultSet = prepareStatement.executeQuery();
 			

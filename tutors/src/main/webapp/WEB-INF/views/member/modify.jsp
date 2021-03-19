@@ -17,7 +17,8 @@
 #isblind:hover, .fa-images{cursor: pointer;}
 .fa-check{color: green;}
 .fa-circle{font-size: 10px;}
-#chk-id,#chk-pw,#chk-pwreg,#chk-email{display: none;}
+#chk-id,#chk-pw,#chk-pwreg,#chk-email-circle{display: none;}
+#chk-email{dispay: inline};
 </style>
 
 </head>
@@ -92,6 +93,7 @@
 
 <script type="text/javascript" src="js/file_check.js"></script>
 <script type="text/javascript">
+
 function go_save(){
 if( ${!empty vo.filename} ){
 	$('#delete-file').css('display','inline');
@@ -146,7 +148,7 @@ $("[name=pw]").keyup(function(){
 
 //이메일 유효성 검사
 $("[name=email]").keyup(function(){
-	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{3}$/i;
 
 	if(reg.test($(this).val())){
  	 	$("#chk-email-circle").css("display","none");

@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.modi:hover{
+		border: 1px solid black;
+		padding: 5px;
+		border-radius: 30px;
+		background-color: #CCCCFF; 
+	}
+</style>
 </head>
 <body>
 
