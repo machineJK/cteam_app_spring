@@ -63,7 +63,6 @@ h3 {font-size: 20px}
 						</ul>
 					</div>
 				</div>
-				<input type="hidden" name="curPage" value="1">
 				</form>
 			<div>
 				<c:forEach items="${page.list }" var="vo">
