@@ -90,7 +90,7 @@ h3 {font-size: 20px}
 					 	</tr>
 					</table>
 					<p></p>
-					</br>
+					<br/>
 				</c:forEach>
 			</div>
 		</table>

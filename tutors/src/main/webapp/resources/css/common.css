@@ -18,7 +18,7 @@ body{
 	margin:0 auto;
 	text-align:center;
 	font-family: 'S-CoreDream-4Regular';
-	background: rgba(230, 238, 249);
+	background-color: #EEF0F9;
 }
 
 a:link, a:visited { text-decoration:none; color:#000; }
@@ -245,7 +245,6 @@ body {
 	overflow-x: hidden;
 	float: left;
 	position: absolute; left: 30%; top: 23%;
-	
 }
 .vo {
 	visibility: gone;

@@ -293,10 +293,12 @@ public class AnController {
 		} 		
 		
 		String id = (String) request.getParameter("id");
+		String mstWho = (String) request.getParameter("mstWho");
 		
 		//System.out.println(id);
 		
 		model.addAttribute("id", id);
+		model.addAttribute("mstWho", mstWho);
 		
 		command = new AnIdCheckCommand();
 		command.execute(model);

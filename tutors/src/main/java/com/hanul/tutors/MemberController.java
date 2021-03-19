@@ -268,14 +268,10 @@ public class MemberController {
 	//����媛���
 	@RequestMapping("/join")
 	public String join(MemberVO vo, MultipartFile file, HttpSession session) {
-		//泥⑤��� ���쇱�� ���ㅻ㈃ �곗�댄�곌�泥댁�� ���쇱��蹂대�� �대����
 		if( ! file.isEmpty() ) {
-			//vo.setFilename( file.getOriginalFilename() );
 			vo.setDbimgpath( common.fileUpload(session, file, "notice") );
 		}
-		//��硫댁���� ���ν�� ��蹂대�� DB�� ���ν�� �� 紐⑸���硫댁�쇰� �곌껐
 		service.member_join(vo);
-		//return "redirect:/";
 		return "redirect:/";
 	}
 	

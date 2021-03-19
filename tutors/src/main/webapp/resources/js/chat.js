@@ -182,6 +182,13 @@
 
 		_teacher.innerHTML = teacherName;
 		div.appendChild(_teacher);
+		
+		//제이쿼리//
+		/*$div = $("#teacherList");
+		_teacherId = teacherId;
+		var _teacher = "<div id='" + teacherId +"'>" + teacherName + "</div>";
+		$div.append(_teacher);*/
+		
 	}
 	//studentList
 	function addStudentList(studentId, studentName){

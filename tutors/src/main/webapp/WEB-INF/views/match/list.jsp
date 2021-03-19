@@ -397,19 +397,18 @@ $(".search-item").click(function(){
 		$("#univNum_modal").css("display","block");
 	}else if($(this).attr("id") == "pay"){
 		$("#pay_modal").css("display","block");
-	}else if($(this).attr("id") == "major"){
-		$("#major_modal").css("display","block");
-	}else if($(this).attr("id") == "univ"){
-		$("#univ_modal").css("display","block");
 	}
 	
 });
 
 //더보기
 function more_list(){
-	if($(".listOpion a").eq(0).has(".btn-fill")){
+	if($(".listOption a").eq(0).hasClass("btn-fill")){
+		//console.log("선생님");
 		teacher_list();
-	}else if($(".listOpion a").eq(1).has(".btn-fill")){
+	}
+	if($(".listOption a").eq(1).hasClass("btn-fill")){
+		//console.log("학생");
 		student_list();
 	}
 }
@@ -418,12 +417,12 @@ function more_list(){
 $(document).on("click",function(e){
 	if($("#content").is(e.target)){
 		$(".modal").css("display","none");
-		$("body, header").css("backgroundColor","#FFFFFF");
+		$("body, header").css("backgroundColor","#EEF0F9");
 
 		//alert("addr1 : " + addr1 + ",addr2 : " + addr2);
 	}else if($("#addr_modal > .close").is(e.target)){
 		$(".modal").css("display","none");
-		$("body, header").css("backgroundColor","#FFFFFF");
+		$("body, header").css("backgroundColor","#EEF0F9");
 
 		//alert("addr1 : " + addr1 + ",addr2 : " + addr2);
 	}else if($("#addr_modal > .validate").is(e.target)){
@@ -436,7 +435,7 @@ $(document).on("click",function(e){
 		}
 		
 		$(".modal").css("display","none");
-		$("body, header").css("backgroundColor","#FFFFFF");
+		$("body, header").css("backgroundColor","#EEF0F9");
 		$("#addr > span").text(addr1 + " " + addr2).css("color","red");
 		$(".grid-container").html("");
 		cnt = 0;
@@ -520,6 +519,7 @@ $(".listOption > a").click(function(){
 function teacher_list(){
 	$(".loading").attr("display","block");
 	$("#pay").css("display","block");
+	$("#more").css("display","block");
 	$.ajax({
 		url:"data/teacher_list",
 		data:{count : cnt, addr1 : addr1, addr2 : addr2, gender : gender, subject : subject, pay : pay},
@@ -543,9 +543,15 @@ function teacher_list(){
 				}
 				$(".loading").attr("display","none");
 				$("#noitem").css("display","none");
+				if($(".grid-container").find("div.grid-item").length % 8 != 0){
+					$("#more").css("display","none");
+				} 
 				cnt += 1;
 			}else{
-				$("#noitem").css("display","block");
+				if($(".grid-container").find("div").length == 0){
+					$("#noitem").css("display","block"); 
+					$("#more").css("display","none");
+				}
 			}
 
 			
@@ -560,6 +566,7 @@ function teacher_list(){
 function student_list(){
 	$(".loading").attr("display","block");
 	$("#pay").css("display","none");
+	$("#more").css("display","block");
 	$.ajax({
 		url:"data/student_list",
 		data:{count : cnt, addr1 : addr1, addr2 : addr2, gender : gender, subject : subject},
@@ -580,9 +587,15 @@ function student_list(){
 				}
 				$(".loading").attr("display","none");
 				$("#noitem").css("display","none");
+				if($(".grid-container").find("div.grid-item").length % 8 != 0){
+					$("#more").css("display","none");
+				} 
 				cnt += 1;
 			}else{
-				$("#noitem").css("display","block");
+				if($(".grid-container").find("div").length == 0){
+					$("#noitem").css("display","block"); 
+					$("#more").css("display","none");
+				}
 			}
 		},
 		error:function(req,text){

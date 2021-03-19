@@ -35,21 +35,26 @@ public class AnDao {
 
 	}
 	
-    public CheckDTO anIdCheck(String idin) {
+    public CheckDTO anIdCheck(String idin,String mstWho) {
 
     	CheckDTO adto = null;
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;		
-		
+		String query = null;
 		try {
+			
 			connection = dataSource.getConnection();
-			String query = "select count(*) "					
-							+ " from member" 
-							+ " where id = '" + idin + "' ";
+			if(mstWho.equals("m")) {
+				query = "select count(*) from member where id = '" + idin + "'";
+			}else if(mstWho.equals("t")) {
+				query = "select count(*) from teacher where teacher_id = '" + idin + "'";
+			}else if(mstWho.equals("s")) {
+				query = "select count(*) from student where student_id = '" + idin + "'";
+			}
 			prepareStatement = connection.prepareStatement(query);
 			resultSet = prepareStatement.executeQuery();
-			
+		
 			while (resultSet.next()) {
 				int idchk = resultSet.getInt(1);
 				adto = new CheckDTO(idchk);					

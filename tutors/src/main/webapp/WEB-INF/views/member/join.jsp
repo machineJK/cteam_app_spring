@@ -66,7 +66,7 @@
 	<td><input type='password' name='pw' class="font" placeholder="비밀번호를 입력하세요" maxlength="13" style="margin: 0px 5px 5px 5px;"/>
 		<span id="isblind"><i class="far fa-eye-slash"></i></span>
 		<br><span id="chk-pw-circle"><i class="fas fa-circle"></i></span><span id="chk-pw"><i class="fas fa-check"></i></span> 비밀번호는 6~13자리 이하로 써주세요
-		<br><span id="chk-pwreg-circle"><i class="fas fa-circle"></i></span><span id="chk-pwreg"><i class="fas fa-check"></i></span> 비밀번호는 영어 대문자, 소문자, 특수문자가<br> 1개이상 포함되어야 합니다</td>
+		<br><span id="chk-pwreg-circle"><i class="fas fa-circle"></i></span><span id="chk-pwreg"><i class="fas fa-check"></i></span> 비밀번호는 영어 소문자, 숫자, 특수문자가<br> 1개이상 포함되어야 합니다</td>
 <!-- 		<ul id="checkList">
 			<li><span id="chk-id-circle" ><i class="fas fa-circle"></i></span><span id="chk-id"><i class="fas fa-check"></i></span> 아이디는 영문,숫자를 이용해 6~13자리로 써주세요</li>
 			<li><span id="chk-pw-circle"><i class="fas fa-circle"></i></span><span id="chk-pw"><i class="fas fa-check"></i></span> 비밀번호는 6~13자리 이하로 써주세요</li>

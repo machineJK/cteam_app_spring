@@ -11,7 +11,7 @@
 			<li class="slide1"></li>         
     		<li class="slide2"></li>
 			<li><a class="${category eq 'cu' ? 'active' : ''}" href='list.match'>과외매칭</a></li>
-			<li><a class="${category eq 'chat' ? 'active' : ''}" href='list.chat'>채팅하기</a></li>
+			<li><a class="${category eq 'chat' ? 'active' : ''}" onclick="chatlogin('${loginInfo.id}');">채팅하기</a></li>
 			<li><a class="${category eq 'no' ? 'active' : ''}" href='list.bo'>게시판</a></li>
 			<%-- <li><a class="${category eq 'bo' ? 'active' : ''}" href='list.bo'>마이페이지</a></li> --%>
 			<%-- <li><a class="${category eq 'da' ? 'active' : ''}" href='list.da'>공공데이터</a></li> --%>
@@ -48,6 +48,16 @@
 	</div>
 </header>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script><script  src="js/script.js"></script>
+  <script>
+	function chatlogin(id){
+		if(id == ""){
+			alert("먼저 로그인을 해주세요!");
+			location.href = "login";
+		}else{
+			location.href = "list.chat";
+		}
+	}
+  </script>
 <style>
 header {
 	/* background-color: #c5cefa; */
