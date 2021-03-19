@@ -32,6 +32,7 @@ import com.hanul.app.command.AnStudentCommand;
 import com.hanul.app.command.AnTeacherCommand;
 import com.hanul.app.command.GetTokenCommand;
 import com.hanul.app.command.MyTeacherDetail;
+import com.hanul.app.command.ReadCountCommand;
 import com.hanul.app.command.SelectCommentCommand;
 import com.hanul.app.command.SetMatchCommand;
 import com.hanul.app.command.SetTokenCommand;
@@ -701,6 +702,25 @@ public class AnController {
 		command.execute(model);
 		
 		return "anSelectComment";
+	}
+	
+	//조회수 증가
+	@RequestMapping(value="/anBoardReadCount", method = {RequestMethod.GET, RequestMethod.POST})
+	public void anBoardReadCount(HttpServletRequest req, Model model) {
+		System.out.println("anBoardReadCount()");
+		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}  
+		
+		String qna_ref_num = (String) req.getParameter("qna_ref_num");
+		model.addAttribute("qna_ref_num", qna_ref_num);
+		
+		command = new ReadCountCommand();
+		command.execute(model);	
+		
 	}
 	
 }

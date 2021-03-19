@@ -1124,25 +1124,34 @@ public class AnDao {
 		return state;
 	}
 	
-	/*
-	 * //濡쒓렇�씤 硫붿냼�뱶 public String anLogin(String id, String passwd) {
-	 * 
-	 * Connection connection = null; PreparedStatement prepareStatement = null;
-	 * ResultSet rs = null; String msg = "�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡;;�뒿�땲�떎!";
-	 * 
-	 * try { connection = dataSource.getConnection(); String query =
-	 * "select id,passwd from member"; prepareStatement =
-	 * connection.prepareStatement(query); rs = prepareStatement.executeQuery();
-	 * 
-	 * while(rs.next()) { if(rs.getString("id").equals(id) &&
-	 * rs.getString("passwd").equals(passwd)) { System.out.println("濡쒓렇�씤 �꽦怨�!"); msg =
-	 * "濡쒓렇�씤 �꽦怨�!"; break; } }
-	 * 
-	 * } catch (Exception e) { System.out.println(e.getMessage()); } finally { try {
-	 * if (prepareStatement != null) { prepareStatement.close(); } if (connection !=
-	 * null) { connection.close(); }
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } } return msg; }
-	 */
+	public void anReadCount(String qna_ref_num) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "update board set board_readcount = board_readcount + 1 where board_num = " + qna_ref_num;				
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	
 }
