@@ -59,6 +59,7 @@ position: relative; top: 50%; left:5%;
 		<form onsubmit="return sendMsgToTeacher();" id="teachertxt">
 			<input type="text" id="textBox1" autocomplete="off" class="chk" onkeypress="if(event.keyCode==13){return emptyCheck1();}"/>
 			<input type="button" value="보내기" class="send" onclick="$('#teachertxt').submit();" />
+			<input type="button" value="요청하기" class="send2"  onclick="sendMatch()"/>
 		</form>
 	</div>
 </div>

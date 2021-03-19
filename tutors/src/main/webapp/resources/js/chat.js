@@ -72,6 +72,48 @@
 		});
 	}
 	
+	//매칭 요청하기
+	function sendMatch(){
+		
+		studentId = $('#myId').val();
+		console.log(studentId);
+		console.log(teacherId);
+						
+		var myNick = document.getElementById('myNick').value;
+		var msg = myNick + "님이 매칭을 요청하였습니다. My Info 화면에서 수락 또는 거절을 눌러주세요!";
+		var date = new Date();
+
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		var ampm = hours >= 12 ? '오후' : '오전';
+		hours = hours % 12;
+		hours = hours ? hours : 12; // the hour '0' should be '12'
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		var strTime = ampm + " " + hours + ":" + minutes;
+		
+		//save in database
+		firebase.database().ref( myId + 2 ).child( teacherId ).push().set({
+			"nickname": myNick,
+			"msg": msg,
+			"date": strTime 
+		});
+		firebase.database().ref( teacherId ).child( myId + 2 ).push().set({
+			"nickname": myNick,
+			"msg": msg,
+			"date": strTime 
+		});
+		
+		$('#textBox1').val('');
+		setTimeout(function() {
+			$('#chatListToTeacher').scrollTop($('#chatListToTeacher')[0].scrollHeight);
+		}, 100);
+		
+		//prevent form from submitting
+		return false;
+	}
+	
+	
+	
 	var teacherId;
 	//message send to teacher
 	function sendMsgToTeacher(){
