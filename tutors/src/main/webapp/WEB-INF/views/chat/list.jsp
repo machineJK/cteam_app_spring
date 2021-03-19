@@ -27,6 +27,7 @@ position: relative; top: 50%; left:5%;
 .textContent {
 	height: 10%;
 }
+.textList { overflow-y : auto;}
 </style>
 </head>
 <body>
@@ -56,8 +57,8 @@ position: relative; top: 50%; left:5%;
 	<div id="chatListToTeacher" class="textList"></div>
 	<div class="textContent">
 		<form onsubmit="return sendMsgToTeacher();" id="teachertxt">
-			<input type="text" id="textBox1" autocomplete="off" />
-			<input type="submit" value="보내기" id="send" />
+			<input type="text" id="textBox1" autocomplete="off" class="chk" onkeypress="if(event.keyCode==13){return emptyCheck1();}"/>
+			<input type="button" value="보내기" class="send" onclick="$('#teachertxt').submit();" />
 		</form>
 	</div>
 </div>
@@ -70,8 +71,8 @@ position: relative; top: 50%; left:5%;
 	<div id="chatListToStudent" class="textList"></div>
 	<div class="textContent">
 		<form onsubmit="return sendMsgToStudent();" id="studenttxt">
-			<input type="text" id="textBox2" autocomplete="off"/>
-			<input type="submit" value="보내기" id="send"/>
+			<input type="text" id="textBox2" autocomplete="off"  class="chk"  onkeypress="if(event.keyCode==13){return emptyCheck2();}"/>
+			<input type="button" value="보내기" class="send"  onclick="$('#studenttxt').submit();"/>
 		</form>
 	</div>
 </div>
@@ -97,31 +98,28 @@ $(function(){
 });
 
 $(document).on('click', '#teacherList div', function(){
-	$('#chatStudent').css('height','0px');
-	$('#chatTeacher').css('height','57%');
  	$('#chatListToTeacher').empty('div');
- 	
+	$('#chatStudent').css('height','0px');
  	
  	teacherId = $(this).attr('id');
- 	/*
-	console.log( chattingData );
-	$.each(chattingData, function(key, value){
-		console.log(value);
-		
-		$('#chatList').append(
-			(value.nickname == $('#myNick').val() ?
-				'<div style="text-align:right;"><h6><span style="display: inline-block;">' + value.date + ' <span style="background-color:#f8fc00; display:inline-block; max-width: 150px; min-width:50px; border-radius: 10px">' + value.msg + '</span></h6></div>' :		
-				'<div style="text-align:left;"><h5>' + value.nickname + '<h5><h6><span style="background-color:#ffffff; display:inline-block; max-width: 150px; min-width:50px; border-radius: 10px">' + value.msg + '</span><span style="display: inline-block">' + value.date + '</span></h6></div>'
-			)
-		);
-	}); */
+ 	
+// 	var top = $('#chatListToTeacher').prop('scrollHeight');
+// 	$('#chatListToTeacher').animate({scrollTop : top}, 5000);
 	receiveMsgImStudent( teacherId );
+	setTimeout(function() {
+		$('#chatListToTeacher').scrollTop($('#chatListToTeacher')[0].scrollHeight);
+		$('#chatTeacher').css('height','57%');
+	}, 500);
+	
 }).on('click', '#studentList div', function(){
 	$('#chatTeacher').css('height','0px');
-	$('#chatStudent').css('height','57%');
 	
  	$('#chatListToStudent').empty('div');
- 
+
+	setTimeout(function() {
+		$('#chatListToStudent').scrollTop($('#chatListToStudent')[0].scrollHeight);
+		$('#chatStudent').css('height','57%');
+	}, 500);
  	
  	studentId = $(this).attr('id');
  	
@@ -129,12 +127,40 @@ $(document).on('click', '#teacherList div', function(){
 })	
 var receiveId = $('#receiveId').val();
 
+
+
+function emptyCheck1(){
+	var ok = true;
+	var val = $('#textBox1').val().trim().length;
+	console.log(val);
+	
+	if( val == 0 ){
+		$('#textBox1').focus();
+		ok = false;
+		return ok;
+	}
+	return ok;
+}
+
+function emptyCheck2(){
+	var ok = true;
+	var val = $('#textBox2').val().trim().length;
+	console.log(val);
+	
+	if( val == 0 ){
+		$('#textBox2').focus();
+		ok = false;
+		return ok;
+	}
+	return ok;
+}
+
 //alert(receiveId);
 if(receiveId != null){
 	var targetId = receiveId;
 	//alert(targetId);
  	setTimeout(function() {
- 		$('#' + targetId).trigger('click');
+ 		$('#'+targetId).trigger('click');
 	}, 1000); 
 	
 }

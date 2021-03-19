@@ -31,8 +31,8 @@
 	width: 20%;
 }
 
-
 .noti_right {float: right; margin-bottom: 5px;}
+.img-view {width: 300px; height: 400px;}
 </style>
 </head>
 <body>
@@ -56,9 +56,9 @@
 			 	<tr class="left divi">
 			 		<th class="w-px60 lineNo" rowspan="2" >
 			 		<c:if test="${!empty vo.id_image_path }">
-						<img class="file-img" src="${vo.id_image_path }"/>
+						<img class="pic_size" src="${vo.id_image_path }"/>
 					</c:if></th>
-			 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_id}</td> 
+			 		<td class="lineNo" style="padding-left: 20px; font-size: 25px; font-weight: bold;">${vo.board_nickname}</td> 
 			 	</tr>
 			 	<tr class="left divi">
 			 		<td class="lineNo" style="padding-left: 20px; font-size: 14px;">${vo.board_write_date}</td>
@@ -69,7 +69,7 @@
 					<td class="lineNo2 left c_detail ">
 						${fn:replace(vo.board_content, crlf, '</br>')}
 						<c:if test="${!empty vo.board_image_path }">
-							<br><img class="file-img" style="" src="${vo.board_image_path }"/>
+							<br><br><br><img class="img-view" style="" src="${vo.board_image_path }"/>
 						</c:if>
 					</td>
 			 	</tr>
