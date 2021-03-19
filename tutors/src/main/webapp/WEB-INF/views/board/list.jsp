@@ -22,6 +22,12 @@ $('#delete').click(function(){
 	$('#delete').css('display', 'none');
 }); */
 
+
+function Changed(value){
+	if(value.trim() != ""){ $("form").submit(); }
+}
+
+
 </script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
@@ -47,8 +53,7 @@ h3 {font-size: 20px}
 					 	</div>
 			 		</div>
 				 	<div class="searchBar">
-					 	<ul>
-							<li><select name='search' class='w-px80 option font'>
+					 	<ul><li><select name='search' class='w-px80 option font' onchange="Changed(this.value);">
 									<option value='all' ${page.search eq 'all' ? 'selected' :''} >전체</option>
 									<option value='content' ${page.search eq 'content' ? 'selected' :''}>내용</option>
 									<option value='writer' ${page.search eq 'writer' ? 'selected' :''}>작성자</option>
