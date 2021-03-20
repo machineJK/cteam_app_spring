@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import common.CommonService;
 import match.ConditionVO;
 import match.MatchServiceImpl;
+import match.MatchVO;
 import match.StudentVO;
 import match.TeacherVO;
 import member.MemberVO;
@@ -97,5 +98,30 @@ public class MatchController {
 		return "redirect:/studentDetail.match?student_id=" + vo.getStudent_id();
 	}
 	
+	@ResponseBody @RequestMapping("/student_match")
+	public void student_match(MatchVO vo) {
+		//System.out.println(vo.getTeacher_id());
+		//System.out.println(vo.getStudent_id());
+		service.student_match(vo);
+	}
 	
+	@ResponseBody @RequestMapping("/teacherCheck.match")
+	public void teacherCheck(MatchVO vo) {
+		service.teacherCheck(vo);
+	}
+	
+	@ResponseBody @RequestMapping("/teacherClose.match")
+	public void teacherClose(MatchVO vo) {
+		service.teacherClose(vo);
+	}
+	
+	@ResponseBody @RequestMapping("/adminCheck.match")
+	public void adminCheck(MatchVO vo) {
+		service.adminCheck(vo);
+	}
+	
+	@ResponseBody @RequestMapping("/adminClose.match")
+	public void adminClose(MatchVO vo) {
+		service.adminClose(vo);
+	}
 }

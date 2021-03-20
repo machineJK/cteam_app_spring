@@ -50,6 +50,35 @@ public class MatchDAO implements MatchService{
 		sql.update("match.mapper.studentUpdate",vo);
 	}
 
+	@Override
+	public void student_match(MatchVO vo) {
+		boolean isAlreadyMatch = (Integer)sql.selectOne("match.mapper.isAlreadyMatch", vo) > 0 ? true : false;
+		if(!isAlreadyMatch) {
+			sql.insert("match.mapper.student_match", vo);
+		}
+	}
+
+	@Override
+	public void teacherCheck(MatchVO vo) {
+		sql.update("match.mapper.teacherCheck", vo);
+	}
+
+	@Override
+	public void teacherClose(MatchVO vo) {
+		sql.delete("match.mapper.teacherClose", vo);
+	}
+
+	@Override
+	public void adminCheck(MatchVO vo) {
+		sql.update("match.mapper.adminCheck", vo);
+	}
+
+	@Override
+	public void adminClose(MatchVO vo) {
+		sql.delete("match.mapper.adminClose", vo);
+	}
+
+
 
 
 

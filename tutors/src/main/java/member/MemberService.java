@@ -1,7 +1,9 @@
 package member;
 
 import java.util.HashMap;
+import java.util.List;
 
+import match.MatchVO;
 import match.StudentVO;
 import match.TeacherVO;
 
@@ -23,6 +25,9 @@ public interface MemberService {
 	boolean student_check(String id);
 	boolean isKakaoNaverPw(MemberVO vo);
 	void updateKakaoNaverExtra(MemberVO vo);
+	List<MatchVO> teacher_match(String id);
+	List<MatchVO> admin_match();
+	List<MatchVO> allmatch(String id);
 //	void updateUimage(String id, String dbimgpath);
 //	void modifyUimage(String uid, String uimage);
 

@@ -76,8 +76,21 @@
 	function sendMatch(){
 		
 		studentId = $('#myId').val();
-		console.log(studentId);
-		console.log(teacherId);
+		//console.log(studentId);
+		teacher_id = teacherId.substring(0,teacherId.length-1);
+		//console.log(teacher_id);
+		
+		$.ajax({
+			url: "student_match",
+			data : {student_id : studentId, teacher_id : teacher_id},
+			success: function(){
+				alert("요청성공!");
+			},
+			error: function(req,text){
+				alert(text + " : " + req.status);
+			}
+		});
+		
 						
 		var myNick = document.getElementById('myNick').value;
 		var msg = myNick + "님이 매칭을 요청하였습니다. My Info 화면에서 수락 또는 거절을 눌러주세요!";

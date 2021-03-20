@@ -1,10 +1,12 @@
 package member;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import match.MatchVO;
 import match.StudentVO;
 import match.TeacherVO;
 
@@ -95,6 +97,28 @@ public class MemberServiceImpl implements MemberService{
 	public boolean isKakaoNaverPw(MemberVO vo) {
 		return dao.isKakaoNaverPw(vo);
 	}
+
+
+	@Override
+	public List<MatchVO> teacher_match(String id) {
+		return dao.teacher_match(id);
+	}
+
+
+	@Override
+	public List<MatchVO> admin_match() {
+		return dao.admin_match();
+	}
+
+
+	@Override
+	public List<MatchVO> allmatch(String id) {
+		return dao.allmatch(id);
+	}
+
+
+
+
 
 
 	

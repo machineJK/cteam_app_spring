@@ -1,7 +1,9 @@
 package com.hanul.tutors;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import board.BoardVO;
 import common.CommonService;
+import match.MatchVO;
 import match.StudentVO;
 import match.TeacherVO;
 import member.MemberServiceImpl;
@@ -318,6 +321,14 @@ public class MemberController {
 	public String select(Model model, String id, HttpSession session) {
 		session.setAttribute("category", "pro");
 		model.addAttribute("vo", service.member_select(id) );
+		model.addAttribute("wantmatchstudent",service.teacher_match(id));
+		model.addAttribute("allmatch", service.allmatch(id));
+		model.addAttribute("wantmatchadmin", service.admin_match());
+		//List<MatchVO> test = service.admin_match();
+		//System.out.println(test.get(0).getStudent_id());
+		//System.out.println(test.get(1).getStudent_id());
+		
+		
 		return "member/profile";
 	}
 	
@@ -362,6 +373,8 @@ public class MemberController {
 	public boolean isKakaoNaverPw(MemberVO vo) {
 		return service.isKakaoNaverPw(vo);
 	}
+	
+	
 		
 		
 }

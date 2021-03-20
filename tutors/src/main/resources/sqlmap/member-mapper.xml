@@ -79,6 +79,21 @@
 		where id = #{id} and kakao_login = #{kakao_login} and naver_login = #{naver_login}
 	</select>
 	
+	<select id="wantmatchstudent" resultType="match.MatchVO">
+		select * from match where teacher_id = #{id}
+		and teacher_value = '0' and student_value = '1' and admin_value = '0'
+	</select>
+	
+	<select id="allmatch" resultType="match.MatchVO">
+		select * from match where (teacher_id = #{id}
+		and teacher_value = '1' and student_value = '1' and admin_value = '1') or 
+        (student_id = #{id}
+		and teacher_value = '1' and student_value = '1' and admin_value = '1')		
+	</select>
+	
+	<select id="wantmatchadmin" resultType="match.MatchVO">
+		select * from match where teacher_value = '1' and student_value = '1' and admin_value = '0'
+	</select>
 	
 	<!-- <insert id="insert">
 	insert into notice ( id, root, title, content, writer, filename, filepath )

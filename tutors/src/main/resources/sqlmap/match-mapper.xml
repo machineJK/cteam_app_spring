@@ -124,4 +124,35 @@
 		where student_id = #{student_id}
 	</update>
 	
+	<select id="isAlreadyMatch" resultType="Integer">
+		select count(*) from match where teacher_id = #{teacher_id} and student_id = #{student_id}
+	</select>
+	
+	<insert id="student_match">
+		insert into match(teacher_id,student_id,student_value,teacher_nickname,student_nickname)
+		values(#{teacher_id},#{student_id},'1',
+		(select teacher_nickname from teacher where teacher_id = #{teacher_id}),
+		(select student_nickname from student where student_id = #{student_id}))
+	</insert>
+	
+	<update id="teacherCheck">
+		update match set teacher_value = '1'
+		where teacher_id = #{teacher_id} and student_id = #{student_id} and teacher_value = '0' and student_value = '1' and admin_value = '0'
+	</update>
+	
+	<delete id="teacherClose">
+		delete from match
+		where teacher_id = #{teacher_id} and student_id = #{student_id} and teacher_value = '0' and student_value = '1' and admin_value = '0'
+	</delete>
+	
+	<update id="adminCheck">
+		update match set admin_value = '1'
+		where teacher_id = #{teacher_id} and student_id = #{student_id} and teacher_value = '1' and student_value = '1' and admin_value = '0'
+	</update>
+	
+	<delete id="adminClose">
+		delete from match
+		where teacher_id = #{teacher_id} and student_id = #{student_id} and teacher_value = '1' and student_value = '1' and admin_value = '0'
+	</delete>
+	
 </mapper>

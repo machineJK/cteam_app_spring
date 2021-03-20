@@ -49,6 +49,30 @@ public class MatchServiceImpl implements MatchService{
 		dao.studentUpdate(vo);
 	}
 
+	@Override
+	public void student_match(MatchVO vo) {
+		dao.student_match(vo);
+	}
+
+	@Override
+	public void teacherCheck(MatchVO vo) {
+		dao.teacherCheck(vo);
+	}
+
+	@Override
+	public void teacherClose(MatchVO vo) {
+		dao.teacherClose(vo);
+	}
+
+	@Override
+	public void adminCheck(MatchVO vo) {
+		dao.adminCheck(vo);
+	}
+
+	@Override
+	public void adminClose(MatchVO vo) {
+		dao.adminClose(vo);
+	}
 
 
 

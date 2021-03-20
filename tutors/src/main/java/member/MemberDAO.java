@@ -1,11 +1,13 @@
 package member;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import match.MatchVO;
 import match.StudentVO;
 import match.TeacherVO;
 
@@ -100,6 +102,27 @@ public class MemberDAO implements MemberService{
 	public boolean isKakaoNaverPw(MemberVO vo) {
 		return sql.selectOne("member.mapper.isKakaoNaverPw", vo) == null ? false : true;
 	}
+
+
+	@Override
+	public List<MatchVO> teacher_match(String id) {
+		return sql.selectList("member.mapper.wantmatchstudent", id);
+	}
+
+
+	@Override
+	public List<MatchVO> admin_match() {
+		return sql.selectList("member.mapper.wantmatchadmin");
+	}
+
+
+	@Override
+	public List<MatchVO> allmatch(String id) {
+		return sql.selectList("member.mapper.allmatch", id);
+	}
+
+
+
 
 
 	
