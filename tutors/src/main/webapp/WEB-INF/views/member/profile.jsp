@@ -133,6 +133,7 @@
 <div>
 	<c:if test='${loginInfo.id ne "admin" }'>
 		<h3>매칭을 요청한 학생</h3>
+		<c:if test="${!empty wantmatchstudent }">
 		<c:forEach var="vo" items="${wantmatchstudent }">
 			<div class="wantmatchparent">
 				<div class="wantmatchstyle" onclick="location.href='studentDetail.match?student_id=${vo.student_id}'">${vo.student_nickname }</div>
@@ -140,10 +141,15 @@
 				<div class="close" onclick="closeMatch('${vo.teacher_id}','${vo.student_id}');"><i class="fas fa-times"></i></div>
 			</div>
 		</c:forEach>
+		</c:if>
+		<c:if test="${empty wantmatchstudent}">
+			<div style="margin-top: 50px; margin-bottom: 10px;">매칭을 요청하는 사람이 없습니다.</div>
+		</c:if>
 		
 		<br>
 		
 		<h3>매칭된 리스트</h3>
+		<c:if test="${!empty allmatch}">
 		<div class="matchedparent">선생</div><div class="matchedparent">학생</div>
 		<c:forEach items="${allmatch }" var="vo">
 			<div style="margin-bottom: 5px;">
@@ -152,26 +158,36 @@
 				<div class="matchedStyle" onclick="location.href='studentDetail.match?student_id=${vo.student_id}'">${vo.student_nickname }</div>
 			</div>
 		</c:forEach>
+		</c:if>
+		<c:if test="${empty allmatch }">
+			<div style="margin-top: 50px; margin-bottom: 50px;">매칭된 리스트가 없습니다.</div>
+		</c:if>
 	</c:if>
 	
+	
+	
 	<c:if test="${loginInfo.id eq 'admin' }">
-		<h3>매칭 요청 리스트</h3>
+		<h3 style="margin-top: 50px;">매칭 요청 리스트</h3>
+		<c:if test="${!empty wantmatchadmin }">
 		<table>
 			<tr>
 				<td style="font-weight: bold;">선생</td>
 				<td style="font-weight: bold;">학생</td>
-				<td></td>
-				<td></td>
+				<td colspan="2"></td>
 			</tr>
 		<c:forEach items="${wantmatchadmin }" var="vo">
 			<tr>
-				<td>${vo.teacher_nickname }</td>
-				<td>${vo.student_nickname }</td>
-				<td class="check" onclick="checktsMatch('${vo.teacher_id}','${vo.student_id }')"><span><i class="fas fa-check"></i></span></td>
-				<td class="close" onclick="closetsMatch('${vo.teacher_id}','${vo.student_id }')"><span><i class="fas fa-times"></i></span></td>
+				<td onclick="location.href='teacherDetail.match?teacher_id=${vo.teacher_id}'">${vo.teacher_nickname }</td>
+				<td onclick="location.href='studentDetail.match?student_id=${vo.student_id}'">${vo.student_nickname }</td>
+				<td onclick="checktsMatch('${vo.teacher_id}','${vo.student_id }')"><span class="check"><i class="fas fa-check"></i></span></td>
+				<td onclick="closetsMatch('${vo.teacher_id}','${vo.student_id }')"><span class="close"><i class="fas fa-times"></i></span></td>
 			</tr>
 		</c:forEach>
 		</table>
+		</c:if>
+		<c:if test="${empty wantmatchadmin }">
+			<div style="margin-top: 50px; margin-bottom: 50px;">현재 승인/거절을 요청하는 리스트가 없습니다</div>
+		</c:if>
 	</c:if>
 	
 </div>

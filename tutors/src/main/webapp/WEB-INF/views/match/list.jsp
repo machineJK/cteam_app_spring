@@ -332,11 +332,16 @@ ul{
 	<div id="more"><a onclick="more_list();" class="btn-empty">더보기</a></div>
 	
 	<div class="dummy" style="display:none;">${loginInfo.id }</div>
-	<!-- <br><button onclick="moreSchools();">학교 더보기</button> -->
-	
+	<c:if test="${empty subject }"><div>subject 값 없다</div></c:if>
+	<div id="isSubject" style="display: none;">${subject }</div>
+
 <script type="text/javascript">
 var addr1 = "", addr2 = "", gender = "", subject="", pay="";
 var cnt = 0;
+if($("#isSubject").text() != ""){
+	subject = $('#isSubject').text();
+	$("#subject > span").text(subject).css("color","red");
+}
 teacher_list();
 
 function teacherjoin(teacher_id,kakao_login,naver_login){

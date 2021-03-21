@@ -33,7 +33,7 @@ public class MatchController {
 	 */
 	
 	@RequestMapping("/list.match")
-	public String match(HttpSession session, Model model) {
+	public String match(HttpSession session, Model model, String subject) {
 		session.setAttribute("category","match");
 		if(session.getAttribute("loginInfo") != null) {
 			MemberVO vo = (MemberVO) session.getAttribute("loginInfo");
@@ -41,6 +41,7 @@ public class MatchController {
 			model.addAttribute("isTeacher", service.isTeacher(id));
 			model.addAttribute("isStudent", service.isStudent(id));
 		}
+		model.addAttribute("subject",subject);
 		return "match/list";
 	}
 
