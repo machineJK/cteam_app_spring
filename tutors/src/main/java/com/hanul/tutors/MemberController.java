@@ -71,7 +71,7 @@ public class MemberController {
 			"https://kauth.kakao.com/oauth/authorize?response_type=code");
 		url.append("&client_id=").append( kakao_client_id );
 		url.append("&state=").append(state);
-		url.append("&redirect_uri=").append("http://localhost:8080/tutors/kakaocallback");
+		url.append("&redirect_uri=").append("http://112.164.58.217:8080/tutors/kakaocallback");
 		
 		return "redirect:" + url.toString();
 	}
@@ -169,7 +169,7 @@ public class MemberController {
 			"https://nid.naver.com/oauth2.0/authorize?response_type=code");
 		url.append("&client_id=").append(naver_client_id);
 		url.append("&state=").append(state);
-		url.append("&redirect_uri=").append("http://localhost:8080/tutors/navercallback");
+		url.append("&redirect_uri=").append("http://112.164.58.217:8080/tutors/navercallback");
 		
 		
 		return "redirect:" + url.toString();
@@ -249,7 +249,7 @@ public class MemberController {
 					"https://kauth.kakao.com/oauth/logout"); 
 			url.append("?client_id=").append(kakao_client_id);
 			url.append("&logout_redirect_uri=")
-						.append("http://localhost:8080/tutors");
+						.append("http://112.164.58.217:8080/tutors");
 			return "redirect:" + url.toString();
 		}else
 			return "redirect:/";

@@ -1153,5 +1153,127 @@ public class AnDao {
 		}
 	}
 
+	public void anBoardDelete(String qna_ref_num) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = 0;
+		System.out.println(qna_ref_num);
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "delete from board where qna_ref_num = " + qna_ref_num;				
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void anBoardDelete(String qna_ref_num,String isComment,String board_id) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		System.out.println(qna_ref_num);
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "delete from board where board_id = " + board_id + "";				
+			prepareStatement = connection.prepareStatement(query);
+			prepareStatement.executeUpdate();
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void anBoardUpdate(String qna_ref_num, String board_content) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = 0;
+		System.out.println(qna_ref_num);
+		System.out.println(board_content);
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "update board set board_content = '" + board_content + 
+							"' where board_num = " + qna_ref_num;			
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void anBoardUpdate(String qna_ref_num, String board_content, String board_image_path) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		int state = 0;
+		System.out.println(qna_ref_num);
+		System.out.println(board_content);
+		System.out.println(board_image_path);
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "update board set board_content = '" + board_content + "',board_image_path = '" + board_image_path +
+					"' where board_num = " + qna_ref_num;			
+			prepareStatement = connection.prepareStatement(query);
+			state = prepareStatement.executeUpdate();
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
 	
 }

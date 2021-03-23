@@ -332,7 +332,6 @@ ul{
 	<div id="more"><a onclick="more_list();" class="btn-empty">더보기</a></div>
 	
 	<div class="dummy" style="display:none;">${loginInfo.id }</div>
-	<c:if test="${empty subject }"><div>subject 값 없다</div></c:if>
 	<div id="isSubject" style="display: none;">${subject }</div>
 
 <script type="text/javascript">

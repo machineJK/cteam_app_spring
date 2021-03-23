@@ -37,6 +37,8 @@ import com.hanul.app.command.SelectCommentCommand;
 import com.hanul.app.command.SetMatchCommand;
 import com.hanul.app.command.SetTokenCommand;
 import com.hanul.app.command.anAdminMatchingCommand;
+import com.hanul.app.command.anBoardDeleteCommand;
+import com.hanul.app.command.anBoardUpdateCommand;
 import com.hanul.app.command.anMatchedCommand;
 import com.hanul.app.command.anWantMatchingCommand;
 
@@ -722,6 +724,107 @@ public class AnController {
 		command.execute(model);	
 		
 	}
+	
+	//게시글 삭제
+	@RequestMapping(value="/anBoardDelete", method = {RequestMethod.GET, RequestMethod.POST})
+	public void anBoardDelete(HttpServletRequest req, Model model) {
+		System.out.println("anBoardDelete()");
+		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}  
+		
+		String qna_ref_num = (String) req.getParameter("qna_ref_num");
+		String isComment,board_id;
+		model.addAttribute("qna_ref_num", qna_ref_num);
+		if((String)req.getParameter("qna_ref_num") != null) {
+			isComment = (String) req.getParameter("isComment");
+			board_id = (String) req.getParameter("board_id");
+			model.addAttribute("isComment", isComment);
+		}
+		command = new anBoardDeleteCommand();
+		command.execute(model);	
+		
+	}
+	
+	//게시글 수정
+	@RequestMapping(value="/anBoardUpdate", method = {RequestMethod.GET, RequestMethod.POST})
+	public void anBoardUpdate(HttpServletRequest req, Model model) {
+		System.out.println("anBoardUpdate()");
+		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}  
+		
+		MultipartRequest multi = (MultipartRequest)req;
+		if(multi.getFile("brdImage") != null) {	//새로운 사진
+			System.out.println("사진 있는쪽");
+			String qna_ref_num = (String) req.getParameter("qna_ref_num");
+			String board_content = (String) req.getParameter("board_content");
+			String brdDbImgPath = (String) req.getParameter("brdDbImgPath");
+			
+			model.addAttribute("qna_ref_num", qna_ref_num);
+			model.addAttribute("board_content", board_content);
+			model.addAttribute("board_image_path", brdDbImgPath);
+			
+			MultipartFile file = multi.getFile("brdImage");
+			if(file != null) {			
+				
+				String fileName = file.getOriginalFilename();
+				System.out.println(fileName);
+				
+				makeDir(req);	
+					
+				if(file.getSize() > 0){			
+					String realImgPath = req.getSession().getServletContext()
+							.getRealPath("/resources/");
+					
+					System.out.println( fileName + " : " + realImgPath);
+					System.out.println( "fileSize : " + file.getSize());					
+													
+				 	try {
+						file.transferTo(new File(realImgPath, fileName));										
+					} catch (Exception e) {
+						e.printStackTrace();
+					} 
+										
+				}else{
+					fileName = "FileFail.jpg";
+					String realImgPath = req.getSession().getServletContext()
+							.getRealPath("/resources/" + fileName);
+					System.out.println(fileName + " : " + realImgPath);
+							
+				}			
+				
+				command = new anBoardUpdateCommand();
+				command.execute(model);
+				
+			}
+			
+			
+		}else {	//기존 사진
+			String qna_ref_num = (String) req.getParameter("qna_ref_num");
+			String board_content = (String) req.getParameter("board_content");
+			
+			model.addAttribute("qna_ref_num", qna_ref_num);
+			model.addAttribute("board_content", board_content);
+			
+			command = new anBoardUpdateCommand();
+			command.execute(model);		
+		}
+
+		
+		
+		
+	}
+	
+
+	
+	
 	
 }
 
