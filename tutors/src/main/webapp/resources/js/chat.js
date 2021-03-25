@@ -119,7 +119,7 @@
 		$('#textBox1').val('');
 		setTimeout(function() {
 			$('#chatListToTeacher').scrollTop($('#chatListToTeacher')[0].scrollHeight);
-		}, 100);
+		}, 300);
 		
 		//prevent form from submitting
 		return false;
@@ -158,7 +158,7 @@
 		$('#textBox1').val('');
 		setTimeout(function() {
 			$('#chatListToTeacher').scrollTop($('#chatListToTeacher')[0].scrollHeight);
-		}, 100);
+		}, 300);
 		
 		//prevent form from submitting
 		return false;

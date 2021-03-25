@@ -1189,7 +1189,7 @@ public class AnDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "delete from board where board_id = " + board_id + "";				
+			String query = "delete from board where board_id = '" + board_id + "' and board_num != ";				
 			prepareStatement = connection.prepareStatement(query);
 			prepareStatement.executeUpdate();
 			
